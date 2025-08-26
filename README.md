@@ -1,12 +1,9 @@
-# React + Vite
+# EduMap
+EduMap is an interactive website designed to support incoming university students, particularly high school graduates in making informed decisions about their degree and university life.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Our three MVP features are:   
+📚 Course Questionnaire – Helps students identify suitable courses and connect with peers who share similar academic interests.     
+💼 Job Prospects Tool – Provides insights into career pathways linked to different degrees, offering clarity on future opportunities.   
+🤝 Buddy Program – Connects students with experienced mentors to ease the transition into university life through ongoing peer-led support.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+By combining these features into a cohesive digital experience, EduMap empowers students to confidently navigate their academic and social journey, reducing feelings of uncertainty and isolation while improving first-year retention and engagement.
