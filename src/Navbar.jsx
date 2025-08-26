@@ -1,17 +1,33 @@
 import React from "react";
+import { NavLink } from "react-router-dom"; 
 
 function Navbar() {
     return (
         <nav className="bg-blue-800 text-white px-6 py-4 flex justify-between items-center fixed top-0 left-0 right-0 w-full h-16 shadow-md z-50">
-            {/* Smaller EduMap in Navbar*/}
-            <h1 className="text-orange-500 text-3xl font-bold">EduMap</h1>
 
-            {/* White nav links*/}
+            <h1 className="text-orange-500 text-3xl font-bold">
+                <NavLink to="/">EduMap</NavLink>
+            </h1>
+
             <ul className="flex space-x-6 text-white font-medium">
-                <li><a href="#home" className="hover:text-orange-400">Course Questionnaire</a></li>
-                <li><a href="#features" className="hover:text-orange-400">Job Prospects</a></li>
-                <li><a href="#about" className="hover:text-orange-400">Buddy Program</a></li>
-                <li><a href="#contact" className="hover:text-orange-400">Contact US</a></li>
+                <li>
+                    <NavLink to="/course-questionnaire"
+                        className={({ isActive }) => isActive ? "text-orange-400" : "hover:text-orange-400"}>
+                        Course Questionnaire
+                    </NavLink>
+                    </li>
+                    <li>
+                    <NavLink to="/job-prospects"
+                        className={({ isActive }) => isActive ? "text-orange-400" : "hover:text-orange-400"}>
+                        Job Prospects
+                    </NavLink>
+                    </li>
+                    <li>
+                    <NavLink to="/buddy-system"
+                        className={({ isActive }) => isActive ? "text-orange-400" : "hover:text-orange-400"}>
+                        Buddy Program
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );
