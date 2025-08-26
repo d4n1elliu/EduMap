@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Navbar from './Navbar';
 import './App.css'
 
 function App() {
@@ -8,6 +7,7 @@ function App() {
 
   return (
     <>
+      <Navbar/>
       <div>
       </div>
       <h1 className="text-orange-500 8xl text-8xl font-extrabold">EduMap</h1>
