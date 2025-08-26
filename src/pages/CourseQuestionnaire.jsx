@@ -17,7 +17,7 @@ export default function CourseQuestionnaire() {
                 </div>
                 <div className="rounded-xl border border-gray-200 p-6 shadow-sm bg-white">
                     <div className="text-2xl font-semibold text-blue-800 mb-2">Schedule</div>
-                    <p className="text-gray-600">We’ll adapt suggestions to fit your time and workload.</p>
+                    <p className="text-gray-600">We'll adapt suggestions to fit your time and workload.</p>
                 </div>
             </section>
         </div>
