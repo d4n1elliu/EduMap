@@ -1,7 +1,7 @@
 # EduMap
 EduMap is an interactive website designed to support incoming university students, particularly high school graduates in making informed decisions about their degree and university life.
 
-Our three MVP features are:
+Our three MVP features are:   
 📚 Course Questionnaire – Helps students identify suitable courses and connect with peers who share similar academic interests.     
 💼 Job Prospects Tool – Provides insights into career pathways linked to different degrees, offering clarity on future opportunities.   
 🤝 Buddy Program – Connects students with experienced mentors to ease the transition into university life through ongoing peer-led support.
