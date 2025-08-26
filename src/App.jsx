@@ -8,9 +8,7 @@ function App() {
   return (
     <>
       <Navbar/>
-      <div>
-      </div>
-      <h1 className="text-orange-500 8xl text-8xl font-extrabold">EduMap</h1>
+      <h1 className="text-orange-500 10xl text-10xl font-extrabold">EduMap</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
