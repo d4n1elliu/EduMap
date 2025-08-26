@@ -8,12 +8,16 @@ export default function BuddySystem() {
 
             <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="rounded-xl border border-gray-200 p-6 shadow-sm bg-white">
-                    <div className="text-2xl font-semibold text-blue-800 mb-2">Career RoadMap</div>
+                    <div className="text-2xl font-semibold text-blue-800 mb-2">Find a Study Buddy</div>
                     <p className="text-gray-600">Match based on course, availability and preferred learning style.</p>
                 </div>
                 <div className="rounded-xl border border-gray-200 p-6 shadow-sm bg-white">
-                    <div className="text-2xl font-semibold text-blue-800 mb-2">MentorConnect</div>
+                    <div className="text-2xl font-semibold text-blue-800 mb-2">Mentorship</div>
                     <p className="text-gray-600">Connect with seniors or alumni for guidance and tips.</p>
+                </div>
+                <div className="rounded-xl border border-gray-200 p-6 shadow-sm bg-white">
+                    <div className="text-2xl font-semibold text-blue-800 mb-2">Group Projects</div>
+                    <p className="text-gray-600">Join teams for hackathons, labs and collaborative assignments.</p>
                 </div>
             </section>
         </div>
