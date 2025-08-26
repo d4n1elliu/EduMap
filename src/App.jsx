@@ -9,11 +9,6 @@ function App() {
     <>
       <Navbar/>
       <h1 className="text-orange-500 10xl text-10xl font-extrabold">EduMap</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
     </>
   )
 }
