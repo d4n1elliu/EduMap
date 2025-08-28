@@ -243,7 +243,7 @@ export default function BuddySystem() {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Courses</label>
-                        {['IT', 'Business', 'Law', 'Sciences', 'Engineering', 'Communication', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
+                        {['IT/Computer Science', 'Business', 'Law', 'Sciences', 'Engineering', 'Communication', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
                             <label key={course} className="flex items-center mb-2">
                                 <input
                                     type="checkbox"
@@ -472,7 +472,7 @@ export default function BuddySystem() {
                         <div className="mb-4">
                             <p className="text-sm font-medium text-gray-700 mb-2">Available Time Slots:</p>
                             <div className="flex flex-wrap gap-2">
-                                {['10:00 AM', '11:00 AM', '2:00 PM', '3:00 PM'].map(time => (
+                                {['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map(time => (
                                     <button
                                         key={time}
                                         className={`px-3 py-2 rounded-lg border ${
