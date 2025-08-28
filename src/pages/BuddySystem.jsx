@@ -12,7 +12,7 @@ export default function BuddySystem() {
         courses: []
     });
 
-    // Data for mentors
+    {/*Data for mentors*/}
     const mentors = [
         {
             id: 1,
@@ -137,7 +137,7 @@ export default function BuddySystem() {
         }
     ];
 
-    // Saved IDs mentors
+    {/* Saved IDs mentors*/}
     const [savedMentors, setSavedMentors] = useState([1, 3]); 
     const [bookedSessions, setBookedSessions] = useState([
         {
@@ -243,7 +243,7 @@ export default function BuddySystem() {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Courses</label>
-                        {['IT/Computer Science', 'Business', 'Law', 'Sciences', 'Engineering', 'Communication', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
+                        {['IT', 'Computer Science', 'Business', 'Law', 'Sciences', 'Engineering', 'Communication', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
                             <label key={course} className="flex items-center mb-2">
                                 <input
                                     type="checkbox"
