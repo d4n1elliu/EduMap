@@ -17,9 +17,9 @@ export default function BuddySystem() {
         {
             id: 1,
             name: "Emma Janice",
-            studies: "Year 3, Computer Science",
-            university: "UTS",
-            skills: ["HTML", "Java", "JavaScript", "Python"],
+            studies: "3rd Year, Computer Science",
+            university: "University of Technology Sydney",
+            skills: ["HTML", "Java", "JavaScript", "Python", "ReactJS"],
             rating: 4,
             reviews: 3,
             about: "Passionate computer science student with experience in web development and programming. I love helping others learn and grow in their coding journey.",
@@ -28,7 +28,7 @@ export default function BuddySystem() {
         {
             id: 2,
             name: "Alex Chen",
-            studies: "Year 4, Business",
+            studies: "4th Year, Business",
             university: "University of Sydney",
             skills: ["Marketing", "Finance", "Strategy", "Leadership"],
             rating: 5,
@@ -39,9 +39,9 @@ export default function BuddySystem() {
         {
             id: 3,
             name: "Sarah Williams",
-            studies: "Year 3, Law",
-            university: "University of NSW",
-            skills: ["Contract Law", "Criminal Law", "Legal Research", "Mooting"],
+            studies: "3rd Year, Law and Business",
+            university: "University of New South Wales",
+            skills: ["Contract Law", "Criminal Law", "Legal Research", "Marketing"],
             rating: 4,
             reviews: 5,
             about: "Law student passionate about justice and helping others understand legal concepts. I enjoy mentoring first-year students.",
@@ -50,7 +50,7 @@ export default function BuddySystem() {
         {
             id: 4,
             name: "Michael Rodriguez",
-            studies: "Year 4, IT",
+            studies: "4th, Information Technology",
             university: "University of Technology Sydney",
             skills: ["Cybersecurity", "Networking", "Database", "Cloud Computing"],
             rating: 5,
@@ -148,7 +148,7 @@ export default function BuddySystem() {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">University</label>
-                        {['all', 'University of NSW', 'University of Sydney', 'University of Technology Sydney'].map(uni => (
+                        {['all', 'University of New South Wales', 'University of Sydney', 'University of Technology Sydney', 'Macquarie University', 'Western University'].map(uni => (
                             <label key={uni} className="flex items-center mb-2">
                                 <input
                                     type="radio"
@@ -165,7 +165,7 @@ export default function BuddySystem() {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Courses</label>
-                        {['IT', 'Business', 'Law', 'Sciences'].map(course => (
+                        {['IT', 'Business', 'Law', 'Sciences', 'Engineering', 'Communication', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
                             <label key={course} className="flex items-center mb-2">
                                 <input
                                     type="checkbox"
