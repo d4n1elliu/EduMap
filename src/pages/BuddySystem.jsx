@@ -57,6 +57,83 @@ export default function BuddySystem() {
             reviews: 8,
             about: "IT professional with focus on cybersecurity. I help students understand complex technical concepts and prepare for industry.",
             image: "👨‍💻"
+        },
+        {
+            id: 5,
+            name: "Danny Lim",
+            studies: "5th/Final Year, Engineering",
+            university: "University of Technology Sydney",
+            skills: ["Cybersecurity", "Networking", "Database", "Cloud Computing"],
+            rating: 5,
+            reviews: 8,
+            about: "IT professional with focus on cybersecurity. I help students understand complex technical concepts and prepare for industry.",
+            image: "👨‍💼"
+        },
+        {
+            id: 6,
+            name: "Brenden Yung",
+            studies: "4th, Information Technology and Business",
+            university: "University of New South Wales",
+            skills: ["Cybersecurity", "Networking", "Database", "Cloud Computing"],
+            rating: 5,
+            reviews: 8,
+            about: "IT professional with focus on cybersecurity. I help students understand complex technical concepts and prepare for industry.",
+            image: "👨‍💻"
+        },
+        {
+            id: 7,
+            name: "Jennie Patel",
+            studies: "3rd, Engineering",
+            university: "Macquarie University",
+            skills: ["Mechanical Design", "CAD", "Robotics", "Problem-Solving"],
+            rating: 4,
+            reviews: 7,
+            about: "Aspiring engineer passionate about robotics and design thinking. I enjoy mentoring students on building real-world engineering projects.",
+            image: "👨‍💼"
+        },
+        {
+            id: 8,
+            name: "James O'Connor",
+            studies: "2nd Year, Communication",
+            university: "University of Sydney",
+            skills: ["Public Speaking", "Media Writing", "Marketing", "Teamwork"],
+            rating: 3,
+            reviews: 4,
+            about: "Communication student with experience in media projects. I like helping peers gain confidence in speaking and presenting ideas.",
+            image: "👨‍🎓"
+        },
+        {
+            id: 9,
+            name: "Hannah Kim",
+            studies: "5th Year, Law",
+            university: "University of New South Wales",
+            skills: ["Legal Research", "Contract Law", "Critical Thinking", "Mooting"],
+            rating: 5,
+            reviews: 10,
+            about: "Law student with a focus on contract law. I enjoy guiding others in building strong analytical skills and preparing for mooting competitions.",
+            image: "👩‍⚖️"
+        },
+        {
+            id: 10,
+            name: "Carlos Martinez",
+            studies: "3rd Year, International Studies",
+            university: "Western University",
+            skills: ["Global Politics", "Cultural Awareness", "Foreign Policy", "Research"],
+            rating: 4,
+            reviews: 5,
+            about: "International Studies student interested in cultural exchange and policy-making. I mentor students on adapting to diverse environments.",
+            image: "👨‍🎓"
+        },
+        {
+            id: 11,
+            name: "Emily Zhang",
+            studies: "4th Year, Health Sciences",
+            university: "University of Sydney",
+            skills: ["Anatomy", "Research", "Healthcare Systems", "Community Outreach"],
+            rating: 5,
+            reviews: 7,
+            about: "Health sciences student passionate about improving community well-being. I mentor students who want to pursue careers in healthcare.",
+            image: "👩‍⚕️"
         }
     ];
 
