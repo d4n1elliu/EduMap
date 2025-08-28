@@ -137,7 +137,8 @@ export default function BuddySystem() {
         }
     ];
 
-    const [savedMentors, setSavedMentors] = useState([1, 3]); // IDs of saved mentors
+    // Saved IDs mentors
+    const [savedMentors, setSavedMentors] = useState([1, 3]); 
     const [bookedSessions, setBookedSessions] = useState([
         {
             id: 1,
