@@ -134,7 +134,18 @@ export default function BuddySystem() {
             reviews: 7,
             about: "Health sciences student passionate about improving community well-being. I mentor students who want to pursue careers in healthcare.",
             image: "👩‍⚕️"
-        }
+        },
+        {
+            id: 12, 
+            name: "Sung Jing Woo",
+            studies: "Bachelor of Information techology",
+            university: "University of Technology Sydney",
+            skills: ["C#", ".Net", "Python", "Linux"],
+            rating: 5, 
+            reviews: 9,
+            about: "Passionate software developer with expertise in C#, .NET, Python, and Linux. Dedicated to creating innovative solutions and mentoring others in technology and career development.",
+            image: "👨‍💻"
+        },
     ];
 
     {/* Saved IDs mentors*/}
