@@ -83,7 +83,7 @@ export default function BuddySystem() {
         {
             id: 7,
             name: "Jennie Patel",
-            studies: "3rd, Engineering",
+            studies: "3rd Year, Engineering",
             university: "Macquarie University",
             skills: ["Mechanical Design", "CAD", "Robotics", "Problem-Solving"],
             rating: 4,
@@ -94,7 +94,7 @@ export default function BuddySystem() {
         {
             id: 8,
             name: "James O'Connor",
-            studies: "2nd Year, Communication",
+            studies: "3rd Year, Communication",
             university: "University of Sydney",
             skills: ["Public Speaking", "Media Writing", "Marketing", "Teamwork"],
             rating: 3,
@@ -138,7 +138,7 @@ export default function BuddySystem() {
         {
             id: 12, 
             name: "Sung Jing Woo",
-            studies: "Bachelor of Information techology",
+            studies: "3rd Year, Information Techology",
             university: "University of Technology Sydney",
             skills: ["C#", ".Net", "Python", "Linux"],
             rating: 5, 
@@ -149,7 +149,7 @@ export default function BuddySystem() {
         {
             id: 13, 
             name: "Johnny Zhang",
-            studies: "Bachelor of International Studies & Business",
+            studies: "3rd Year, International Studies & Business",
             university: "Macquarie University",
             skills: ["Marketing", "Japanese", "Teamwork", "Advertising"],
             rating: 5, 
