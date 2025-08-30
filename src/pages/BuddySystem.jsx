@@ -299,7 +299,7 @@ export default function BuddySystem() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {filteredMentors.map(mentor => (
-                        <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow">
+                        <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                             <div className="text-center mb-3">
                                 <div className="text-4xl mb-2">{mentor.image}</div>
                                 <h3 className="font-semibold text-gray-800">{mentor.name}</h3>
@@ -334,15 +334,17 @@ export default function BuddySystem() {
                                 ))}
                             </div>
 
-                            <button
-                                onClick={() => {
-                                    setSelectedMentor(mentor);
-                                    setShowBooking(true);
-                                }}
-                                className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
-                            >
-                                View Profile
-                            </button>
+                            <div className="mt-auto">
+                                <button
+                                    onClick={() => {
+                                        setSelectedMentor(mentor);
+                                        setShowBooking(true);
+                                    }}
+                                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                                >
+                                    View Profile
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -353,7 +355,7 @@ export default function BuddySystem() {
     const renderSavedMentorsTab = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {mentors.filter(mentor => savedMentors.includes(mentor.id)).map(mentor => (
-                <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+                <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm flex flex-col h-full">
                     <div className="text-center mb-3">
                         <div className="text-4xl mb-2">{mentor.image}</div>
                         <h3 className="font-semibold text-gray-800">{mentor.name}</h3>
@@ -379,15 +381,17 @@ export default function BuddySystem() {
                         </button>
                     </div>
 
-                    <button
-                        onClick={() => {
-                            setSelectedMentor(mentor);
-                            setShowBooking(true);
-                        }}
-                        className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
-                    >
-                        Book Session
-                    </button>
+                    <div className="mt-auto">
+                        <button
+                            onClick={() => {
+                                setSelectedMentor(mentor);
+                                setShowBooking(true);
+                            }}
+                            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                        >
+                            Book Session
+                        </button>
+                    </div>
                 </div>
             ))}
         </div>
