@@ -638,7 +638,6 @@ export default function BuddySystem() {
                     )}
                 </main>
             </div>
-            
             <Footer/>
         </div>
     );
