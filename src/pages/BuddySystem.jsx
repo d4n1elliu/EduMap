@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Footer from './Footer';
 
 export default function BuddySystem() {
     const [activeTab, setActiveTab] = useState('mentors');
@@ -635,4 +636,5 @@ export default function BuddySystem() {
             )}
         </div>
     );
+    <Footer/>
 }
