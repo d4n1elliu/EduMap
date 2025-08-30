@@ -146,6 +146,17 @@ export default function BuddySystem() {
             about: "Passionate software developer with expertise in C#, .NET, Python, and Linux. Dedicated to creating innovative solutions and mentoring others in technology and career development.",
             image: "👨‍💻"
         },
+        {
+            id: 13, 
+            name: "Johnny Zhang",
+            studies: "Bachelor of International Studies & Business",
+            university: "Macquarie University",
+            skills: ["Marketing", "Japanese", "Teamwork", "Advertising"],
+            rating: 5, 
+            reviews: 8,
+            about: "Enthusiastic International Studies and Business student with a strong interest in global markets, cross-cultural communication and advertising. I enjoy mentoring peers on developing language skills, teamwork strategies and marketing projects that connect cultures and businesses.",
+            image: "👨‍💼"
+        },
     ];
 
     {/* Saved IDs mentors*/}
