@@ -266,7 +266,7 @@ export default function BuddySystem() {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Courses</label>
-                        {['IT', 'Computer Science', 'Business', 'Law', 'Sciences', 'Engineering', 'Communication', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
+                        {['Information Technology', 'Computer Science', 'Business', 'Law', 'Sciences', 'Engineering', 'Communication', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
                             <label key={course} className="flex items-center mb-2">
                                 <input
                                     type="checkbox"
