@@ -566,74 +566,79 @@ export default function BuddySystem() {
     );
 
     return (
-        <div className="w-full max-w-6xl px-6 pt-4">
-            {/* Header */}
-            <section className="text-center mb-8">
-                <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-3">Buddy Program</h1>
-                <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
-            </section>
+        <div className="min-h-screen flex flex-col">
+            <div className="w-full max-w-6xl px-6 pt-4 mx-auto flex-1">
+                {/* Header */}
+                <main className="flex-1">
+                    <section className="text-center mb-8">
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-3">Buddy Program</h1>
+                        <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
+                    </section>
 
-            {/* Navigation Tabs */}
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
-                <div className="flex border-b border-gray-200">
-                    {[
-                        { id: 'mentors', label: 'Mentors' },
-                        { id: 'saved', label: 'Saved Mentors' },
-                        { id: 'bookings', label: 'My Bookings' }
-                    ].map(tab => (
-                        <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id)}
-                            className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
-                                activeTab === tab.id
-                                    ? 'border-blue-500 text-blue-600'
-                                    : 'border-transparent text-gray-500 hover:text-gray-700'
-                            }`}
-                        >
-                            {tab.label}
-                        </button>
-                    ))}
-                </div>
+                    {/* Navigation Tabs */}
+                    <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
+                        <div className="flex border-b border-gray-200">
+                            {[
+                                { id: 'mentors', label: 'Mentors' },
+                                { id: 'saved', label: 'Saved Mentors' },
+                                { id: 'bookings', label: 'My Bookings' }
+                            ].map(tab => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+                                        activeTab === tab.id
+                                            ? 'border-blue-500 text-blue-600'
+                                            : 'border-transparent text-gray-500 hover:text-gray-700'
+                                    }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
 
-                <div className="p-6">
-                    {activeTab === 'mentors' && renderMentorsTab()}
-                    {activeTab === 'saved' && renderSavedMentorsTab()}
-                    {activeTab === 'bookings' && renderBookingsTab()}
-                </div>
+                        <div className="p-6">
+                            {activeTab === 'mentors' && renderMentorsTab()}
+                            {activeTab === 'saved' && renderSavedMentorsTab()}
+                            {activeTab === 'bookings' && renderBookingsTab()}
+                        </div>
+                    </div>
+
+                    {/* Messages Panel */}
+                    {showMessages && renderMessages()}
+
+                    {/* Messages Toggle Button */}
+                    <button
+                        onClick={() => setShowMessages(!showMessages)}
+                        className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-colors"
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                    </button>
+
+                    {/* Profile / Booking Modal */}
+                    {showBooking && selectedMentor && (
+                    <div className="fixed inset-0 z-50 bg-black/40 flex items-start md:items-center justify-center p-4">
+                        <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+                            <div className="flex items-center justify-between px-6 py-4 border-b">
+                                <h3 className="text-lg font-semibold">Mentor Profile</h3>
+                                <button
+                                type="button"
+                                onClick={() => setShowBooking(false)}
+                                className="p-2 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                aria-label="Close profile"
+                                > ✕ </button>
+                            </div>
+                            <div className="p-6">
+                                {renderMentorProfile()} {/* re-use your existing renderer */}
+                            </div>
+                            </div>
+                        </div>
+                    )}
+                </main>
             </div>
-
-            {/* Messages Panel */}
-            {showMessages && renderMessages()}
-
-            {/* Messages Toggle Button */}
-            <button
-                onClick={() => setShowMessages(!showMessages)}
-                className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-colors"
-            >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-            </button>
-
-            {/* Profile / Booking Modal */}
-            {showBooking && selectedMentor && (
-            <div className="fixed inset-0 z-50 bg-black/40 flex items-start md:items-center justify-center p-4">
-                <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden">
-                    <div className="flex items-center justify-between px-6 py-4 border-b">
-                        <h3 className="text-lg font-semibold">Mentor Profile</h3>
-                        <button
-                        type="button"
-                        onClick={() => setShowBooking(false)}
-                        className="p-2 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        aria-label="Close profile"
-                        > ✕ </button>
-                    </div>
-                    <div className="p-6">
-                        {renderMentorProfile()} {/* re-use your existing renderer */}
-                    </div>
-                    </div>
-                </div>
-            )}
+            
             <Footer/>
         </div>
     );
