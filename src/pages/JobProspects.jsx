@@ -2,7 +2,7 @@ import Footer from './Footer';
 
 export default function JobProspects() {
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-blue-300">
             <div className="w-full max-w-6xl px-6 pt-4 mx-auto flex-1">
                 <main className="flex-1">
                     <section className="text-center mb-10">
