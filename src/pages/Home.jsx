@@ -5,7 +5,7 @@ import Footer from './Footer';
 function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-blue-300">
-      <div className="w-full px-6 pt-4 flex-1">
+      <div className="w-full px-6 pt-28 flex-1">
         <main className="flex-1 max-w-6xl mx-auto">
             <section className="text-center mb-12">
               <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-4">Welcome to EduMap</h1>
