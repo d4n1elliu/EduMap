@@ -9,7 +9,7 @@ function Navbar() {
                 <NavLink to="/">EduMap</NavLink>
             </h1>
 
-            <ul className="flex space-x-6 text-white font-medium">
+            <ul className="flex space-x-10 text-white font-medium">
                 <li>
                     <NavLink to="/course-questionnaire"
                         className={({ isActive }) => isActive ? "text-blue-400" : "hover:text-blue-400"}>
