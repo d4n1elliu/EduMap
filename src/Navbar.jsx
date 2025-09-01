@@ -12,19 +12,19 @@ function Navbar() {
             <ul className="flex space-x-6 text-white font-medium">
                 <li>
                     <NavLink to="/course-questionnaire"
-                        className={({ isActive }) => isActive ? "text-orange-400" : "hover:text-blue-400"}>
+                        className={({ isActive }) => isActive ? "text-blue-400" : "hover:text-blue-400"}>
                         Course Questionnaire
                     </NavLink>
                     </li>
                     <li>
                     <NavLink to="/job-prospects"
-                        className={({ isActive }) => isActive ? "text-orange-400" : "hover:text-blue-400"}>
+                        className={({ isActive }) => isActive ? "text-blue-400" : "hover:text-blue-400"}>
                         Job Prospects
                     </NavLink>
                     </li>
                     <li>
                     <NavLink to="/buddy-system"
-                        className={({ isActive }) => isActive ? "text-orange-400" : "hover:text-blue-400"}>
+                        className={({ isActive }) => isActive ? "text-blue-400" : "hover:text-blue-400"}>
                         Buddy Program
                     </NavLink>
                 </li>
