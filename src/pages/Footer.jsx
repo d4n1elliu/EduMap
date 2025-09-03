@@ -1,7 +1,7 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-orange-500 text-white w-full">
+    <footer className="bg-gradient-to-r from-gray-500 to-blue-400 text-white w-full">
       <div className="px-6 py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
           {/* Company Info */}
@@ -58,4 +58,3 @@ export default function Footer() {
     </footer>
   );
 }
-

@@ -465,7 +465,7 @@ export default function BuddySystem() {
  
                          <div className="flex flex-wrap gap-2 justify-center mb-6">
                              {selectedMentor.skills.map(skill => (
-                                 <span key={skill} className="px-4 py-2 bg-blue-100 text-blue-800 text-sm rounded-full font-medium">
+                                 <span key={skill} className="px-4 py-2 bg-slate-100 text-slate-800 text-sm rounded-full font-medium">
                                      {skill}
                                  </span>
                              ))}
@@ -493,7 +493,7 @@ export default function BuddySystem() {
                                          <div key={day} className="py-3 text-gray-500 font-medium">{day}</div>
                                      ))}
                                      {[...Array(31)].map((_, i) => (
-                                         <div key={i} className={`py-3 cursor-pointer hover:bg-blue-100 rounded-lg transition-colors ${i === 16 ? 'bg-blue-500 text-white' : ''}`}>
+                                         <div key={i} className={`py-3 cursor-pointer hover:bg-slate-100 rounded-lg transition-colors ${i === 16 ? 'bg-slate-600 text-white' : ''}`}>
                                              {i + 1}
                                          </div>
                                      ))}
@@ -509,8 +509,8 @@ export default function BuddySystem() {
                                              key={time}
                                              className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${
                                                  time === '10:00 AM' 
-                                                     ? 'border-blue-500 bg-blue-50 text-blue-700' 
-                                                     : 'border-gray-300 hover:border-blue-300 hover:bg-blue-50'
+                                                     ? 'border-slate-500 bg-slate-50 text-slate-700' 
+                                                     : 'border-gray-300 hover:border-slate-300 hover:bg-slate-50'
                                              }`}
                                          >
                                              {time}
@@ -519,7 +519,7 @@ export default function BuddySystem() {
                                  </div>
                              </div>
  
-                             <button className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg">
+                             <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
                                  BOOK SESSION
                              </button>
                          </div>
@@ -572,13 +572,13 @@ export default function BuddySystem() {
     );
 
     return (
-        <div className="min-h-screen flex flex-col bg-blue-300">
+        <div className="min-h-screen flex flex-col bg-slate-100">
             <div className="w-full max-w-6xl px-20 pt-4 mx-auto flex-1">
                 {/* Header */}
                 <main className="flex-1">
                     <section className="text-center mb-8">
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-3">Buddy Program</h1>
-                        <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-slate-700 mb-3">Buddy Program</h1>
+                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
                     </section>
 
                     {/* Navigation Tabs */}
@@ -594,7 +594,7 @@ export default function BuddySystem() {
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
                                         activeTab === tab.id
-                                            ? 'border-blue-500 text-blue-600'
+                                            ? 'border-slate-500 text-slate-600'
                                             : 'border-transparent text-gray-500 hover:text-gray-700'
                                     }`}
                                 >
