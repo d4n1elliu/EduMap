@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import CourseQuestionnaire from './pages/CourseQuestionnaire';
 import BuddySystem from './pages/BuddySystem';
 import JobProspects from './pages/JobProspects';
+import About from './pages/About';
 import Home from './pages/Home';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <div className="pt-24 flex justify-center">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/course-questionnaire" element={<CourseQuestionnaire />} />
           <Route path="/buddy-system" element={<BuddySystem />} />
           <Route path="/job-prospects" element={<JobProspects />} />

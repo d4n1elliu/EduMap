@@ -17,17 +17,23 @@ function Home() {
             <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <NavLink to="/course-questionnaire" className="block rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow bg-white">
                 <div className="text-2xl font-semibold text-blue-800 mb-2">Course Questionnaire</div>
-                <p className="text-gray-600">Get personalised course suggestions based on your interests and goals.</p>
+                <p className="text-gray-600">
+                  Get personalised course suggestions based on your interests and goals.
+                </p>
               </NavLink>
 
               <NavLink to="/job-prospects" className="block rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow bg-white">
                 <div className="text-2xl font-semibold text-blue-800 mb-2">Job Prospects</div>
-                <p className="text-gray-600">See career paths, current skills in demand and industries hiring now.</p>
+                <p className="text-gray-600">
+                  See career paths, current skills in demand and industries hiring now.
+                </p>
               </NavLink>
 
               <NavLink to="/buddy-system" className="block rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow bg-white">
                 <div className="text-2xl font-semibold text-blue-800 mb-2">Buddy Program</div>
-                <p className="text-gray-600">Find study partners and mentors to stay motivated and succeed.</p>
+                <p className="text-gray-600">
+                  Find study partners and mentors to stay motivated and succeed.
+                </p>
               </NavLink>
             </section>
           </main>
