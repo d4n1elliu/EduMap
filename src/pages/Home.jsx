@@ -1,6 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Footer from './Footer';
+import UNSW from '../assets/unsw.png';
+import UTS from '../assets/uts.png';
+import USYD from '../assets/usyd.png';
+import Macquarie from '../assets/macquarie.png';
+import Western from '../assets/western_university.png';
 
 function Home() {
   return (
@@ -14,21 +19,12 @@ function Home() {
               </p>
             </section>
 
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <NavLink to="/course-questionnaire" className="block rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow bg-white">
-                <div className="text-2xl font-semibold text-blue-800 mb-2">Course Questionnaire</div>
-                <p className="text-gray-600">Get personalised course suggestions based on your interests and goals.</p>
-              </NavLink>
-
-              <NavLink to="/job-prospects" className="block rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow bg-white">
-                <div className="text-2xl font-semibold text-blue-800 mb-2">Job Prospects</div>
-                <p className="text-gray-600">See career paths, current skills in demand and industries hiring now.</p>
-              </NavLink>
-
-              <NavLink to="/buddy-system" className="block rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow bg-white">
-                <div className="text-2xl font-semibold text-blue-800 mb-2">Buddy Program</div>
-                <p className="text-gray-600">Find study partners and mentors to stay motivated and succeed.</p>
-              </NavLink>
+            <section className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-10 place-items-center">
+              <img src={UNSW} alt="UNSW" className="h-30 w-auto object-contain drop-shadow"/>
+              <img src={USYD} alt="USYD" className="h-30 w-auto object-contain drop-shadow"/>
+              <img src={UTS} alt="UTS" className="h-30 w-auto object-contain drop-shadow"/>
+              <img src={Macquarie} alt="Macquarie University" className="h-30 w-auto object-contain drop-shadow"/>
+              <img src={Western} alt="Western Sydney University" className="h-30   w-auto object-contain drop-shadow" />
             </section>
           </main>
           </div>
@@ -38,5 +34,3 @@ function Home() {
 }
 
 export default Home;
-
-
