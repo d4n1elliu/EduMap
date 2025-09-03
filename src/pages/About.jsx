@@ -6,7 +6,7 @@ export default function About() {
             <div className="w-full max-w-6xl px-6 pt-28 mx-auto flex-1">
                 <main className="flex-1">
                     <section className="text-center mb-10 space-y-5">
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-blue-500 mb-8">Meet The Team! </h1>
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-8">Meet The Team! </h1>
                         <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Daniel Liu (14430779)</p>
                         <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Julian Alcazaren (24608263)</p>
                         <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Robert Ly (24561680)</p>
