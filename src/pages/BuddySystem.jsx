@@ -572,7 +572,7 @@ export default function BuddySystem() {
     );
 
     return (
-        <div className="min-h-screen flex flex-col bg-slate-100">
+        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-400 via-blue-100 via-orange-100 to-orange-400">
             <div className="w-full max-w-6xl px-20 pt-4 mx-auto flex-1">
                 {/* Header */}
                 <main className="flex-1">

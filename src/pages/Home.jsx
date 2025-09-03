@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-blue-300">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-400 via-blue-100 via-orange-100 to-orange-400">
       <div className="w-full px-6 pt-28 flex-1">
         <main className="flex-1 max-w-6xl mx-auto">
             <section className="text-center mb-12">

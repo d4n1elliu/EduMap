@@ -1,9 +1,10 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-gray-500 to-blue-400 text-white w-full">
+    <footer className="bg-gradient-to-r from-slate-600 via-slate-500 via-orange-300 to-orange-400 text-white w-full"> {/* Footer Background Styling */}
       <div className="px-6 py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
+          
           {/* Company Info */}
           <div className="col-span-1 md:col-span-1">
             <h3 className="text-2xl fontc-bold mb-5">EduMap</h3>
@@ -49,7 +50,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-orange-400 mt-8 pt-8 text-center">
+        <div className="mt-8 pt-8 text-center">
           <p className="text-orange-100">
             © 2025 EduMap. All rights reserved.
           </p>
