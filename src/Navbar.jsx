@@ -19,6 +19,13 @@ function Navbar() {
                 </li>
 
                 <li>
+                <NavLink to="/login"
+                    className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-400"}>
+                    Login
+                </NavLink>
+                </li>
+
+                <li>
                 <NavLink to="/course-questionnaire"
                     className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-400"}>
                     Course Questionnaire

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Backend API endpoint
 const endpointUrl = "http://localhost:5046/api";
 
 // Create axios instance
