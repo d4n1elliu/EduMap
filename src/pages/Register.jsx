@@ -1,9 +1,9 @@
 import {useState} from "react";
-import {login} from "../api/auth";
+import {register} from "../api/auth";
 import {useNavigate} from "react-router-dom";
 import Footer from './Footer';
 
-export default function Login() {
+export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -12,7 +12,7 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await login(email, password );
+            const response = await register(email, password );
 
             // Save token to localStorage
             localStorage.setItem('authToken', response.data.data.token);
@@ -32,14 +32,19 @@ export default function Login() {
                     onSubmit={handleSubmit}
                     className="bg-white p-20 rounded-lg shadow-md max-w-md sm:max-w-lg lg:max-w-xl"
                 >
-                    <h2 className="text-2xl font-bold mb-6 text-center text-orange-500">
-                        Login to EduMap
-                    </h2>
+                    <h1 className="text-2xl font-bold mb-6 text-center text-orange-500">
+                        Sign Up
+                    </h1>
+                    {error && <p className="text-red-500 mb-4">{error}</p>}
+                    
+                    <h3 className="text-2xl font-bold mb-6 text-center text-orange-500">
+                        Sign Up to Continue
+                    </h3>
                     {error && <p className="text-red-500 mb-4">{error}</p>}
 
                     <input
                         type="email"
-                        placeholder="Email"
+                        placeholder="New Email"
                         className="w-full p-2 mb-6 border rounded"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -48,7 +53,7 @@ export default function Login() {
 
                     <input
                         type="password"
-                        placeholder="Password"
+                        placeholder="New Password"
                         className="w-full p-2 mb-6 border rounded"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -59,7 +64,7 @@ export default function Login() {
                         type="submit"
                         className="w-full py-3 bg-blue-500 text-white font-semibold rounded hover:bg-orange-600 transition-colors"
                     >
-                        Login
+                        Sign Up
                     </button>
                 </form>
             </div>
