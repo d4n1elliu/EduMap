@@ -34,8 +34,15 @@ export default function Footer() {
               <li>
                 <Link to="/about" className="text-orange-100 hover:text-white transition-color">About Us</Link>
               </li>
-              <li><a href="#" className="text-orange-100 hover:text-white transition-colors">Services</a></li>
-              <li><a href="#" className="text-orange-100 hover:text-white transition-colors">Contact</a></li>
+              <li>
+                <Link to="/course-questionnaire" className="text-orange-100 hover:text-white transition-color">Course Questionnaire</Link>
+              </li>
+              <li>
+                <Link to="/job-prospects" className="text-orange-100 hover:text-white transition-color">Job Prospects</Link>
+              </li>
+              <li>
+                <Link to="/buddy-system" className="text-orange-100 hover:text-white transition-color">Buddy System</Link>
+              </li>
             </ul>
           </div>
 
