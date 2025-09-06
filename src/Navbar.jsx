@@ -11,12 +11,6 @@ function Navbar() {
             </h1>
 
             <ul className="flex space-x-10 text-white font-medium">
-                <li>
-                <NavLink to="/about"
-                    className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-400"}>
-                    About
-                </NavLink>
-                </li>
 
                 <li>
                 <NavLink to="/login"
