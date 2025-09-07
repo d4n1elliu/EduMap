@@ -236,11 +236,13 @@ export default function BuddySystem() {
         }
     ]);
 
+    // Messages data
     const [messages] = useState([
         { mentorId: 1, mentorName: "Emma Janice", lastMessage: "Hi! Looking forward to our session tomorrow." },
         { mentorId: 3, mentorName: "Sarah Williams", lastMessage: "Thanks for the great study tips!" }
     ]);
 
+    // Handle filter changes
     const handleFilterChange = (filterType, value) => {
         if (filterType === 'courses') {
             const newCourses = filters.courses.includes(value)
@@ -252,6 +254,7 @@ export default function BuddySystem() {
         }
     };
 
+    // Toggle saving/removing mentor
     const toggleSavedMentor = (mentorId) => {
         if (savedMentors.includes(mentorId)) {
             setSavedMentors(savedMentors.filter(id => id !== mentorId));
@@ -260,6 +263,7 @@ export default function BuddySystem() {
         }
     };
 
+    // Filter mentors based on search and filters
     const filteredMentors = mentors.filter(mentor => {
         const matchesSearch = mentor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             mentor.studies.toLowerCase().includes(searchQuery.toLowerCase());
@@ -273,6 +277,7 @@ export default function BuddySystem() {
         return matchesSearch && matchesGender && matchesUniversity && matchesCourses;
     });
 
+    // Render Mentors Tab
     const renderMentorsTab = () => (
         <div className="flex gap-6">
             {/* Filters Sidebar */}
@@ -283,7 +288,8 @@ export default function BuddySystem() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                     </svg>
                 </div>
-                
+
+                {/*Filters Form*/} 
                 <div className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
@@ -301,7 +307,8 @@ export default function BuddySystem() {
                             </label>
                         ))}
                     </div>
-
+                    
+                    {/*University Filter*/}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">University</label>
                         {['all', 'University of New South Wales', 'University of Sydney', 'University of Technology Sydney', 'Macquarie University', 'Western University'].map(uni => (
@@ -319,6 +326,7 @@ export default function BuddySystem() {
                         ))}
                     </div>
 
+                    {/*Courses Filter*/}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Courses</label>
                         {['Information Technology', 'Computer Science', 'Business', 'Law', 'Sciences', 'Engineering', 'Communication', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
@@ -352,7 +360,8 @@ export default function BuddySystem() {
                         </svg>
                     </div>
                 </div>
-
+                
+                {/* Mentors List */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {filteredMentors.map(mentor => (
                         <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
@@ -363,6 +372,7 @@ export default function BuddySystem() {
                                 <p className="text-xs text-gray-500">{mentor.university}</p>
                             </div>
                             
+                            {/* Ratings and Save Button */}
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center">
                                     {[...Array(5)].map((_, i) => (
@@ -381,7 +391,8 @@ export default function BuddySystem() {
                                     </svg>
                                 </button>
                             </div>
-
+                            
+                            {/*Skills tag*/}
                             <div className="flex flex-wrap gap-1 mb-3">
                                 {mentor.skills.slice(0, 3).map(skill => (
                                     <span key={skill} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
@@ -389,7 +400,8 @@ export default function BuddySystem() {
                                     </span>
                                 ))}
                             </div>
-
+                            
+                            {/*About Section*/}
                             <div className="mt-auto">
                                 <button
                                     onClick={() => {
@@ -408,6 +420,7 @@ export default function BuddySystem() {
         </div>
     );
 
+    // Render Saved Mentors Tab
     const renderSavedMentorsTab = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {mentors.filter(mentor => savedMentors.includes(mentor.id)).map(mentor => (
@@ -418,7 +431,8 @@ export default function BuddySystem() {
                         <p className="text-sm text-gray-600">{mentor.studies}</p>
                         <p className="text-xs text-gray-500">{mentor.university}</p>
                     </div>
-                    
+
+                    {/* Ratings and Save Button */}
                     <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center">
                             {[...Array(5)].map((_, i) => (
@@ -437,6 +451,7 @@ export default function BuddySystem() {
                         </button>
                     </div>
 
+                    {/*Skills tag*/}
                     <div className="mt-auto">
                         <button
                             onClick={() => {
@@ -453,6 +468,7 @@ export default function BuddySystem() {
         </div>
     );
 
+    // Render Bookings Tab
     const renderBookingsTab = () => (
         <div className="space-y-4">
             {bookedSessions.map(session => {
@@ -470,6 +486,7 @@ export default function BuddySystem() {
                                 </div>
                             </div>
                             
+                            {/* Action Buttons */}
                             <div className="flex flex-col space-y-2">
                                 <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
                                     Message
@@ -487,7 +504,7 @@ export default function BuddySystem() {
             })}
         </div>
     );
-
+        // Render Messages Tab
          const renderMentorProfile = () => (
          <div className="bg-white rounded-lg">
              <button
@@ -499,7 +516,8 @@ export default function BuddySystem() {
                  </svg>
                  Back to Mentors
              </button>
- 
+            
+            {/* Mentor Details */}
              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                  {/* Left Column - Mentor Info */}
                  <div className="lg:col-span-1">
@@ -509,6 +527,7 @@ export default function BuddySystem() {
                          <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies}</p>
                          <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
                          
+                         {/* Ratings */}
                          <div className="flex items-center justify-center mb-6">
                              {[...Array(5)].map((_, i) => (
                                  <svg key={i} className={`w-6 h-6 ${i < selectedMentor.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
@@ -517,7 +536,8 @@ export default function BuddySystem() {
                              ))}
                              <span className="ml-3 text-gray-600 font-medium">{selectedMentor.reviews} Reviews</span>
                          </div>
- 
+                             
+                        {/* Skills Tags */}
                          <div className="flex flex-wrap gap-2 justify-center mb-6">
                              {selectedMentor.skills.map(skill => (
                                  <span key={skill} className="px-4 py-2 bg-slate-100 text-slate-800 text-sm rounded-full font-medium">
@@ -535,7 +555,8 @@ export default function BuddySystem() {
                              <h3 className="text-2xl font-semibold text-gray-800 mb-4">About {selectedMentor.name}</h3>
                              <p className="text-gray-600 leading-relaxed text-lg">{selectedMentor.about}</p>
                          </div>
- 
+                             
+                        {/* Booking Section */}
                          <div className="bg-gray-50 rounded-xl p-6">
                              <h3 className="text-xl font-semibold text-gray-800 mb-4">Book a Session</h3>
                              <p className="text-gray-600 mb-6 text-lg">Choose your preferred date and time for a mentor session.</p>
@@ -573,7 +594,7 @@ export default function BuddySystem() {
                                      ))}
                                  </div>
                              </div>
- 
+                                     
                              <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
                                  BOOK SESSION
                              </button>
@@ -584,6 +605,7 @@ export default function BuddySystem() {
          </div>
      );
 
+    // Render Messages Panel
     const renderMessages = () => (
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
             <div className="bg-green-600 text-white p-4 rounded-t-lg">
@@ -605,6 +627,7 @@ export default function BuddySystem() {
                 </div>
             </div>
             
+            {/* Messages List */}
             <div className="p-4">
                 {messages.map(message => (
                     <div key={message.mentorId} className="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
@@ -627,6 +650,7 @@ export default function BuddySystem() {
     );
 
     return (
+        // Main Layout
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-400 via-blue-100 via-orange-100 to-orange-400">
             <div className="w-full max-w-6xl px-20 pt-4 mx-auto flex-1">
                 {/* Header */}
@@ -657,7 +681,7 @@ export default function BuddySystem() {
                                 </button>
                             ))}
                         </div>
-
+                        
                         <div className="p-6">
                             {activeTab === 'mentors' && renderMentorsTab()}
                             {activeTab === 'saved' && renderSavedMentorsTab()}

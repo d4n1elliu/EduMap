@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
+    // Footer Component
     <footer className="bg-gradient-to-r from-slate-600 via-slate-500 via-orange-300 to-orange-400 text-white w-full"> {/* Footer Background Styling */}
       <div className="px-6 py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
@@ -13,6 +14,7 @@ export default function Footer() {
                 Empowering students to connect, learn, and grow together through our comprehensive
                 educational platform and mentorship programs.
             </p>
+            {/* Social Media Icons */}
             <div className="flex space-x-4">
               <a href="#" className="text-orange-100 hover:text-white transition-colors">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
