@@ -9,6 +9,7 @@ export default function Register() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -25,6 +26,7 @@ export default function Register() {
         }
     }
 
+    // JSX for the registration form
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-300 via-blue-100 via-orange-100 to-orange-300">
             <div className="flex-1 flex items-center justify-center px-4">
@@ -32,6 +34,7 @@ export default function Register() {
                     onSubmit={handleSubmit}
                     className="bg-white p-20 rounded-lg shadow-md max-w-md sm:max-w-lg lg:max-w-xl"
                 >
+                    {/* Sign Up Header */}
                     <h1 className="text-2xl font-bold mb-6 text-center text-orange-500">
                         Sign Up
                     </h1>
@@ -42,6 +45,7 @@ export default function Register() {
                     </h3>
                     {error && <p className="text-red-500 mb-4">{error}</p>}
 
+                    {/* Email Input */}
                     <input
                         type="email"
                         placeholder="New Email"
@@ -51,6 +55,7 @@ export default function Register() {
                         required
                     />
 
+                    {/* Password Input */}
                     <input
                         type="password"
                         placeholder="New Password"
@@ -60,6 +65,7 @@ export default function Register() {
                         required
                     />
 
+                    {/* Submit Button */}
                     <button
                         type="submit"
                         className="w-full py-3 bg-blue-500 text-white font-semibold rounded hover:bg-orange-600 transition-colors"
