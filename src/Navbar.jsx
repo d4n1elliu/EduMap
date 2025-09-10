@@ -13,7 +13,7 @@ function Navbar() {
             {/* Login & SignUp button */}
             <ul className="flex space-x-10 text-white font-medium">
                 <li>
-                <NavLink to="/register"
+                <NavLink to="/signup"
                     className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-400"}>
                     Sign Up
                 </NavLink>
