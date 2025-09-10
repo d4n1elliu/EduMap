@@ -67,7 +67,7 @@ export default function Register() {
                     {/* Email Input */}
                     <input
                         type="email"
-                        placeholder="Email"
+                        placeholder="example@gmail.com"
                         className="w-full p-2 mb-6 border rounded"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
