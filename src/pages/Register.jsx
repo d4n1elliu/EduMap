@@ -58,6 +58,12 @@ export default function Register() {
                         Create your EduMap account
                     </p>
 
+                    {error && (
+                        <p className="text-red-500 mb-4 text-center">
+                            {error}
+                        </p>
+                    )}
+                    
                     {/* Email Input */}
                     <input
                         type="email"
