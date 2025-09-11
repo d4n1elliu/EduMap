@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Footer from './Footer';
 
 export default function BuddySystem() {
+
+    // UseState variables
     const [activeTab, setActiveTab] = useState('mentors');
     const [selectedMentor, setSelectedMentor] = useState(null);
     const [showBooking, setShowBooking] = useState(false);
