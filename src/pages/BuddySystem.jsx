@@ -554,14 +554,14 @@ export default function BuddySystem() {
                  <div className="lg:col-span-2">
                      <div className="space-y-8">
                          <div>
-                             <h3 className="text-2xl font-semibold text-gray-800 mb-4">About {selectedMentor.name}</h3>
-                             <p className="text-gray-600 leading-relaxed text-lg">{selectedMentor.about}</p>
+                             <h3 className="text-2xl font-semibold text-blue-800 mb-4">About {selectedMentor.name}</h3>
+                             <p className="text-blue-600 leading-relaxed text-lg">{selectedMentor.about}</p>
                          </div>
                              
                         {/* Booking Section */}
-                         <div className="bg-gray-50 rounded-xl p-6">
-                             <h3 className="text-xl font-semibold text-gray-800 mb-4">Book a Session</h3>
-                             <p className="text-gray-600 mb-6 text-lg">Choose your preferred date and time for a mentor session.</p>
+                         <div className="bg-blue-50 rounded-xl p-6">
+                             <h3 className="text-xl font-semibold text-blue-800 mb-4">Book a Session</h3>
+                             <p className="text-blue-600 mb-6 text-lg">Choose your preferred date and time for a mentor session.</p>
                              
                              {/* Calendar */}
                              <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
@@ -580,15 +580,15 @@ export default function BuddySystem() {
  
                              {/* Time Slots */}
                              <div className="mb-6">
-                                 <p className="text-base font-medium text-gray-700 mb-4">Available Time Slots:</p>
+                                 <p className="text-base font-medium text-blue-700 mb-4">Available Time Slots:</p>
                                  <div className="grid grid-cols-4 gap-3">
                                      {['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map(time => (
                                          <button
                                              key={time}
                                              className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${
                                                  time === '10:00 AM' 
-                                                     ? 'border-slate-500 bg-slate-50 text-slate-700' 
-                                                     : 'border-gray-300 hover:border-slate-300 hover:bg-slate-50'
+                                                     ? 'border-blue-500 bg-slate-50 text-blue-700' 
+                                                     : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
                                              }`}
                                          >
                                              {time}
@@ -596,6 +596,8 @@ export default function BuddySystem() {
                                      ))}
                                  </div>
                              </div>
+                                     
+                             <button className="w-full bg-blue-700 text-white py-4 px-6 rounded-lg hover:bg-green-800 transition-colors font-semibold text-lg">
                             {/* Book Button */}
                              <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
                                  BOOK SESSION
@@ -609,7 +611,7 @@ export default function BuddySystem() {
 
     // Render Messages Panel
     const renderMessages = () => (
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+        <div className="bg-white rounded-lg border border-blue-200 shadow-sm">
             <div className="bg-green-600 text-white p-4 rounded-t-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -633,16 +635,16 @@ export default function BuddySystem() {
             <div className="p-4">
                 {messages.map(message => (
                     <div key={message.mentorId} className="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
-                        <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="w-10 h-10 bg-blue-300 rounded-full flex items-center justify-center">
+                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </div>
                         <div className="flex-1">
-                            <h4 className="font-medium text-gray-800">{message.mentorName}</h4>
-                            <p className="text-sm text-gray-600 truncate">{message.lastMessage}</p>
+                            <h4 className="font-medium text-blue-800">{message.mentorName}</h4>
+                            <p className="text-sm text-blue-600 truncate">{message.lastMessage}</p>
                         </div>
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                     </div>
@@ -658,12 +660,12 @@ export default function BuddySystem() {
                 {/* Header */}
                 <main className="flex-1">
                     <section className="text-center mb-8">
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-slate-700 mb-3">Buddy Program</h1>
-                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-3">Buddy Program</h1>
+                        <p className="text-lg md:text-xl text-blue-500 max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
                     </section>
 
                     {/* Navigation Tabs */}
-                    <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
+                    <div className="bg-white rounded-lg border border-blue-200 shadow-sm mb-6">
                         <div className="flex border-b border-gray-200">
                             {[
                                 { id: 'mentors', label: 'Mentors' },
