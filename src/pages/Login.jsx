@@ -4,6 +4,8 @@ import {useNavigate} from "react-router-dom";
 import Footer from './Footer';
 
 export default function Login() {
+
+    // State variables for form inputs and submission status
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");

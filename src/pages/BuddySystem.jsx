@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Footer from './Footer';
 
 export default function BuddySystem() {
+
+    // UseState variables
     const [activeTab, setActiveTab] = useState('mentors');
     const [selectedMentor, setSelectedMentor] = useState(null);
     const [showBooking, setShowBooking] = useState(false);
@@ -596,6 +598,8 @@ export default function BuddySystem() {
                              </div>
                                      
                              <button className="w-full bg-blue-700 text-white py-4 px-6 rounded-lg hover:bg-green-800 transition-colors font-semibold text-lg">
+                            {/* Book Button */}
+                             <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
                                  BOOK SESSION
                              </button>
                          </div>
