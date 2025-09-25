@@ -598,6 +598,7 @@ export default function BuddySystem() {
                              </div>
                                      
                              <button className="w-full bg-blue-700 text-white py-4 px-6 rounded-lg hover:bg-green-800 transition-colors font-semibold text-lg">
+                                </button>
                             {/* Book Button */}
                              <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
                                  BOOK SESSION
