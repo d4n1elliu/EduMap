@@ -15,7 +15,7 @@ export default function BuddySystem() {
         courses: []
     });
 
-    {/*Data for mentors*/}
+    // Data for mentors 
     const mentors = [
         {
             id: 1,
@@ -217,7 +217,7 @@ export default function BuddySystem() {
         },
     ];
 
-    {/* Saved IDs mentors*/}
+    // Saved IDs mentors 
     const [savedMentors, setSavedMentors] = useState([1, 3]); 
     const [bookedSessions, setBookedSessions] = useState([
         {
@@ -600,15 +600,15 @@ export default function BuddySystem() {
                              <button className="w-full bg-blue-700 text-white py-4 px-6 rounded-lg hover:bg-green-800 transition-colors font-semibold text-lg">
                                 </button>
                             {/* Book Button */}
-                             <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
-                                 BOOK SESSION
-                             </button>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     );
+                            <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
+                                BOOK SESSION
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 
     // Render Messages Panel
     const renderMessages = () => (
