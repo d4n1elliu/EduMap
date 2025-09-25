@@ -3,6 +3,9 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import EduMapLogo from "./assets/EduMap Logo 300dpi.png"; 
+import EduMapLogoBlack from "./assets/EduMapLogoBLACK300dpi.png"; 
+import EduMapLogoWhite from "./assets/EduMapLogoWHITE300dpi.png"; 
+import EduMapLogoBlue from "./assets/EduMapLogoBLUE300dpi.png"; 
 
 function Navbar() {
     const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
