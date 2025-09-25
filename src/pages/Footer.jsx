@@ -5,7 +5,7 @@ export default function Footer() {
     // Footer Component
     <footer className="bg-gradient-to-r from-slate-600 via-slate-500 via-orange-300 to-orange-400 text-white w-full"> {/* Footer Background Styling */}
       <div className="px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
           
           {/* Company Info */}
           <div className="col-span-1 md:col-span-1">
@@ -28,27 +28,7 @@ export default function Footer() {
               </a>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/about" className="text-orange-100 hover:text-white transition-color">About Us</Link>
-              </li>
-              <li>
-                <Link to="/course-questionnaire" className="text-orange-100 hover:text-white transition-color">Course Questionnaire</Link>
-              </li>
-              <li>
-                <Link to="/job-prospects" className="text-orange-100 hover:text-white transition-color">Job Prospects</Link>
-              </li>
-              <li>
-                <Link to="/buddy-system" className="text-orange-100 hover:text-white transition-color">Buddy System</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Support */}
+          {/* Support Section*/}
           <div>
             <h4 className="text-lg font-semibold mb-4">Support</h4>
             <ul className="space-y-2">
