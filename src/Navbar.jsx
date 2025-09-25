@@ -17,8 +17,8 @@ function Navbar() {
         window.location.reload();
     };
     return (
-        <nav className="bg-gradient-to-r from-slate-600 via-slate-500 via-orange-300 to-orange-400 text-white px-6 py-5 flex justify-between items-center fixed top-0 left-0 right-0 w-full h-24 z-50"> 
-        {/* Main navigation <div> container: fixed at the top, gradient background*/}
+        <nav className="px-6 py-5 flex justify-between items-center fixed top-0 left-0 right-0 z-50 h-24 flex items-center bg-slate-900 text-white px-6"> 
+        {/* Match footer color for cohesion (no translucency) */}
 
             <div className="flex items-center space-x-3">
                 <img 
@@ -35,19 +35,19 @@ function Navbar() {
             {token ? (
                 <ul className="flex items-center space-x-8 text-white font-medium">
                     <li>
-                        <NavLink to="/course-questionnaire" className={({ isActive }) => isActive ? "text-green-500" : "hover:text-blue-700"}>Course Questionnaire</NavLink>
+                        <NavLink to="/course-questionnaire" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Course Questionnaire</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/job-prospects" className={({ isActive }) => isActive ? "text-green-500" : "hover:text-blue-700"}>Job Prospects</NavLink>
+                        <NavLink to="/job-prospects" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Job Prospects</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/buddy-system" className={({ isActive }) => isActive ? "text-green-500" : "hover:text-blue-700"}>Buddy System</NavLink>
+                        <NavLink to="/buddy-system" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Buddy System</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/about" className={({ isActive }) => isActive ? "text-green-500" : "hover:text-blue-700"}>About Us</NavLink>
+                        <NavLink to="/about" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>About Us</NavLink>
                     </li>
                     <li>
-                        <button onClick={handleLogout} className="ml-5 px-4 py-1 rounded bg-white/20 hover:bg-white/20">Logout</button>
+                        <button onClick={handleLogout} className="ml-5 px-3 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-300">Logout</button>
                     </li>
                 </ul>
             ) : (
@@ -56,13 +56,13 @@ function Navbar() {
                 <ul className="flex space-x-10 text-white font-medium">
                     <li>
                         <NavLink to="/signup"
-                            className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-200"}>
+                            className={({ isActive }) => isActive ? "text-orange-400" : "text-blue-300 hover:text-blue-200"}>
                             Sign Up
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/login"
-                            className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-200"}>
+                            className={({ isActive }) => isActive ? "text-orange-400" : "text-blue-300 hover:text-blue-200"}>
                             Login
                         </NavLink>
                     </li>
