@@ -15,6 +15,7 @@ import UWA from '../assets/UWA logo.png'
 
 function Home() {
   return (
+    /* EduMap Welcome Message */
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-400 via-blue-100 via-orange-100 to-orange-400">
       <div className="w-full px-6 pt-28 flex-1">
         <main className="flex-1 max-w-6xl mx-auto">
@@ -24,7 +25,7 @@ function Home() {
                 Navigate your education journey with tailored tools: explore courses, discover job prospects and connect with peers.
               </p>
             </section>
-
+            {/* All Universities logos display in the middle of the website */}
             <section className="mt-10 flex justify-center items-center gap-10">
                <img src={UNSW} alt="UNSW" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
                <img src={USYD} alt="USYD" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
