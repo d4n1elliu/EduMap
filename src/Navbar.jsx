@@ -22,14 +22,14 @@ function Navbar() {
             <ul className="flex space-x-10 text-white font-medium">
                 <li>
                 <NavLink to="/signup"
-                    className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-400"}>
+                    className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-500"}>
                     Sign Up
                 </NavLink>
                 </li>
 
                 <li>
                 <NavLink to="/login"
-                    className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-400"}>
+                    className={({ isActive }) => isActive ? "text-white-400" : "hover:text-blue-500"}>
                     Login
                 </NavLink>
                 </li>
