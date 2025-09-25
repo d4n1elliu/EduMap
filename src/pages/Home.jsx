@@ -20,7 +20,7 @@ function Home() {
       <div className="w-full px-6 pt-28 flex-1">
         <main className="flex-1 max-w-6xl mx-auto">
             <section className="text-center mb-12">
-              <div className="mx-auto max-w-3xl rounded-sm bg-white shadow-2xl px-8 md:px-15 py-10 md:py-12 shadow text-center">
+              <div className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl px-8 md:px-10 py-10 md:py-12 shadow text-center">
                 <h1 className="text-5xl md:text-6xl font-bold text-orange-500 mb-4">Welcome to EduMap</h1>
                 <p className="text-lg md:text-xl text-black">
                   Navigate your education journey with tailored tools: explore courses, discover job prospects and connect with peers.

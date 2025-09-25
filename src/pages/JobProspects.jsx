@@ -4,7 +4,7 @@ import Footer from './Footer';
 export default function JobProspects() {
     return (
         // JSX for the Job Prospects page
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-300 via-blue-100 via-orange-100 to-orange-300">
+        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-800 via-blue-300 via-orange-300 to-orange-800">
             <div className="w-full max-w-6xl px-6 pt-28 mx-auto flex-1">
                 <main className="flex-1">
                     <section className="text-center mb-10">
