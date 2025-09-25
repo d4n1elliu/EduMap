@@ -6,6 +6,12 @@ import UTS from '../assets/uts.png';
 import USYD from '../assets/usyd.png';
 import Macquarie from '../assets/macquarie.png';
 import Western from '../assets/western_university.png';
+import ANU from '../assets/ANU logo.png'
+import Monash from '../assets/Monash logo.png'
+import UOA from '../assets/UOA logo.png'
+import UOM from '../assets/UOM logo.png'
+import UQ from  '../assets/UQ logo.png'
+import UWA from '../assets/UWA logo.png'
 
 function Home() {
   return (
@@ -19,12 +25,18 @@ function Home() {
               </p>
             </section>
 
-            <section className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-10 place-items-center">
-              <img src={UNSW} alt="UNSW" className="h-30 w-auto object-contain drop-shadow"/>
-              <img src={USYD} alt="USYD" className="h-30 w-auto object-contain drop-shadow"/>
-              <img src={UTS} alt="UTS" className="h-30 w-auto object-contain drop-shadow"/>
-              <img src={Macquarie} alt="Macquarie University" className="h-30 w-auto object-contain drop-shadow"/>
-              <img src={Western} alt="Western Sydney University" className="h-30   w-auto object-contain drop-shadow" />
+            <section className="mt-10 flex justify-center items-center gap-10">
+               <img src={UNSW} alt="UNSW" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={USYD} alt="USYD" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={UTS} alt="UTS" className="h-20 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={Macquarie} alt="Macquarie University" className="h-20 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={Western} alt="Western Sydney University" className="h-25 w-auto object-contain drop-shadow flex-shrink-0" />
+               <img src={ANU} alt="ANU" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={Monash} alt="Monash" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={UOA} alt="UOA" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={UOM} alt="UOM" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={UQ} alt="UQ" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
+               <img src={UWA} alt="UWA" className="h-25 w-auto object-contain drop-shadow flex-shrink-0"/>
             </section>
           </main>
           </div>

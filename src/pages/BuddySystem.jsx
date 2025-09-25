@@ -506,98 +506,99 @@ export default function BuddySystem() {
             })}
         </div>
     );
-
-    // Render Messages Tab
-    const renderMentorProfile = () => (
-        <div className="bg-white rounded-lg">
-            <button
-                onClick={() => setShowBooking(false)}
-                className="text-blue-600 hover:text-blue-800 mb-6 flex items-center text-sm font-medium"
-            >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-                Back to Mentors
-            </button>
-        
-        {/* Mentor Details */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Left Column - Mentor Info */}
-                <div className="lg:col-span-1">
-                    <div className="text-center">
-                        <div className="text-7xl mb-6">{selectedMentor.image}</div>
-                        <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.name}</h2>
-                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies}</p>
-                        <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
-                        
-                        {/* Ratings */}
-                        <div className="flex items-center justify-center mb-6">
-                            {[...Array(5)].map((_, i) => (
-                                <svg key={i} className={`w-6 h-6 ${i < selectedMentor.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            ))}
-                            <span className="ml-3 text-gray-600 font-medium">{selectedMentor.reviews} Reviews</span>
-                        </div>
-                            
-                    {/* Skills Tags */}
-                        <div className="flex flex-wrap gap-2 justify-center mb-6">
-                            {selectedMentor.skills.map(skill => (
-                                <span key={skill} className="px-4 py-2 bg-slate-100 text-slate-800 text-sm rounded-full font-medium">
-                                    {skill}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Right Column - About & Booking */}
-                <div className="lg:col-span-2">
-                    <div className="space-y-8">
-                        <div>
-                            <h3 className="text-2xl font-semibold text-blue-800 mb-4">About {selectedMentor.name}</h3>
-                            <p className="text-blue-600 leading-relaxed text-lg">{selectedMentor.about}</p>
-                        </div>
-                            
-                    {/* Booking Section */}
-                        <div className="bg-blue-50 rounded-xl p-6">
-                            <h3 className="text-xl font-semibold text-blue-800 mb-4">Book a Session</h3>
-                            <p className="text-blue-600 mb-6 text-lg">Choose your preferred date and time for a mentor session.</p>
-                            
-                            {/* Calendar */}
-                            <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-                                <div className="text-center text-xl font-semibold text-gray-800 mb-4">August 2024</div>
-                                <div className="grid grid-cols-7 gap-2 text-center text-sm">
-                                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
-                                        <div key={day} className="py-3 text-gray-500 font-medium">{day}</div>
-                                    ))}
-                                    {[...Array(31)].map((_, i) => (
-                                        <div key={i} className={`py-3 cursor-pointer hover:bg-slate-100 rounded-lg transition-colors ${i === 16 ? 'bg-slate-600 text-white' : ''}`}>
-                                            {i + 1}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Time Slots */}
-                            <div className="mb-6">
-                                <p className="text-base font-medium text-blue-700 mb-4">Available Time Slots:</p>
-                                <div className="grid grid-cols-4 gap-3">
-                                    {['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map(time => (
-                                        <button
-                                            key={time}
-                                            className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${
-                                                time === '10:00 AM' 
-                                                    ? 'border-blue-500 bg-slate-50 text-blue-700' 
-                                                    : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
-                                            }`}
-                                        >
-                                            {time}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                                
+        // Render Messages Tab
+         const renderMentorProfile = () => (
+         <div className="bg-white rounded-lg">
+             <button
+                 onClick={() => setShowBooking(false)}
+                 className="text-blue-600 hover:text-blue-800 mb-6 flex items-center text-sm font-medium"
+             >
+                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                 </svg>
+                 Back to Mentors
+             </button>
+            
+            {/* Mentor Details */}
+             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                 {/* Left Column - Mentor Info */}
+                 <div className="lg:col-span-1">
+                     <div className="text-center">
+                         <div className="text-7xl mb-6">{selectedMentor.image}</div>
+                         <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.name}</h2>
+                         <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies}</p>
+                         <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
+                         
+                         {/* Ratings */}
+                         <div className="flex items-center justify-center mb-6">
+                             {[...Array(5)].map((_, i) => (
+                                 <svg key={i} className={`w-6 h-6 ${i < selectedMentor.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                 </svg>
+                             ))}
+                             <span className="ml-3 text-gray-600 font-medium">{selectedMentor.reviews} Reviews</span>
+                         </div>
+                             
+                        {/* Skills Tags */}
+                         <div className="flex flex-wrap gap-2 justify-center mb-6">
+                             {selectedMentor.skills.map(skill => (
+                                 <span key={skill} className="px-4 py-2 bg-slate-100 text-slate-800 text-sm rounded-full font-medium">
+                                     {skill}
+                                 </span>
+                             ))}
+                         </div>
+                     </div>
+                 </div>
+ 
+                 {/* Right Column - About & Booking */}
+                 <div className="lg:col-span-2">
+                     <div className="space-y-8">
+                         <div>
+                             <h3 className="text-2xl font-semibold text-blue-800 mb-4">About {selectedMentor.name}</h3>
+                             <p className="text-blue-600 leading-relaxed text-lg">{selectedMentor.about}</p>
+                         </div>
+                             
+                        {/* Booking Section */}
+                         <div className="bg-blue-50 rounded-xl p-6">
+                             <h3 className="text-xl font-semibold text-blue-800 mb-4">Book a Session</h3>
+                             <p className="text-blue-600 mb-6 text-lg">Choose your preferred date and time for a mentor session.</p>
+                             
+                             {/* Calendar */}
+                             <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                                 <div className="text-center text-xl font-semibold text-gray-800 mb-4">August 2024</div>
+                                 <div className="grid grid-cols-7 gap-2 text-center text-sm">
+                                     {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
+                                         <div key={day} className="py-3 text-gray-500 font-medium">{day}</div>
+                                     ))}
+                                     {[...Array(31)].map((_, i) => (
+                                         <div key={i} className={`py-3 cursor-pointer hover:bg-slate-100 rounded-lg transition-colors ${i === 16 ? 'bg-slate-600 text-white' : ''}`}>
+                                             {i + 1}
+                                         </div>
+                                     ))}
+                                 </div>
+                             </div>
+ 
+                             {/* Time Slots */}
+                             <div className="mb-6">
+                                 <p className="text-base font-medium text-blue-700 mb-4">Available Time Slots:</p>
+                                 <div className="grid grid-cols-4 gap-3">
+                                     {['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map(time => (
+                                         <button
+                                             key={time}
+                                             className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${
+                                                 time === '10:00 AM' 
+                                                     ? 'border-blue-500 bg-slate-50 text-blue-700' 
+                                                     : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
+                                             }`}
+                                         >
+                                             {time}
+                                         </button>
+                                     ))}
+                                 </div>
+                             </div>
+                                     
+                             <button className="w-full bg-blue-700 text-white py-4 px-6 rounded-lg hover:bg-green-800 transition-colors font-semibold text-lg">
+                                </button>
                             {/* Book Button */}
                             <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
                                 BOOK SESSION
