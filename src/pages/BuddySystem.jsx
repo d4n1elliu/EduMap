@@ -663,7 +663,7 @@ export default function BuddySystem() {
                 <main className="flex-1">
                     <section className="text-center mb-8">
                         <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-3">Buddy Program</h1>
-                        <p className="text-lg md:text-xl text-blue-500 max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
+                        <p className="text-lg md:text-xl font-bold text-black max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
                     </section>
 
                     {/* Navigation Tabs */}

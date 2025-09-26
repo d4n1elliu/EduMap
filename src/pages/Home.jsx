@@ -23,7 +23,7 @@ function Home() {
               <h1 className="text-5xl md:text-6xl font-bold text-orange-500 mb-4">
                 Welcome to EduMap
               </h1>
-              <p className="text-lg md:text-xl text-black">
+              <p className="text-lg md:text-xl font-semibold text-black">
                 Navigate your education journey with tailored tools: explore
                 courses, discover job prospects and connect with peers.
               </p>
