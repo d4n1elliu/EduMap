@@ -2,6 +2,7 @@ import {useState} from "react";
 import {login} from "../api/auth";
 import {useNavigate} from "react-router-dom";
 import Footer from './Footer';
+import Background from "./Background";
 
 export default function Login() {
 
@@ -34,7 +35,7 @@ export default function Login() {
 
     // JSX for the login form
     return (
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-300 via-blue-100 via-orange-100 to-orange-300">
+        <Background>
             <div className="flex-1 flex items-center justify-center px-4">
                 <form
                     onSubmit={handleSubmit}
@@ -76,6 +77,6 @@ export default function Login() {
                 </form>
             </div>
             <Footer/>
-        </div>
+        </Background>
     );
 }

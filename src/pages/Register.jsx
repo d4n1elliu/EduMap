@@ -2,6 +2,7 @@ import {useState} from "react";
 import {register} from "../api/auth";
 import {useNavigate, Link} from "react-router-dom";
 import Footer from './Footer';
+import Background from "./Background";
 
 export default function Register() {
 
@@ -44,7 +45,7 @@ export default function Register() {
 
     // JSX for the registration form
     return (
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-300 via-blue-100 via-orange-100 to-orange-300">
+        <Background>
             <div className="flex-1 flex items-center justify-center px-4">
                 <form
                     onSubmit={handleSubmit}
@@ -116,6 +117,6 @@ export default function Register() {
                 </form>
             </div>
             <Footer/>
-        </div>
+        </Background>
     );
 }

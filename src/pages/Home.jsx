@@ -1,5 +1,3 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
 import Footer from "./Footer";
 import UNSW from "../assets/unsw.png";
 import UTS from "../assets/uts.png";
@@ -12,11 +10,12 @@ import UOA from "../assets/UOA logo.png";
 import UOM from "../assets/UOM logo.png";
 import UQ from "../assets/UQ logo.png";
 import UWA from "../assets/UWA logo.png";
+import Background from "./Background";
 
 function Home() {
   return (
     /* EduMap Welcome Message */
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-800 via-blue-300 via-orange-300 to-orange-800">
+    <Background>
       <div className="w-full px-6 pt-28 flex-1">
         <main className="flex-1 max-w-6xl mx-auto">
           <section className="text-center mb-12">
@@ -91,7 +90,7 @@ function Home() {
         </main>
       </div>
       <Footer />
-    </div>
+    </Background>
   );
 }
 
