@@ -8,7 +8,7 @@ export default function CourseQuestionnaire() {
                 <main className="flex-1">
                     <section className="text-center mb-10">
                     <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-3">Course Questionnaire</h1>
-                        <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Answer a few questions and get tailored course recommendations.</p>
+                        <p className="text-lg md:text-xl font-bold text-blackmax-w-3xl mx-auto">Answer a few questions and get tailored course recommendations.</p>
                     </section>
 
                     <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
