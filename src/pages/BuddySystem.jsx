@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Footer from './Footer';
+import Background from './Background';
 
 export default function BuddySystem() {
 
@@ -656,7 +657,7 @@ export default function BuddySystem() {
 
     return (
         // Main Layout
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-400 via-blue-100 via-orange-100 to-orange-400">
+        <Background>
             <div className="w-full max-w-6xl px-20 pt-4 mx-auto flex-1">
                 {/* Header */}
                 <main className="flex-1">
@@ -729,6 +730,6 @@ export default function BuddySystem() {
                 </main>
             </div>
             <Footer/>
-        </div>
+        </Background>
     );
 }

@@ -1,8 +1,9 @@
 import Footer from './Footer';
+import Background from './Background';
 
 export default function CourseQuestionnaire() {
     return (
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-800 via-blue-300 via-orange-300 to-orange-800">
+        <Background>
             <div className="w-full max-w-6xl px-6 pt-28 mx-auto flex-1">
                 <main className="flex-1">
                     <section className="text-center mb-10">
@@ -27,6 +28,6 @@ export default function CourseQuestionnaire() {
                 </main>
             </div>
             <Footer/>
-        </div>
+        </Background>
     )
 }
