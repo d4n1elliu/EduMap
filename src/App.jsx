@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Navbar/>
-      <div className="pt-24 flex justify-center">
+      <div className="pt-24">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
