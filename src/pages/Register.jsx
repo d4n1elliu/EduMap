@@ -29,7 +29,7 @@ export default function Register() {
         
         try {
             const response = await register(email, password);
-
+            if (response.data && response.data.data?.jwtToken)
             // Save token to localStorage
             localStorage.setItem('authToken', response.data.data.token);
 
@@ -37,7 +37,7 @@ export default function Register() {
             navigate('/');
             window.location.reload();
         } catch (err) {
-            setError("Registration failed. Please try again.");
+            setError(err.response?.data?.message || "Server Error");
         } finally {
             setIsSubmitting(false);
         }

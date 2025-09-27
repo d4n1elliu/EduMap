@@ -8,6 +8,6 @@ export const login = async (username, password) => {
 };
 
 // Temporary student number for registration
-export const register = async (email, username, password) => {
-    return await api.post(`${controller}/register`, { email, username, password, studentNumber });
+export const register = async (email, password) => {
+    return await api.post(`${controller}/register`, { email, password });
 };
