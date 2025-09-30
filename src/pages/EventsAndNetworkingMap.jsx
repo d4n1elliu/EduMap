@@ -9,7 +9,7 @@ export default function EventsAndNetworkingMap() {
             <div className="w-full max-w-6xl px-6 pt-28 mx-auto flex-1">
                 <main className="flex-1">
                     <section className="text-center mb-10">
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-3">Events & Networking Map</h1>
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-blue-500 mb-3">Events & Networking Map</h1>
                         <p className="text-lg md:text-xl font-bold text-black-700 max-w-3xl mx-auto">Explore career paths, compare your skills to market needs and follow a step-by-step roadmap with mentor support.</p>
                     </section>
 
