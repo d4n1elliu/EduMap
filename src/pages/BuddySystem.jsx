@@ -658,15 +658,18 @@ export default function BuddySystem() {
     return (
         // Main Layout
         <Background>
-            <div className="w-full max-w-6xl px-20 pt-4 mx-auto flex-1">
+            <div className="w-full max-w-6xl px-20 pt-10 mx-auto flex-1">
+
                 {/* Header */}
-                <main className="flex-1">
-                    <section className="text-center mb-8">
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-3">Buddy Program</h1>
-                        <p className="text-lg md:text-xl font-bold text-black max-w-3xl mx-auto">Connect with peers, mentors and study partners who share your goals.</p>
-                    </section>
+                <header className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl px-5 md:px-8 py-8 md:py-10 shadow text-center mb-12">
+                    <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-4 leading-light whitespace-nowrap">Buddy Program</h1>
+                    <p className="text-lg md:text-xl font-bold text-black max-w-3xl mx-auto">
+                        Connect with peers, mentors and study partners who share your goals.
+                    </p>
+                </header>
 
                     {/* Navigation Tabs */}
+                <main className="flex-1">
                     <div className="bg-white rounded-lg border border-blue-200 shadow-sm mb-6">
                         <div className="flex border-b border-gray-200">
                             {[
