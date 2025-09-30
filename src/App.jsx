@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 //import './App.css'
 import CourseQuestionnaire from './pages/CourseQuestionnaire';
 import BuddySystem from './pages/BuddySystem';
-import JobProspects from './pages/JobProspects';
+import JobProspects from './pages/EventsAndNetworkingMap';
 import About from './pages/About';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -22,7 +22,7 @@ function App() {
           <Route path="/signup" element={<Register />} />
           <Route path="/course-questionnaire" element={<CourseQuestionnaire />} />
           <Route path="/buddy-system" element={<BuddySystem />} />
-          <Route path="/job-prospects" element={<JobProspects />} />
+          <Route path="/EventsAndNetworkingMap" element={<JobProspects />} />
         </Routes>
       </div>
     </>

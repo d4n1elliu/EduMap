@@ -38,7 +38,7 @@ function Navbar() {
                         <NavLink to="/course-questionnaire" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Course Questionnaire</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/job-prospects" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Job Prospects</NavLink>
+                        <NavLink to="/EventsAndNetworkingMap" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Events & Networking Map</NavLink>
                     </li>
                     <li>
                         <NavLink to="/buddy-system" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Buddy System</NavLink>
