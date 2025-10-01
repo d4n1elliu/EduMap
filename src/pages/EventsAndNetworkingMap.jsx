@@ -6,7 +6,7 @@ export default function EventsAndNetworkingMap() {
     return (
         // JSX for the Events & Networking Map page
         <Background>
-            <div className="w-full max-w-6xl px-6 pt-28 mx-auto flex-1">
+            <div className="w-full max-w-6xl px-6 pt-10 pb-10 mx-auto flex-1">
                 
                 <main className="flex-1">
                 {/* Header */}
