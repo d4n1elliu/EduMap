@@ -12,7 +12,7 @@ export default function CourseQuestionnaire() {
             <div className="w-full max-w-6xl px-6 pt-10 pb-10 mx-auto flex-1">
                 <main className="flex-1">
                     <header className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl px-8 md:px-10 py-10 md:py-10 shadow text-center mb-12">
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-3">
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-3">
                             Course Questionnaire
                         </h1>
                         <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
