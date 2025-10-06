@@ -37,8 +37,8 @@ export default function ContactUs() {
                 <div className="w-full max-w-4xl">
                     {/* Header */}
                     <div className="text-center mb-12">
-                        <h1 className="text-4xl font-bold text-white mb-4">Contact Us</h1>
-                        <p className="text-xl text-white/90 max-w-2xl mx-auto">
+                        <h1 className="text-4xl font-bold text-orange-700 mb-4">Contact Us</h1>
+                        <p className="text-xl font-medium text-blue-700 max-w-2xl mx-auto">
                             Have questions about EduMap? We'd love to hear from you. 
                             Send us a message and we'll respond as soon as possible.
                         </p>
@@ -46,7 +46,7 @@ export default function ContactUs() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Contact Form */}
-                        <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="bg-white/30 backdrop-blur-sm p-8 rounded-lg shadow-lg">
                             <h2 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h2>
                             
                             {submitStatus === 'success' && (
@@ -134,7 +134,7 @@ export default function ContactUs() {
                         <div className="space-y-8">
                             {/* Contact Details */}
                             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
-                                <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
+                                <h3 className="text-2xl font-bold text-black mb-6">Get in Touch</h3>
                                 
                                 <div className="space-y-6">
                                     <div className="flex items-start space-x-4">
@@ -145,11 +145,11 @@ export default function ContactUs() {
                                             </svg>
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-semibold text-white mb-1">Email</h4>
-                                            <a href="mailto:support@edumap.com" className="text-orange-300 hover:text-orange-200 transition-colors">
+                                            <h4 className="text-lg font-semibold text-black mb-1">Email</h4>
+                                            <a href="mailto:support@edumap.com" className="text-orange-700 hover:text-orange-200 transition-colors">
                                                 support@edumap.com
                                             </a>
-                                            <p className="text-white/80 text-sm mt-1">
+                                            <p className="text-black text-sm mt-1">
                                                 We'll respond within 24 hours
                                             </p>
                                         </div>
@@ -162,11 +162,11 @@ export default function ContactUs() {
                                             </svg>
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-semibold text-white mb-1">Phone</h4>
-                                            <a href="tel:+1-555-123-4567" className="text-orange-300 hover:text-orange-200 transition-colors">
+                                            <h4 className="text-lg font-semibold text-black mb-1">Phone</h4>
+                                            <a href="tel:+1-555-123-4567" className="text-orange-700 hover:text-orange-200 transition-colors">
                                                 +1 (555) 123-4567
                                             </a>
-                                            <p className="text-white/80 text-sm mt-1">
+                                            <p className="text-black text-sm mt-1">
                                                 Mon-Fri 9AM-6PM EST
                                             </p>
                                         </div>
@@ -179,43 +179,15 @@ export default function ContactUs() {
                                             </svg>
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-semibold text-white mb-1">Office</h4>
-                                            <p className="text-white/90">
+                                            <h4 className="text-lg font-semibold text-black mb-1">Office</h4>
+                                            <p className="text-orange-700">
                                                 123 Education Street<br/>
                                                 Learning City, LC 12345
                                             </p>
-                                            <p className="text-white/80 text-sm mt-1">
+                                            <p className="text-black text-sm mt-1">
                                                 Visit us by appointment
                                             </p>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* FAQ Section */}
-                            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
-                                <h3 className="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h3>
-                                
-                                <div className="space-y-4">
-                                    <div>
-                                        <h4 className="text-lg font-semibold text-white mb-2">How do I get started with EduMap?</h4>
-                                        <p className="text-white/80 text-sm">
-                                            Simply create an account and complete our course questionnaire to get personalized recommendations.
-                                        </p>
-                                    </div>
-                                    
-                                    <div>
-                                        <h4 className="text-lg font-semibold text-white mb-2">Is EduMap free to use?</h4>
-                                        <p className="text-white/80 text-sm">
-                                            Yes! EduMap is completely free for students. We're committed to making education accessible to everyone.
-                                        </p>
-                                    </div>
-                                    
-                                    <div>
-                                        <h4 className="text-lg font-semibold text-white mb-2">How does the buddy system work?</h4>
-                                        <p className="text-white/80 text-sm">
-                                            Our buddy system pairs you with experienced mentors who can guide you through your academic journey.
-                                        </p>
                                     </div>
                                 </div>
                             </div>
