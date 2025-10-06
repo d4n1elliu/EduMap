@@ -11,6 +11,7 @@ import UOM from "../assets/UOM logo.png";
 import UQ from "../assets/UQ logo.png";
 import UWA from "../assets/UWA logo.png";
 import Background from "./Background";
+import Handshake from "../assets/officeHandshake.jpg"; 
 
 function Home() {
   return (
@@ -27,10 +28,14 @@ function Home() {
                 Discover your career with confidence.
               </p>
               <p className="text-lg md:text-xl font-semibold text-black">
-                Find 🫵 courses, meet mentors and take your next step forward.
+                Find 🫵 courses, meet mentors <img 
+                  src={Handshake} 
+                  alt="Handshake" 
+                  className="inline-block w-8 h-6 mx-1 align-middle"
+                /> and take your next step forward 💼
               </p>
               <div className="mt-8">
-                <a href="/course-questionnaire" className="inline-block px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors">
+                <a href="/course-questionnaire" className="inline-block px-12 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors">
                   Get Started
                 </a>
               </div>
