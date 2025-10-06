@@ -42,7 +42,7 @@ function Home() {
             </div>
           </section>
           {/* All Universities logos display in the middle of the website */}
-          <section className="mt-12 flex justify-center items-center gap-10">
+          <section className="pt-10 pb-30 mt-12 flex justify-center items-center gap-10">
             <img
               src={UNSW}
               alt="UNSW"
