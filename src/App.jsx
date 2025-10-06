@@ -9,6 +9,7 @@ import About from './pages/About';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from "./pages/Register";
+import ContactUs from './pages/ContactUs';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/course-questionnaire" element={<CourseQuestionnaire />} />
           <Route path="/buddy-system" element={<BuddySystem />} />
           <Route path="/EventsAndNetworkingMap" element={<JobProspects />} />
+          <Route path="/contact" element={<ContactUs />} />
         </Routes>
       </div>
     </>

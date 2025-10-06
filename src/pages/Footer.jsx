@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
           
           {/* Company Info */}
-          <div className="col-span-1 md:col-span-1">
+          <div className="col-span-1">
             <h3 className="text-2xl font-bold mb-5 text-white">EduMap</h3>
             <p className="text-slate-300 mb-5">
                 Empowering students to connect, learn, and grow together through our comprehensive
@@ -26,12 +26,13 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          {/* Support Section*/}
+
+          {/* Support Section with Contact Us */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Support</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Privacy Policy</a></li>
+            <ul className="space-y-2 mb-6">
+              <li><a href="/contact" className="text-slate-300 hover:text-white transition-colors">Contact Us</a></li>
+              <li><a href="about" className="text-slate-300 hover:text-white transition-colors">About Us</a></li>
               <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Terms of Service</a></li>
               <li><a href="#" className="text-slate-300 hover:text-white transition-colors">FAQ</a></li>
             </ul>
