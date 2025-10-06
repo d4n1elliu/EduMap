@@ -33,7 +33,7 @@ export default function Footer() {
             <ul className="space-y-2 mb-6">
               <li><a href="/contact" className="text-slate-300 hover:text-white transition-colors">Contact Us</a></li>
               <li><a href="/about" className="text-slate-300 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="/terms" className="text-slate-300 hover:text-white transition-colors">Terms of Service</a></li>
               <li><a href="/faq" className="text-slate-300 hover:text-white transition-colors">FAQ</a></li>
             </ul>
           </div>

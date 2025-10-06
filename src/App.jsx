@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Register from "./pages/Register";
 import ContactUs from './pages/ContactUs';
 import FAQ from './pages/FAQ';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/EventsAndNetworkingMap" element={<JobProspects />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/terms" element={<TermsOfService />} />
         </Routes>
       </div>
     </>
