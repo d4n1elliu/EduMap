@@ -37,11 +37,7 @@ export default function ContactUs() {
                 <div className="w-full max-w-4xl">
                     {/* contactUs Header */}
                     <div className="text-center mb-12">
-                        <h1 className="text-4xl font-bold text-orange-700 mb-4">Contact Us</h1>
-                        <p className="text-xl font-medium text-blue-700 max-w-2xl mx-auto">
-                            Have questions about EduMap? We'd love to hear from you. 
-                            Send us a message and we'll respond as soon as possible.
-                        </p>
+                        <h1 className="text-5xl md:text-6xl font-bold text-blue-700 mb-6">Contact Us</h1>
                     </div>
 
                     {/* Enquires Section */}

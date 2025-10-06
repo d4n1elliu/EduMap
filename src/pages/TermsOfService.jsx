@@ -8,9 +8,9 @@ export default function TermsOfService() {
                 <div className="w-full max-w-4xl">
                     {/* Header */}
                     <div className="text-center mb-12">
-                        <h1 className="text-4xl font-bold text-orange-700 mb-4">Terms of Service</h1>
-                        <p className="text-lg text-blue-700 font-medium">
-                            Last updated: January 2025
+                        <h1 className="text-5xl md:text-6xl font-bold text-blue-700 mb-6">Terms of Service</h1>
+                        <p className="font-bold text-black text-sm">
+                            Last updated: 1st October 2025
                         </p>
                     </div>
 
@@ -224,7 +224,7 @@ export default function TermsOfService() {
                         <section>
                             <h2 className="text-2xl font-bold text-orange-500 mb-4">12. Governing Law</h2>
                             <p className="text-gray-800 leading-relaxed">
-                                These Terms shall be governed by and construed in accordance with the laws of 
+                                These terms shall be governed by and construed in accordance with the laws of 
                                 the jurisdiction where EduMap operates. Any disputes arising from these Terms 
                                 shall be resolved in the courts of that jurisdiction.
                             </p>

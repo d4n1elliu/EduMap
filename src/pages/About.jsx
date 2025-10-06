@@ -8,11 +8,7 @@ export default function About() {
                 <div className="w-full max-w-6xl">
                     {/* Header Section */}
                     <div className="text-center mb-16">
-                        <h1 className="text-5xl md:text-6xl font-bold text-orange-700 mb-6">About EduMap</h1>
-                        <p className="text-xl text-blue-700 font-medium max-w-3xl mx-auto">
-                            Empowering students to make confident academic and career decisions through 
-                            innovative tools, mentorship, and community support.
-                        </p>
+                        <h1 className="text-5xl md:text-6xl font-bold text-blue-700 mb-6">About EduMap</h1>
                     </div>
 
                     {/* Main Content Grid */}
@@ -43,7 +39,7 @@ export default function About() {
 
                         {/* Core Values Section */}
                         <div className="bg-white/100 backdrop-blur-sm p-8 rounded-lg shadow-lg lg:col-span-2">
-                            <h2 className="text-3xl font-bold text-orange-500 mb-6 text-center">Our Core Values</h2>
+                            <h2 className="text-3xl pb-5 font-bold text-orange-500 mb-6 text-center">Our Core Values</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 <div className="text-center">
                                     <div className="bg-orange-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -73,7 +69,7 @@ export default function About() {
                                     </div>
                                     <h3 className="text-lg font-semibold text-gray-800 mb-2">Growth</h3>
                                     <p className="text-gray-600 text-sm">Encouraging personal, academic and professional development</p>
-                        </div>
+                                </div>
 
                                 <div className="text-center">
                                     <div className="bg-orange-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -90,7 +86,7 @@ export default function About() {
 
                     {/* How EduMap Works Section */}
                     <div className="mb-16">
-                        <h2 className="text-4xl font-bold text-orange-500 text-center mb-12">How EduMap Works</h2>
+                        <h2 className="text-5xl md:text-5xl font-bold text-center text-blue-700 mb-6">How EduMap Works</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="bg-white/100 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center">
                                 <div className="bg-orange-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
