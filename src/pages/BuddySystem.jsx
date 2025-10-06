@@ -572,7 +572,7 @@ export default function BuddySystem() {
                                          <div key={day} className="py-3 text-gray-500 font-medium">{day}</div>
                                      ))}
                                      {[...Array(31)].map((_, i) => (
-                                         <div key={i} className={`py-3 cursor-pointer hover:bg-slate-100 rounded-lg transition-colors ${i === 16 ? 'bg-slate-600 text-white' : ''}`}>
+                                        <div key={i} className={`py-3 cursor-pointer hover:bg-blue-50 rounded-lg transition-colors ${i === 16 ? 'bg-blue-600 text-white' : ''}`}>
                                              {i + 1}
                                          </div>
                                      ))}
@@ -598,10 +598,8 @@ export default function BuddySystem() {
                                  </div>
                              </div>
                                      
-                             <button className="w-full bg-blue-700 text-white py-4 px-6 rounded-lg hover:bg-green-800 transition-colors font-semibold text-lg">
-                                </button>
-                            {/* Book Button */}
-                            <button className="w-full bg-slate-700 text-white py-4 px-6 rounded-lg hover:bg-slate-800 transition-colors font-semibold text-lg">
+                           {/* Book Button */}
+                           <button className="w-full mt-4 bg-orange-700 text-white py-4 px-6 rounded-lg hover:bg-green-800 transition-colors font-semibold text-lg">
                                 BOOK SESSION
                             </button>
                         </div>
@@ -730,6 +728,18 @@ export default function BuddySystem() {
                          </div>
                      </div>
                      )}
+
+                    {/* Proceed to Events when a booking exists */}
+                    <div className="pt-2 pb-8 flex justify-center">
+                        <a
+                          href="/EventsAndNetworkingMap"
+                          className={`px-6 py-3 rounded-lg font-semibold transition-colors ${bookedSessions.length > 0 ? 'bg-purple-700 text-white hover:bg-orange-600' : 'bg-gray-200 text-gray-500 cursor-not-allowed'}`}
+                          aria-disabled={bookedSessions.length === 0}
+                          onClick={(e) => { if (bookedSessions.length === 0) e.preventDefault(); }}
+                        >
+                          Proceed to Events & Networking Map
+                        </a>
+                    </div>
                 </main>
             </div>
             <Footer/>

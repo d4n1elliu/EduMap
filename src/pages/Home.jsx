@@ -27,6 +27,11 @@ function Home() {
                 Navigate your education journey with tailored tools: explore
                 courses, discover job prospects and connect with peers.
               </p>
+              <div className="mt-8">
+                <a href="/course-questionnaire" className="inline-block px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors">
+                  Get Started
+                </a>
+              </div>
             </div>
           </section>
           {/* All Universities logos display in the middle of the website */}
