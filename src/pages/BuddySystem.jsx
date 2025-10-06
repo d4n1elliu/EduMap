@@ -259,11 +259,15 @@ export default function BuddySystem() {
 
     // Toggle saving/removing mentor
     const toggleSavedMentor = (mentorId) => {
+        let next;
         if (savedMentors.includes(mentorId)) {
-            setSavedMentors(savedMentors.filter(id => id !== mentorId));
+            next = savedMentors.filter(id => id !== mentorId);
         } else {
-            setSavedMentors([...savedMentors, mentorId]);
+            next = [...savedMentors, mentorId];
         }
+        setSavedMentors(next);
+        // persist for Events map to read
+        localStorage.setItem('buddySavedMentors', JSON.stringify(next));
     };
 
     // Filter mentors based on search and filters
