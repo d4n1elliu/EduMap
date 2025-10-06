@@ -234,7 +234,7 @@ export default function TermsOfService() {
 
                     {/* Footer Note */}
                     <div className="mt-8 text-center">
-                        <p className="text-gray-600 text-sm">
+                        <p className="font-bold text-black text-sm">
                             By using EduMap, you acknowledge that you have read and understood these Terms of Service.
                         </p>
                     </div>
