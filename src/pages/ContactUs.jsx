@@ -35,7 +35,7 @@ export default function ContactUs() {
         <Background>
             <div className="flex-1 flex items-center justify-center px-4 py-12">
                 <div className="w-full max-w-4xl">
-                    {/* Header */}
+                    {/* contactUs Header */}
                     <div className="text-center mb-12">
                         <h1 className="text-4xl font-bold text-orange-700 mb-4">Contact Us</h1>
                         <p className="text-xl font-medium text-blue-700 max-w-2xl mx-auto">
@@ -44,10 +44,10 @@ export default function ContactUs() {
                         </p>
                     </div>
 
+                    {/* Enquires Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        {/* Contact Form */}
-                        <div className="bg-white/30 backdrop-blur-sm p-8 rounded-lg shadow-lg">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h2>
+                        <div className="bg-white/100 backdrop-blur-sm p-8 rounded-lg shadow-lg">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-6"> Enquires </h2>
                             
                             {submitStatus === 'success' && (
                                 <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
@@ -55,6 +55,7 @@ export default function ContactUs() {
                                 </div>
                             )}
 
+                            {/* Email Us Section */}
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -133,7 +134,7 @@ export default function ContactUs() {
                         {/* Contact Information */}
                         <div className="space-y-8">
                             {/* Contact Details */}
-                            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                            <div className="bg-white/100 backdrop-blur-sm p-8 rounded-lg">
                                 <h3 className="text-2xl font-bold text-black mb-6">Get in Touch</h3>
                                 
                                 <div className="space-y-6">
@@ -163,8 +164,8 @@ export default function ContactUs() {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-semibold text-black mb-1">Phone</h4>
-                                            <a href="tel:+1-555-123-4567" className="text-orange-700 hover:text-orange-200 transition-colors">
-                                                +1 (555) 123-4567
+                                            <a href="tel:+61-555-123-456" className="text-orange-700 hover:text-orange-200 transition-colors">
+                                                +61 (123456789)
                                             </a>
                                             <p className="text-black text-sm mt-1">
                                                 Mon-Fri 9AM-6PM EST

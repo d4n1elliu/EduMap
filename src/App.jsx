@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from "./pages/Register";
 import ContactUs from './pages/ContactUs';
+import FAQ from './pages/FAQ';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/buddy-system" element={<BuddySystem />} />
           <Route path="/EventsAndNetworkingMap" element={<JobProspects />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
       </div>
     </>
