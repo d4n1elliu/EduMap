@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import Background from './Background';
+import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 
 export default function CourseQuestionnaire() {
     const [step, setStep] = useState(1);
+    const navigate = useNavigate();
 
     const nextStep = () => setStep((prev) => prev + 1);
+    const prevStep = () => setStep((prev) => Math.max(1, prev - 1));
 
     return (
         <Background>
@@ -105,12 +108,20 @@ export default function CourseQuestionnaire() {
                                 ))}
                             </div>
 
-                            <button
-                                onClick={nextStep}
-                                className="mt-6 w-full py-2 rounded-lg bg-orange-500 text-white font-semibold hover:bg-orange-600"
-                            >
-                                Continue
-                            </button>
+                            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <button
+                                    onClick={prevStep}
+                                    className="w-full py-2 rounded-lg bg-blue-500 text-gray-800 font-semibold hover:bg-red-600"
+                                >
+                                    Back
+                                </button>
+                                <button
+                                    onClick={() => navigate('/profile-setup')}
+                                    className="w-full py-2 rounded-lg bg-orange-500 text-white font-semibold hover:bg-green-600"
+                                >
+                                    Finish & Set Up Profile
+                                </button>
+                            </div>
                         </section>
                     )}
                 </main>

@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from "./pages/Register";
 import ContactUs from './pages/ContactUs';
+import ProfileSetup from './pages/ProfileSetup';
 import FAQ from './pages/FAQ';
 import TermsOfService from './pages/TermsOfService';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/course-questionnaire" element={<CourseQuestionnaire />} />
+          <Route path="/profile-setup" element={<ProfileSetup />} />
           <Route path="/buddy-system" element={<BuddySystem />} />
           <Route path="/EventsAndNetworkingMap" element={<JobProspects />} />
           <Route path="/contact" element={<ContactUs />} />
