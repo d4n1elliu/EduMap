@@ -123,7 +123,7 @@ export default function FAQ() {
                         {/* Centered content container */}
                         <div className="text-center">
                             {/* Main heading to encourage users to reach out */}
-                            <h2 className="text-2xl font-bold text-black mb-4">Any More Questions?</h2>
+                            <h2 className="text-2xl font-bold text-orange-700 mb-4">Any More Questions?</h2>
                             
                             {/* Descriptive text explaining the support options */}
                             <p className="text-black mb-6">
