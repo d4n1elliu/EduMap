@@ -1,6 +1,6 @@
 {/* import React from "react";*/}
 
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import EduMapLogo from "./assets/EduMap Logo 300dpi.png"; 
 
@@ -12,6 +12,7 @@ import EduMapLogoBlue from "./assets/EduMapLogoBLUE300dpi.png";
 function Navbar() {
     const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
     const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
@@ -33,40 +34,54 @@ function Navbar() {
                 </h1>
             </div>
 
-            {/* Navigation bar appears when User IS LOGGED/SIGNED IN Functionality*/}
-            {token ? (
-                <ul className="flex items-center space-x-8 text-white font-medium">
-                    <li>
-                        <NavLink to="/course-questionnaire" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Course Questionnaire</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/EventsAndNetworkingMap" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Events & Networking Map</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/buddy-system" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Buddy System</NavLink>
-                    </li>
-                    <li>
-                        <button onClick={handleLogout} className="ml-5 px-3 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-300">Logout</button>
-                    </li>
-                </ul>
-            ) : (
+            {/* Compact navigation with hamburger menu (decluttered) */}
+            <div className="relative">
+                <button
+                    type="button"
+                    onClick={() => setMenuOpen((o) => !o)}
+                    aria-label="Open menu"
+                    className="p-2 rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                >
+                    {/* Hamburger icon */}
+                    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                </button>
 
-                /* Login & Sign up Menu are visible when users are NOT LOGGED/SIGNED IN Functionality*/
-                <ul className="flex space-x-10 text-white font-medium">
-                    <li>
-                        <NavLink to="/signup"
-                            className={({ isActive }) => isActive ? "text-orange-400" : "text-blue-300 hover:text-blue-200"}>
-                            Sign Up
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/login"
-                            className={({ isActive }) => isActive ? "text-orange-400" : "text-blue-300 hover:text-blue-200"}>
-                            Login
-                        </NavLink>
-                    </li>
-                </ul>
-            )}
+                {menuOpen && (
+                    <>
+                        {/* Backdrop */}
+                        <div
+                            className="fixed inset-0 z-40 bg-black/30"
+                            onClick={() => setMenuOpen(false)}
+                        />
+                        {/* Menu Panel */}
+                        <div className="absolute right-0 mt-3 w-64 z-50 rounded-xl bg-slate-900 border border-slate-700 shadow-2xl overflow-hidden">
+                            <div className="py-2">
+                                <NavLink to="/" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">Home</NavLink>
+                                <NavLink to="/course-questionnaire" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">Questionnaire</NavLink>
+                                <NavLink to="/buddy-system" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">BuddySystem</NavLink>
+                                <NavLink to="/EventsAndNetworkingMap" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">EventsMap & Forum</NavLink>
+                                <NavLink to="/about" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">About</NavLink>
+                                <NavLink to="/contact" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">Contact Us</NavLink>
+                                <NavLink to="/faq" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">FAQ</NavLink>
+                                <NavLink to="/terms" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">Terms & Service</NavLink>
+                                <div className="border-t border-slate-700 my-2" />
+                                {token ? (
+                                    <button onClick={() => { setMenuOpen(false); handleLogout(); }} className="w-full text-left px-5 py-3 hover:bg-slate-800">Logout</button>
+                                ) : (
+                                    <>
+                                        <NavLink to="/login" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">Login</NavLink>
+                                        <NavLink to="/signup" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">Sign Up</NavLink>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </>
+                )}
+            </div>
         </nav>
     );
 }
