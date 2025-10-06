@@ -69,11 +69,7 @@ export default function FAQ() {
                 <div className="w-full max-w-4xl">
                     {/* Header */}
                     <div className="text-center mb-12">
-                        <h1 className="text-4xl font-bold text-orange-700 mb-4">Frequently Asked Questions</h1>
-                        <p className="text-xl font-medium text-blue-700 max-w-2xl mx-auto">
-                            Find answers to common questions about EduMap. 
-                            Can't find what you're looking for? Contact us for personalized help.
-                        </p>
+                        <h1 className="text-5xl md:text-6xl font-bold text-blue-700 mb-6">Frequently Asked Questions</h1>
                     </div>
 
                     {/* FAQ Items */}
