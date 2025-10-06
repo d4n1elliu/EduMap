@@ -46,9 +46,6 @@ function Navbar() {
                         <NavLink to="/buddy-system" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>Buddy System</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/about" className={({ isActive }) => isActive ? "text-green-400" : "text-blue-300 hover:text-blue-200"}>About Us</NavLink>
-                    </li>
-                    <li>
                         <button onClick={handleLogout} className="ml-5 px-3 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-300">Logout</button>
                     </li>
                 </ul>
