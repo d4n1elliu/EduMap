@@ -24,8 +24,10 @@ function Home() {
                 Welcome to EduMap
               </h1>
               <p className="text-lg md:text-xl font-semibold text-black">
-                Navigate your education journey with tailored tools: explore
-                courses, discover job prospects and connect with peers.
+                Discover your career with confidence.
+              </p>
+              <p className="text-lg md:text-xl font-semibold text-black">
+                Find 🫵 courses, meet mentors and take your next step forward.
               </p>
               <div className="mt-8">
                 <a href="/course-questionnaire" className="inline-block px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors">
