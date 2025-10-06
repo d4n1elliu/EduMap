@@ -80,7 +80,7 @@ function Navbar() {
                                     Mentors
                                 </NavLink>
                                 <NavLink to="/EventsAndNetworkingMap" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">
-                                    Job Board & Forum
+                                    Events & CampusMap
                                 </NavLink>
                                 <NavLink to="/about" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">
                                     About
