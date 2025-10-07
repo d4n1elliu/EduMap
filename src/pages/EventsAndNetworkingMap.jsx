@@ -100,9 +100,17 @@ export default function EventsAndNetworkingMap() {
 
                 {/* Map */}
                 <MapContainer whenCreated={(m)=>{mapRef.current=m;}} center={center} zoom={16} style={{ height: '100%', width: '100%' }}>
+                    {/* Base without POI icons */}
                     <TileLayer
-                        attribution='&copy; OpenStreetMap contributors'
-                        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                        attribution='&copy; OpenStreetMap contributors &copy; CARTO'
+                        url='https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png'
+                        subdomains={['a','b','c','d']}
+                    />
+                    {/* Labels only overlay */}
+                    <TileLayer
+                        attribution='&copy; OpenStreetMap contributors &copy; CARTO'
+                        url='https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png'
+                        subdomains={['a','b','c','d']}
                     />
                     {/* Campus markers */}
                     <Marker position={center} icon={locationIcon}>
