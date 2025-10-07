@@ -77,10 +77,10 @@ function Navbar() {
                                     Questionnaire
                                 </NavLink>
                                 <NavLink to="/buddy-system" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">
-                                    BuddySystem
+                                    Mentors
                                 </NavLink>
                                 <NavLink to="/EventsAndNetworkingMap" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">
-                                    EventsMap & Forum
+                                    Events & CampusMap
                                 </NavLink>
                                 <NavLink to="/about" onClick={() => setMenuOpen(false)} className="block px-5 py-3 hover:bg-slate-800">
                                     About
