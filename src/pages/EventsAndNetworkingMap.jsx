@@ -5,8 +5,8 @@ import L from 'leaflet';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
-import redMarker from '../assets/marker.png';
 import blueMarker from '../assets/blueMarker.png';
+import humanMarker from '../assets/humanMarker.png';
 
 // Fix default marker icons for Vite builds
 L.Icon.Default.mergeOptions({
@@ -17,8 +17,8 @@ L.Icon.Default.mergeOptions({
 
 /* Custom marker icon for mentors/events */
 const mentorIcon = L.icon({
-    iconUrl: redMarker,
-    iconSize: [20, 32],
+    iconUrl: humanMarker,
+    iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -28],
     shadowUrl,
@@ -104,11 +104,31 @@ export default function EventsAndNetworkingMap() {
                         attribution='&copy; OpenStreetMap contributors'
                         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     />
-                    {/* Campus marker */}
+                    {/* Campus markers */}
                     <Marker position={center} icon={locationIcon}>
                         <Popup>
                             <div className="space-y-2">
-                                <div className="font-semibold">UTS, Ultimo</div>
+                                <div className="font-semibold">UTS, Ultimo NSW 2007</div>
+                                <div className="text-sm text-slate-600">Campus location</div>
+                            </div>
+                        </Popup>
+                    </Marker>
+                    
+                    {/* UNSW marker */}
+                    <Marker position={[-33.9173, 151.2313]} icon={locationIcon}>
+                        <Popup>
+                            <div className="space-y-2">
+                                <div className="font-semibold">UNSW Sydney, Kensington NSW 2033</div>
+                                <div className="text-sm text-slate-600">Campus location</div>
+                            </div>
+                        </Popup>
+                    </Marker>
+                    
+                    {/* USYD marker */}
+                    <Marker position={[-33.8886, 151.1873]} icon={locationIcon}>
+                        <Popup>
+                            <div className="space-y-2">
+                                <div className="font-semibold">University of Sydney, Camperdown NSW 2050</div>
                                 <div className="text-sm text-slate-600">Campus location</div>
                             </div>
                         </Popup>
