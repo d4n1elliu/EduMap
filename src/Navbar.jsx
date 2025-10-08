@@ -29,7 +29,7 @@ function Navbar() {
      */
     return (
         <nav className="px-6 py-5 flex justify-between items-center fixed top-0 left-0 right-0 z-[2000] h-24 flex items-center bg-slate-900 text-white px-6">
-            {/* Match footer color for cohesion (no translucency) */}
+            {/* Matching footer color for cohesion and no translucency */}
 
             <div className="flex items-center space-x-3">
                 <img
@@ -44,7 +44,7 @@ function Navbar() {
                 </h1>
             </div>
 
-            {/* Compact navigation with hamburger menu (decluttered) */}
+            {/* Compact navigation with hamburger menu */}
             <div className="relative">
                 <button
                     type="button"
@@ -60,7 +60,7 @@ function Navbar() {
                     </svg>
                 </button>
                 
-                {/* Slide-over panel; renders only when menu is open */}
+                {/* Slide-over panel; Only renders when menu is open */}
                 {menuOpen && (
                     <>
                     {/* Click-catcher to close the menu when user clicks outside. NOTE: Add position & full-screen sizing if you want a real backdrop. */}
