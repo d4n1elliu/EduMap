@@ -1,7 +1,7 @@
 // src/api/js/booking.js
 import api from './api'; 
 
-const BUDDY_BASE = '/buddysystem'; // relative to /api
+const BUDDY_BASE = '/BuddySystem'; // relative to /api
 
 // helper: minutes -> "HH:mm:ss" (TimeSpan)
 function toHHMMSS(minutes) {
@@ -11,12 +11,21 @@ function toHHMMSS(minutes) {
 }
 
 const auth = (token) => ({
-  headers: { Authorization: `Bearer ${token}` }
+  headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+  }
 });
 
 /** GET /api/buddysystem/get-bookings */
 export async function getMyBookings(token) {
-  const { data } = await api.get(`${BUDDY_BASE}/get-bookings`, auth(token));
+  alert(token);
+  const { data } = await api.get(`${BUDDY_BASE}/get-bookings`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+            "Content-Type": "application/json" 
+        }
+    });
   return data?.responseData ?? data;
 }
 
@@ -35,7 +44,7 @@ export async function bookMentor({ startTime, durationMinutes, mentorId }, token
 
 /** GET /api/buddysystem/confirm-booking?bookingId={id} */
 export async function confirmBooking(bookingId, token) {
-  const { data } = await api.get(
+  const { data } = await api.post(
     `${BUDDY_BASE}/confirm-booking`,
     { ...auth(token), params: { bookingId } }
   );

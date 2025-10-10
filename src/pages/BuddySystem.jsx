@@ -245,6 +245,7 @@ export default function BuddySystem() {
 
     // Load bookings from API
     const loadBookings = async () => {
+
         if (!token) return;
         
         setIsLoadingBookings(true);

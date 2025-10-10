@@ -4,6 +4,11 @@ import {useNavigate, Link} from "react-router-dom";
 import Footer from './Footer';
 import Background from "./Background";
 
+export const Role = Object.freeze({
+    STUDENT: 0,
+    MENTOR: 1, 
+})
+
 export default function Register() {
 
     // Account fields 
@@ -12,8 +17,7 @@ export default function Register() {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [role, setRole] = useState("Student"); // Default to Student
-    const [course, setCourse] = useState("");
+    const [role, setRole] = useState(Role.STUDENT); // Default to Student
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
@@ -25,11 +29,6 @@ export default function Register() {
         // Validate form fields
         if (!firstName.trim() || !lastName.trim()) {
             setError("Please enter your first and last name");
-            return;
-        }
-        
-        if (!course) {
-            setError("Please select your course");
             return;
         }
         
@@ -47,7 +46,7 @@ export default function Register() {
         setError("");
         
         try {
-            const response = await register(email, password, firstName, lastName, role, course);
+            const response = await register(email, password, firstName, lastName, role);
             if (response.data && response.data.data?.jwtToken)
             // Save token to localStorage
             localStorage.setItem('authToken', response.data.data.token);
@@ -124,32 +123,8 @@ export default function Register() {
                         onChange={(e) => setRole(e.target.value)}
                         required
                     >
-                        <option value="Student">Student</option>
-                        <option value="Mentor">Mentor</option>
-                    </select>
-
-                    {/* Course Selection */}
-                    <select
-                        className="w-full p-2 mb-4 border rounded"
-                        value={course}
-                        onChange={(e) => setCourse(e.target.value)}
-                        required
-                    >
-                        <option value="">Select your course</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Information Technology">Information Technology</option>
-                        <option value="Business">Business</option>
-                        <option value="Law">Law</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="Medicine">Medicine</option>
-                        <option value="Arts">Arts</option>
-                        <option value="Science">Science</option>
-                        <option value="Education">Education</option>
-                        <option value="Architecture">Architecture</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="International Studies">International Studies</option>
-                        <option value="Communications">Communications</option>
-                        <option value="Health Sciences">Health Sciences</option>
+                        <option value={Role.STUDENT}>Student</option>
+                        <option value={Role.MENTOR}>Mentor</option>
                     </select>
 
                     {/* Password Input */}

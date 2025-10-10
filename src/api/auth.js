@@ -8,13 +8,12 @@ export const login = async (username, password) => {
 };
 
 // Registration with all required fields
-export const register = async (email, password, firstName, lastName, role, course) => {
+export const register = async (email, password, firstName, lastName, role) => {
     return await api.post(`${controller}/register`, { 
         email, 
         password, 
         firstName, 
         lastName, 
         role, 
-        course 
     });
 };
