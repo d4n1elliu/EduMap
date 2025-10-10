@@ -20,10 +20,10 @@ export default function Login() {
 
         // Call the login API
         try {
-            const response = await login(email, password );
-
+            const response = await login(email, password);
+         
             // Save token to localStorage
-            localStorage.setItem('authToken', response.data.data.token);
+            localStorage.setItem('authToken', response.data.data.jwtToken);
 
             // Redirect to home page, updating to refresh Navbar state
             navigate('/');
