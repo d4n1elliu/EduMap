@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from './Footer';
 import Background from './Background';
+import { getMyBookings, bookMentor, confirmBooking } from '../api/booking';
 
 export default function BuddySystem() {
 
@@ -15,6 +16,21 @@ export default function BuddySystem() {
         university: 'all',
         courses: []
     });
+    
+    // Booking state
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(null);
+    const [selectedDuration, setSelectedDuration] = useState(60); // minutes
+    const [isBooking, setIsBooking] = useState(false);
+    const [bookingError, setBookingError] = useState('');
+    const [bookingSuccess, setBookingSuccess] = useState('');
+    
+    // Real bookings from API
+    const [bookedSessions, setBookedSessions] = useState([]);
+    const [isLoadingBookings, setIsLoadingBookings] = useState(false);
+    
+    // Get auth token
+    const token = localStorage.getItem('authToken');
 
     // Data for mentors 
     const mentors = [
@@ -219,31 +235,109 @@ export default function BuddySystem() {
     ];
 
     // Saved IDs mentors 
-    const [savedMentors, setSavedMentors] = useState([1, 3]); 
-    const [bookedSessions, setBookedSessions] = useState([
-        {
-            id: 1,
-            mentorId: 1,
-            mentorName: "Emma Janice",
-            studies: "Computer Science",
-            sessionTime: "10:00 AM 17/08/2024",
-            status: "Confirmed"
-        },
-        {
-            id: 2,
-            mentorId: 3,
-            mentorName: "Sarah Williams",
-            studies: "Law",
-            sessionTime: "2:00 PM 20/08/2024",
-            status: "Confirmed"
-        }
-    ]);
+    const [savedMentors, setSavedMentors] = useState([1, 3]);
 
     // Messages data
     const [messages] = useState([
         { mentorId: 1, mentorName: "Emma Janice", lastMessage: "Hi! Looking forward to our session tomorrow." },
         { mentorId: 3, mentorName: "Sarah Williams", lastMessage: "Thanks for the great study tips!" }
     ]);
+
+    // Load bookings from API
+    const loadBookings = async () => {
+        if (!token) return;
+        
+        setIsLoadingBookings(true);
+        try {
+            const bookings = await getMyBookings(token);
+            setBookedSessions(bookings || []);
+        } catch (error) {
+            console.error('Failed to load bookings:', error);
+            setBookedSessions([]);
+        } finally {
+            setIsLoadingBookings(false);
+        }
+    };
+
+    // Handle booking creation
+    const handleBookMentor = async () => {
+        if (!selectedMentor || !selectedDate || !selectedTime || !token) {
+            setBookingError('Please select a mentor, date, and time');
+            return;
+        }
+
+        setIsBooking(true);
+        setBookingError('');
+        setBookingSuccess('');
+
+        try {
+            // Combine date and time into ISO string
+            const [hours, minutes] = selectedTime.split(':');
+            const [ampm] = selectedTime.split(' ')[1] || ['AM'];
+            let hour24 = parseInt(hours);
+            if (ampm === 'PM' && hour24 !== 12) hour24 += 12;
+            if (ampm === 'AM' && hour24 === 12) hour24 = 0;
+
+            const bookingDateTime = new Date(selectedDate);
+            bookingDateTime.setHours(hour24, parseInt(minutes), 0, 0);
+
+            console.log('Booking request data:', {
+                startTime: bookingDateTime.toISOString(),
+                durationMinutes: selectedDuration,
+                mentorId: selectedMentor.id,
+                token: token ? 'Present' : 'Missing'
+            });
+
+            const result = await bookMentor({
+                startTime: bookingDateTime.toISOString(),
+                durationMinutes: selectedDuration,
+                mentorId: selectedMentor.id
+            }, token);
+
+            console.log('Booking response:', result);
+
+            if (result.success) {
+                setBookingSuccess('Booking created successfully!');
+                setShowBooking(false);
+                setSelectedMentor(null);
+                setSelectedDate(null);
+                setSelectedTime(null);
+                // Reload bookings
+                await loadBookings();
+            } else {
+                setBookingError(result.message || 'Failed to create booking');
+            }
+        } catch (error) {
+            console.error('Booking error details:', error);
+            console.error('Error response:', error.response?.data);
+            console.error('Error status:', error.response?.status);
+            setBookingError(`Failed to create booking: ${error.response?.data?.message || error.message}`);
+        } finally {
+            setIsBooking(false);
+        }
+    };
+
+    // Handle booking confirmation
+    const handleConfirmBooking = async (bookingId) => {
+        if (!token) return;
+
+        try {
+            const result = await confirmBooking(bookingId, token);
+            if (result.success) {
+                // Reload bookings to show updated status
+                await loadBookings();
+            } else {
+                console.error('Failed to confirm booking:', result.message);
+            }
+        } catch (error) {
+            console.error('Confirmation error:', error);
+        }
+    };
+
+    // Load bookings on component mount
+    useEffect(() => {
+        loadBookings();
+    }, [token]);
 
     // Handle filter changes
     const handleFilterChange = (filterType, value) => {
@@ -478,37 +572,60 @@ export default function BuddySystem() {
     // Render Bookings Tab
     const renderBookingsTab = () => (
         <div className="space-y-4">
-            {bookedSessions.map(session => {
-                const mentor = mentors.find(m => m.id === session.mentorId);
-                return (
-                    <div key={session.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-4">
-                                <div className="text-3xl">{mentor?.image}</div>
-                                <div>
-                                    <h3 className="font-semibold text-gray-800">{session.mentorName}</h3>
-                                    <p className="text-sm text-gray-600">{session.studies}</p>
-                                    <p className="text-sm text-gray-500">Session Time: {session.sessionTime}</p>
-                                    <p className="text-sm text-green-600">{session.status}</p>
+            {isLoadingBookings ? (
+                <div className="text-center py-8">
+                    <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    <p className="mt-2 text-gray-600">Loading bookings...</p>
+                </div>
+            ) : bookedSessions.length === 0 ? (
+                <div className="text-center py-8">
+                    <p className="text-gray-600">No bookings found. Book a mentor to get started!</p>
+                </div>
+            ) : (
+                bookedSessions.map(booking => {
+                    const mentor = mentors.find(m => m.id === booking.mentorId);
+                    return (
+                        <div key={booking.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-4">
+                                    <div className="text-3xl">{mentor?.image || '👤'}</div>
+                                    <div>
+                                        <h3 className="font-semibold text-gray-800">{booking.firstName} {booking.lastName}</h3>
+                                        <p className="text-sm text-gray-600">{booking.course?.name || 'Course not specified'}</p>
+                                        <p className="text-sm text-gray-500">
+                                            Session Time: {new Date(booking.startTime).toLocaleString()}
+                                        </p>
+                                        <p className={`text-sm ${booking.isConfirmed ? 'text-green-600' : 'text-orange-600'}`}>
+                                            {booking.isConfirmed ? 'Confirmed' : 'Pending Confirmation'}
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                {/* Action Buttons */}
+                                <div className="flex flex-col space-y-2">
+                                    <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
+                                        Message
+                                    </button>
+                                    {!booking.isConfirmed && (
+                                        <button 
+                                            onClick={() => handleConfirmBooking(booking.id)}
+                                            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                                        >
+                                            Confirm
+                                        </button>
+                                    )}
+                                    <button className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors text-sm">
+                                        Reschedule
+                                    </button>
+                                    <button className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm">
+                                        Cancel
+                                    </button>
                                 </div>
                             </div>
-                            
-                            {/* Action Buttons */}
-                            <div className="flex flex-col space-y-2">
-                                <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
-                                    Message
-                                </button>
-                                <button className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors text-sm">
-                                    Reschedule
-                                </button>
-                                <button className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm">
-                                    Cancel
-                                </button>
-                            </div>
                         </div>
-                    </div>
-                );
-            })}
+                    );
+                })
+            )}
         </div>
     );
         // Render Messages Tab
@@ -575,11 +692,24 @@ export default function BuddySystem() {
                                      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
                                          <div key={day} className="py-3 text-gray-500 font-medium">{day}</div>
                                      ))}
-                                     {[...Array(31)].map((_, i) => (
-                                        <div key={i} className={`py-3 cursor-pointer hover:bg-blue-50 rounded-lg transition-colors ${i === 16 ? 'bg-blue-600 text-white' : ''}`}>
-                                             {i + 1}
-                                         </div>
-                                     ))}
+                                     {[...Array(31)].map((_, i) => {
+                                         const day = i + 1;
+                                         const isSelected = selectedDate && selectedDate.getDate() === day;
+                                         return (
+                                             <button
+                                                 key={i}
+                                                 onClick={() => {
+                                                     const date = new Date(2024, 7, day); // August 2024
+                                                     setSelectedDate(date);
+                                                 }}
+                                                 className={`py-3 cursor-pointer hover:bg-blue-50 rounded-lg transition-colors ${
+                                                     isSelected ? 'bg-blue-600 text-white' : ''
+                                                 }`}
+                                             >
+                                                 {day}
+                                             </button>
+                                         );
+                                     })}
                                  </div>
                              </div>
  
@@ -590,9 +720,10 @@ export default function BuddySystem() {
                                      {['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map(time => (
                                          <button
                                              key={time}
+                                             onClick={() => setSelectedTime(time)}
                                              className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${
-                                                 time === '10:00 AM' 
-                                                     ? 'border-blue-500 bg-slate-50 text-blue-700' 
+                                                 selectedTime === time 
+                                                     ? 'border-blue-500 bg-blue-50 text-blue-700' 
                                                      : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
                                              }`}
                                          >
@@ -601,11 +732,56 @@ export default function BuddySystem() {
                                      ))}
                                  </div>
                              </div>
+                             
+                             {/* Duration Selection */}
+                             <div className="mb-6">
+                                 <p className="text-base font-medium text-blue-700 mb-4">Session Duration:</p>
+                                 <div className="flex gap-3">
+                                     {[30, 60, 90, 120, 150, 180].map(duration => (
+                                         <button
+                                             key={duration}
+                                             onClick={() => setSelectedDuration(duration)}
+                                             className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
+                                                 selectedDuration === duration 
+                                                     ? 'border-blue-500 bg-blue-50 text-blue-700' 
+                                                     : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
+                                             }`}
+                                         >
+                                             {duration === 30 ? '30 mins' : 
+                                              duration === 60 ? '1 hr' : 
+                                              duration === 90 ? '1 hr 30 mins' :
+                                              duration === 120 ? '2 hrs' :
+                                              duration === 150 ? '2 hrs 30 mins' :
+                                              '3 hrs'}
+                                         </button>
+                                     ))}
+                                 </div>
+                             </div>
+                             
+                             {/* Error/Success Messages */}
+                             {bookingError && (
+                                 <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                                     {bookingError}
+                                 </div>
+                             )}
+                             {bookingSuccess && (
+                                 <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+                                     {bookingSuccess}
+                                 </div>
+                             )}
                                      
                            {/* Book Button */}
-                           <button className="w-full mt-4 bg-orange-700 text-white py-4 px-6 rounded-lg hover:bg-green-800 transition-colors font-semibold text-lg">
-                                BOOK SESSION
-                            </button>
+                           <button 
+                               onClick={handleBookMentor}
+                               disabled={isBooking || !selectedDate || !selectedTime}
+                               className={`w-full mt-4 py-4 px-6 rounded-lg font-semibold text-lg transition-colors ${
+                                   isBooking || !selectedDate || !selectedTime
+                                       ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                                       : 'bg-orange-700 text-white hover:bg-green-800'
+                               }`}
+                           >
+                               {isBooking ? 'BOOKING...' : 'BOOK SESSION'}
+                           </button>
                         </div>
                     </div>
                 </div>
@@ -661,90 +837,105 @@ export default function BuddySystem() {
         // Main Layout
         <Background>
             <div className="w-full max-w-6xl px-20 pt-10 mx-auto flex-1">
-
-                {/* Header */}
-                <header className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl px-5 md:px-8 py-8 md:py-10 shadow text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-4 leading-light whitespace-nowrap">Buddy Program</h1>
-                    <p className="text-lg md:text-xl font-bold text-black max-w-3xl mx-auto">
-                        Connect with peers, mentors and study partners who share your goals.
-                    </p>
-                </header>
-
-                    {/* Navigation Tabs */}
-                <main className="flex-1">
-                    <div className="bg-white rounded-lg border border-blue-200 shadow-sm mb-6">
-                        <div className="flex border-b border-gray-200">
-                            {[
-                                { id: 'mentors', label: 'Mentors' },
-                                { id: 'saved', label: 'Saved Mentors' },
-                                { id: 'bookings', label: 'My Bookings' }
-                            ].map(tab => (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
-                                        activeTab === tab.id
-                                            ? 'border-slate-500 text-slate-600'
-                                            : 'border-transparent text-gray-500 hover:text-gray-700'
-                                    }`}
-                                >
-                                    {tab.label}
-                                </button>
-                            ))}
-                        </div>
-                        
-                        <div className="p-6">
-                            {activeTab === 'mentors' && renderMentorsTab()}
-                            {activeTab === 'saved' && renderSavedMentorsTab()}
-                            {activeTab === 'bookings' && renderBookingsTab()}
-                        </div>
-                    </div>
-
-                    {/* Messages Panel */}
-                    {showMessages && renderMessages()}
-
-                    {/* Messages Toggle Button */}
-                    <button
-                        onClick={() => setShowMessages(!showMessages)}
-                        className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-colors"
-                    >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                        </svg>
-                    </button>
-
-                    {/* Profile / Booking Modal */}
-                     {showBooking && selectedMentor && (
-                     <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
-                         <div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
-                             <div className="flex items-center justify-between px-6 py-4 border-b bg-gray-50">
-                                 <h3 className="text-xl font-semibold text-gray-800">Mentor Profile</h3>
-                                 <button
-                                 type="button"
-                                 onClick={() => setShowBooking(false)}
-                                 className="p-2 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
-                                 aria-label="Close profile"
-                                 > ✕ </button>
-                             </div>
-                             <div className="p-6">
-                                 {renderMentorProfile()}
-                             </div>
-                         </div>
-                     </div>
-                     )}
-
-                    {/* Proceed to Events when a booking exists */}
-                    <div className="pt-2 pb-8 flex justify-center">
-                        <a
-                          href="/EventsAndNetworkingMap"
-                          className={`px-6 py-3 rounded-lg font-semibold transition-colors ${bookedSessions.length > 0 ? 'bg-purple-700 text-white hover:bg-orange-600' : 'bg-gray-200 text-gray-500 cursor-not-allowed'}`}
-                          aria-disabled={bookedSessions.length === 0}
-                          onClick={(e) => { if (bookedSessions.length === 0) e.preventDefault(); }}
+                {/* Authentication Check */}
+                {!token ? (
+                    <div className="text-center py-20">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-4">Authentication Required</h2>
+                        <p className="text-gray-600 mb-6">Please log in to access the Buddy System.</p>
+                        <a 
+                            href="/login" 
+                            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
                         >
-                          Proceed to Events & Networking Map
+                            Go to Login
                         </a>
                     </div>
-                </main>
+                ) : (
+                    <>
+                        {/* Header */}
+                        <header className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl px-5 md:px-8 py-8 md:py-10 shadow text-center mb-12">
+                            <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-4 leading-light whitespace-nowrap">Buddy Program</h1>
+                            <p className="text-lg md:text-xl font-bold text-black max-w-3xl mx-auto">
+                                Connect with peers, mentors and study partners who share your goals.
+                            </p>
+                        </header>
+
+                        {/* Navigation Tabs */}
+                        <main className="flex-1">
+                            <div className="bg-white rounded-lg border border-blue-200 shadow-sm mb-6">
+                                <div className="flex border-b border-gray-200">
+                                    {[
+                                        { id: 'mentors', label: 'Mentors' },
+                                        { id: 'saved', label: 'Saved Mentors' },
+                                        { id: 'bookings', label: 'My Bookings' }
+                                    ].map(tab => (
+                                        <button
+                                            key={tab.id}
+                                            onClick={() => setActiveTab(tab.id)}
+                                            className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+                                                activeTab === tab.id
+                                                    ? 'border-slate-500 text-slate-600'
+                                                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                                            }`}
+                                        >
+                                            {tab.label}
+                                        </button>
+                                    ))}
+                                </div>
+                                
+                                <div className="p-6">
+                                    {activeTab === 'mentors' && renderMentorsTab()}
+                                    {activeTab === 'saved' && renderSavedMentorsTab()}
+                                    {activeTab === 'bookings' && renderBookingsTab()}
+                                </div>
+                            </div>
+
+                            {/* Messages Panel */}
+                            {showMessages && renderMessages()}
+
+                            {/* Messages Toggle Button */}
+                            <button
+                                onClick={() => setShowMessages(!showMessages)}
+                                className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-colors"
+                            >
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                            </button>
+
+                            {/* Profile / Booking Modal */}
+                            {showBooking && selectedMentor && (
+                                <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+                                    <div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+                                        <div className="flex items-center justify-between px-6 py-4 border-b bg-gray-50">
+                                            <h3 className="text-xl font-semibold text-gray-800">Mentor Profile</h3>
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowBooking(false)}
+                                                className="p-2 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
+                                                aria-label="Close profile"
+                                            > ✕ </button>
+                                        </div>
+                                        <div className="p-6">
+                                            {renderMentorProfile()}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Proceed to Events when a booking exists */}
+                            <div className="pt-2 pb-8 flex justify-center">
+                                <a
+                                    href="/EventsAndNetworkingMap"
+                                    className={`px-6 py-3 rounded-lg font-semibold transition-colors ${bookedSessions.length > 0 ? 'bg-purple-700 text-white hover:bg-orange-600' : 'bg-gray-200 text-gray-500 cursor-not-allowed'}`}
+                                    aria-disabled={bookedSessions.length === 0}
+                                    onClick={(e) => { if (bookedSessions.length === 0) e.preventDefault(); }}
+                                >
+                                    Proceed to Events & Networking Map
+                                </a>
+                            </div>
+                        </main>
+                    </>
+                )}
             </div>
             <Footer/>
         </Background>
