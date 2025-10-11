@@ -10,13 +10,19 @@ const api = axios.create({
 
 // Add interceptor to handle 401 responses
 api.interceptors.response.use(
-    response => response,
-    error => {
-        if (error.response && error.response.status === 401) {
-            //window.location.href = '/login'; // redirect to login
-        }
-        return Promise.reject(error);
+  (response) => response,
+  (error) => {
+    const status = error?.response?.status;
+    if (status === 401) {
+      // clear any bad/expired token
+      localStorage.removeItem('authToken');
+      // avoid redirect loops
+      if (window.location.pathname !== '/login') {
+        //window.location.href = '/login';
+      }
     }
+    return Promise.reject(error);
+  }
 );
 
 export default api;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Footer from './Footer';
 import Background from './Background';
-import { getMyBookings, bookMentor, confirmBooking } from '../api/booking';
+import { getMyBookings, bookMentor, confirmBooking, getMentors } from '../api/booking';
 
 export default function BuddySystem() {
 
@@ -16,7 +16,7 @@ export default function BuddySystem() {
         university: 'all',
         courses: []
     });
-    
+
     // Booking state
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
@@ -24,215 +24,15 @@ export default function BuddySystem() {
     const [isBooking, setIsBooking] = useState(false);
     const [bookingError, setBookingError] = useState('');
     const [bookingSuccess, setBookingSuccess] = useState('');
-    
+    const [mentors, setMentors] = useState([]);
+
     // Real bookings from API
     const [bookedSessions, setBookedSessions] = useState([]);
     const [isLoadingBookings, setIsLoadingBookings] = useState(false);
-    
-    // Get auth token
-    const token = localStorage.getItem('authToken');
+    const [isLoadingMentors, setIsLoadingMentors] = useState(false);
 
-    // Data for mentors 
-    const mentors = [
-        {
-            id: 1,
-            name: "Emma Janice",
-            studies: "3rd Year, Computer Science",
-            university: "University of Technology Sydney",
-            skills: ["HTML", "Java", "JavaScript", "Python", "ReactJS"],
-            rating: 4,
-            reviews: 3,
-            about: "Passionate computer science student with experience in web development and programming. I love helping others learn and grow in their coding journey.",
-            image: "👩‍💻"
-        },
-        {
-            id: 2,
-            name: "Alex Chen",
-            studies: "4th Year, Business",
-            university: "University of Sydney",
-            skills: ["Marketing", "Finance", "Strategy", "Leadership"],
-            rating: 5,
-            reviews: 7,
-            about: "Business student with internship experience at top consulting firms. I specialise in helping students develop professional skills and career planning.",
-            image: "👨‍💼"
-        },
-        {
-            id: 3,
-            name: "Sarah Williams",
-            studies: "3rd Year, Law and Business",
-            university: "University of New South Wales",
-            skills: ["Contract Law", "Criminal Law", "Legal Research", "Marketing"],
-            rating: 4,
-            reviews: 5,
-            about: "Law student passionate about justice and helping others understand legal concepts. I enjoy mentoring first-year students.",
-            image: "👩‍⚖️"
-        },
-        {
-            id: 4,
-            name: "Michael Rodriguez",
-            studies: "4th, Information Technology",
-            university: "University of Technology Sydney",
-            skills: ["Cybersecurity", "Networking", "Database", "Cloud Computing"],
-            rating: 5,
-            reviews: 8,
-            about: "IT professional with focus on cybersecurity. I help students understand complex technical concepts and prepare for industry.",
-            image: "👨‍💻"
-        },
-        {
-            id: 5,
-            name: "Danny Lim",
-            studies: "5th/Final Year, Engineering",
-            university: "University of Technology Sydney",
-            skills: ["Cybersecurity", "Networking", "Database", "Cloud Computing"],
-            rating: 5,
-            reviews: 8,
-            about: "IT professional with focus on cybersecurity. I help students understand complex technical concepts and prepare for industry.",
-            image: "👨‍💼"
-        },
-        {
-            id: 6,
-            name: "Brenden Yung",
-            studies: "4th, Information Technology and Business",
-            university: "University of New South Wales",
-            skills: ["Cybersecurity", "Networking", "Database", "Cloud Computing"],
-            rating: 5,
-            reviews: 8,
-            about: "IT professional with focus on cybersecurity. I help students understand complex technical concepts and prepare for industry.",
-            image: "👨‍💻"
-        },
-        {
-            id: 7,
-            name: "Jennie Patel",
-            studies: "3rd Year, Engineering",
-            university: "Macquarie University",
-            skills: ["Mechanical Design", "CAD", "Robotics", "Problem-Solving"],
-            rating: 4,
-            reviews: 7,
-            about: "Aspiring engineer passionate about robotics and design thinking. I enjoy mentoring students on building real-world engineering projects.",
-            image: "👨‍💼"
-        },
-        {
-            id: 8,
-            name: "James O'Connor",
-            studies: "3rd Year, Communication",
-            university: "University of Sydney",
-            skills: ["Public Speaking", "Media Writing", "Marketing", "Teamwork"],
-            rating: 3,
-            reviews: 4,
-            about: "Communication student with experience in media projects. I like helping peers gain confidence in speaking and presenting ideas.",
-            image: "👨‍🎓"
-        },
-        {
-            id: 9,
-            name: "Hannah Kim",
-            studies: "5th Year, Law",
-            university: "University of New South Wales",
-            skills: ["Legal Research", "Contract Law", "Critical Thinking", "Mooting"],
-            rating: 5,
-            reviews: 9,
-            about: "Law student with a focus on contract law. I enjoy guiding others in building strong analytical skills and preparing for mooting competitions.",
-            image: "👩‍⚖️"
-        },
-        {
-            id: 10,
-            name: "Carlos Martinez",
-            studies: "3rd Year, International Studies",
-            university: "Western University",
-            skills: ["Global Politics", "Cultural Awareness", "Foreign Policy", "Research"],
-            rating: 4,
-            reviews: 5,
-            about: "International Studies student interested in cultural exchange and policy-making. I mentor students on adapting to diverse environments.",
-            image: "👨‍🎓"
-        },
-        {
-            id: 11,
-            name: "Emily Zhang",
-            studies: "4th Year, Health Sciences",
-            university: "University of Sydney",
-            skills: ["Anatomy", "Research", "Healthcare Systems", "Community Outreach"],
-            rating: 5,
-            reviews: 7,
-            about: "Health sciences student passionate about improving community well-being. I mentor students who want to pursue careers in healthcare.",
-            image: "👩‍⚕️"
-        },
-        {
-            id: 12, 
-            name: "Sung Jing Woo",
-            studies: "3rd Year, Information Techology",
-            university: "University of Technology Sydney",
-            skills: ["C#", ".Net", "Python", "Linux"],
-            rating: 5, 
-            reviews: 9,
-            about: "Passionate software developer with expertise in C#, .NET, Python, and Linux. Dedicated to creating innovative solutions and mentoring others in technology and career development.",
-            image: "👨‍💻"
-        },
-        {
-            id: 13, 
-            name: "Johnny Zhang",
-            studies: "3rd Year, International Studies & Business",
-            university: "Macquarie University",
-            skills: ["Marketing", "Japanese", "Teamwork", "Advertising"],
-            rating: 5, 
-            reviews: 8,
-            about: "Enthusiastic International Studies and Business student with a strong interest in global markets, cross-cultural communication and advertising. I enjoy mentoring peers on developing language skills, teamwork strategies and marketing projects that connect cultures and businesses.",
-            image: "👨‍💼"
-        },
-        {
-            id: 14,
-            name: "Victor Zhong",
-            studies: "3rd Year, Architecture",
-            university: "University of New South Wales",
-            skills: ["SketchUp", "AutoCAD", "Revit", "Rhino 3D", "Portfolio Review"],
-            rating: 4,
-            reviews: 9,
-            about: "Sustainable-design enthusiast. Happy to help with studio crits, portfolio layout and CAD fundamentals.", 
-            image: "👷🏻‍♂️", 
-        },
-        {
-            id: 15,
-            name: "Hector Lim",
-            studies: "4th year, Mathematics",
-            university: "University of Sydney",
-            skills: ["Calculus", "Linear Algebra", "Probability", "LaTeX", "Python (NumPy)"],
-            rating: 5,
-            reviews: 9,
-            about: "Patient explainer of tough proofs and problem-solving strategies. Can guide exam prep and LaTeX write-ups.", 
-            image: "🧑‍🎓", 
-        },
-        {
-            id: 16,
-            name: "David Lee",
-            studies: "3rd year, International Studies",
-            university: "University of Technology Sydney",
-            skills: ["Academic Writing", "Policy Analysis", "Qualitative Research", "Presentation Skills", "Referencing"],
-            rating: 5,
-            reviews: 9,
-            about: "Focus on Asia-Pacific studies. I help with essay structure, research methods and presentation polish.", 
-            image: "🧑‍💼", 
-        },
-        {
-            id: 17,
-            name: "Mia Su",
-            studies: "4rd year, Education",
-            university: "Western University",
-            skills: ["Lesson Planning", "Classroom Management", "Educational Psychology", "Literacy Tutoring", "APA Referencing"],
-            rating: 5,
-            reviews: 9,
-            about: "Pre-service teacher passionate about inclusive learning. I can review lesson plans and share prac tips.", 
-            image: "👩‍🏫", 
-        },
-        {
-            id: 18,
-            name: "Jay Kim",
-            studies: "4th year, Education",
-            university: "Western University",
-            skills: ["Lesson Planning", "Classroom Management", "Educational Psychology", "Literacy Tutoring", "APA Referencing"],
-            rating: 5,
-            reviews: 9,
-            about: "Pre-service teacher focused on inclusive learning. I can review lesson plans, share prac tips and discuss classroom strategies.",
-            image: "🧑‍🏫",
-        },
-    ];
+    // Get auth token
+    const token = localStorage.getItem('token');
 
     // Saved IDs mentors 
     const [savedMentors, setSavedMentors] = useState([1, 3]);
@@ -245,18 +45,29 @@ export default function BuddySystem() {
 
     // Load bookings from API
     const loadBookings = async () => {
-
         if (!token) return;
-        
+
         setIsLoadingBookings(true);
         try {
-            const bookings = await getMyBookings(token);
-            setBookedSessions(bookings || []);
+            const request = await getMyBookings(token);
+            setBookedSessions(request.data.data || []);
         } catch (error) {
             console.error('Failed to load bookings:', error);
-            setBookedSessions([]);
         } finally {
             setIsLoadingBookings(false);
+        }
+    };
+
+    // Load mentors from API
+    const loadMentors = async () => {
+        setIsLoadingMentors(true);
+        try {
+            const request = await getMentors();
+            setMentors(request.data.data || []);
+        } catch (error) {
+            console.error('Failed to load mentors:', error);
+        } finally {
+            setIsLoadingMentors(false);
         }
     };
 
@@ -272,10 +83,10 @@ export default function BuddySystem() {
         setBookingSuccess('');
 
         try {
-            // Combine date and time into ISO string
-            const [hours, minutes] = selectedTime.split(':');
-            const [ampm] = selectedTime.split(' ')[1] || ['AM'];
-            let hour24 = parseInt(hours);
+            const [timePart, ampmPart] = selectedTime.split(' ');
+            const [hours, minutes] = timePart.split(':');
+            const ampm = ampmPart || 'AM';
+            let hour24 = parseInt(hours, 10);
             if (ampm === 'PM' && hour24 !== 12) hour24 += 12;
             if (ampm === 'AM' && hour24 === 12) hour24 = 0;
 
@@ -338,6 +149,7 @@ export default function BuddySystem() {
     // Load bookings on component mount
     useEffect(() => {
         loadBookings();
+        loadMentors();
     }, [token]);
 
     // Handle filter changes
@@ -367,15 +179,15 @@ export default function BuddySystem() {
 
     // Filter mentors based on search and filters
     const filteredMentors = mentors.filter(mentor => {
-        const matchesSearch = mentor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            mentor.studies.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesSearch = mentor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            mentor.studies.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesGender = filters.gender === 'all' || mentor.gender === filters.gender;
         const matchesUniversity = filters.university === 'all' || mentor.university === filters.university;
-        const matchesCourses = filters.courses.length === 0 || 
-                              filters.courses.some(course => 
-                                  mentor.studies.toLowerCase().includes(course.toLowerCase())
-                              );
-        
+        const matchesCourses = filters.courses.length === 0 ||
+            filters.courses.some(course =>
+                mentor.studies.toLowerCase().includes(course.toLowerCase())
+            );
+
         return matchesSearch && matchesGender && matchesUniversity && matchesCourses;
     });
 
@@ -391,7 +203,7 @@ export default function BuddySystem() {
                     </svg>
                 </div>
 
-                {/*Filters Form*/} 
+                {/*Filters Form*/}
                 <div className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
@@ -409,7 +221,7 @@ export default function BuddySystem() {
                             </label>
                         ))}
                     </div>
-                    
+
                     {/*University Filter*/}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">University</label>
@@ -462,18 +274,18 @@ export default function BuddySystem() {
                         </svg>
                     </div>
                 </div>
-                
+
                 {/* Mentors List */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {filteredMentors.map(mentor => (
                         <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                             <div className="text-center mb-3">
-                                <div className="text-4xl mb-2">{mentor.image}</div>
-                                <h3 className="font-semibold text-gray-800">{mentor.name}</h3>
+                                <div className="text-4xl mb-2">{mentor.image || "👩‍🏫"}</div>
+                                <h3 className="font-semibold text-gray-800">{mentor.firstName + " " + mentor.lastName}</h3>
                                 <p className="text-sm text-gray-600">{mentor.studies}</p>
                                 <p className="text-xs text-gray-500">{mentor.university}</p>
                             </div>
-                            
+
                             {/* Ratings and Save Button */}
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center">
@@ -493,16 +305,8 @@ export default function BuddySystem() {
                                     </svg>
                                 </button>
                             </div>
-                            
-                            {/*Skills tag*/}
-                            <div className="flex flex-wrap gap-1 mb-3">
-                                {mentor.skills.slice(0, 3).map(skill => (
-                                    <span key={skill} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                            
+
+
                             {/*About Section*/}
                             <div className="mt-auto">
                                 <button
@@ -601,14 +405,14 @@ export default function BuddySystem() {
                                         </p>
                                     </div>
                                 </div>
-                                
+
                                 {/* Action Buttons */}
                                 <div className="flex flex-col space-y-2">
                                     <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
                                         Message
                                     </button>
                                     {!booking.isConfirmed && (
-                                        <button 
+                                        <button
                                             onClick={() => handleConfirmBooking(booking.id)}
                                             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
                                         >
@@ -629,160 +433,156 @@ export default function BuddySystem() {
             )}
         </div>
     );
-        // Render Messages Tab
-         const renderMentorProfile = () => (
-         <div className="bg-white rounded-lg">
-             <button
-                 onClick={() => setShowBooking(false)}
-                 className="text-blue-600 hover:text-blue-800 mb-6 flex items-center text-sm font-medium"
-             >
-                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                 </svg>
-                 Back to Mentors
-             </button>
-            
+    // Render Messages Tab
+    const renderMentorProfile = () => (
+        <div className="bg-white rounded-lg">
+            <button
+                onClick={() => setShowBooking(false)}
+                className="text-blue-600 hover:text-blue-800 mb-6 flex items-center text-sm font-medium"
+            >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to Mentors
+            </button>
+
             {/* Mentor Details */}
-             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                 {/* Left Column - Mentor Info */}
-                 <div className="lg:col-span-1">
-                     <div className="text-center">
-                         <div className="text-7xl mb-6">{selectedMentor.image}</div>
-                         <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.name}</h2>
-                         <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies}</p>
-                         <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
-                         
-                         {/* Ratings */}
-                         <div className="flex items-center justify-center mb-6">
-                             {[...Array(5)].map((_, i) => (
-                                 <svg key={i} className={`w-6 h-6 ${i < selectedMentor.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
-                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                 </svg>
-                             ))}
-                             <span className="ml-3 text-gray-600 font-medium">{selectedMentor.reviews} Reviews</span>
-                         </div>
-                             
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Left Column - Mentor Info */}
+                <div className="lg:col-span-1">
+                    <div className="text-center">
+                        <div className="text-7xl mb-6">{selectedMentor.image}</div>
+                        <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.name}</h2>
+                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies}</p>
+                        <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
+
+                        {/* Ratings */}
+                        <div className="flex items-center justify-center mb-6">
+                            {[...Array(5)].map((_, i) => (
+                                <svg key={i} className={`w-6 h-6 ${i < selectedMentor.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            ))}
+                            <span className="ml-3 text-gray-600 font-medium">{selectedMentor.reviews} Reviews</span>
+                        </div>
+
                         {/* Skills Tags */}
-                         <div className="flex flex-wrap gap-2 justify-center mb-6">
-                             {selectedMentor.skills.map(skill => (
-                                 <span key={skill} className="px-4 py-2 bg-slate-100 text-slate-800 text-sm rounded-full font-medium">
-                                     {skill}
-                                 </span>
-                             ))}
-                         </div>
-                     </div>
-                 </div>
- 
-                 {/* Right Column - About & Booking */}
-                 <div className="lg:col-span-2">
-                     <div className="space-y-8">
-                         <div>
-                             <h3 className="text-2xl font-semibold text-blue-800 mb-4">About {selectedMentor.name}</h3>
-                             <p className="text-blue-600 leading-relaxed text-lg">{selectedMentor.about}</p>
-                         </div>
-                             
+                        <div className="flex flex-wrap gap-2 justify-center mb-6">
+                            {selectedMentor.skills.map(skill => (
+                                <span key={skill} className="px-4 py-2 bg-slate-100 text-slate-800 text-sm rounded-full font-medium">
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Right Column - About & Booking */}
+                <div className="lg:col-span-2">
+                    <div className="space-y-8">
+                        <div>
+                            <h3 className="text-2xl font-semibold text-blue-800 mb-4">About {selectedMentor.name}</h3>
+                            <p className="text-blue-600 leading-relaxed text-lg">{selectedMentor.about}</p>
+                        </div>
+
                         {/* Booking Section */}
-                         <div className="bg-blue-50 rounded-xl p-6">
-                             <h3 className="text-xl font-semibold text-blue-800 mb-4">Book a Session</h3>
-                             <p className="text-blue-600 mb-6 text-lg">Choose your preferred date and time for a mentor session.</p>
-                             
-                             {/* Calendar */}
-                             <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-                                 <div className="text-center text-xl font-semibold text-gray-800 mb-4">August 2024</div>
-                                 <div className="grid grid-cols-7 gap-2 text-center text-sm">
-                                     {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
-                                         <div key={day} className="py-3 text-gray-500 font-medium">{day}</div>
-                                     ))}
-                                     {[...Array(31)].map((_, i) => {
-                                         const day = i + 1;
-                                         const isSelected = selectedDate && selectedDate.getDate() === day;
-                                         return (
-                                             <button
-                                                 key={i}
-                                                 onClick={() => {
-                                                     const date = new Date(2024, 7, day); // August 2024
-                                                     setSelectedDate(date);
-                                                 }}
-                                                 className={`py-3 cursor-pointer hover:bg-blue-50 rounded-lg transition-colors ${
-                                                     isSelected ? 'bg-blue-600 text-white' : ''
-                                                 }`}
-                                             >
-                                                 {day}
-                                             </button>
-                                         );
-                                     })}
-                                 </div>
-                             </div>
- 
-                             {/* Time Slots */}
-                             <div className="mb-6">
-                                 <p className="text-base font-medium text-blue-700 mb-4">Available Time Slots:</p>
-                                 <div className="grid grid-cols-4 gap-3">
-                                     {['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map(time => (
-                                         <button
-                                             key={time}
-                                             onClick={() => setSelectedTime(time)}
-                                             className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${
-                                                 selectedTime === time 
-                                                     ? 'border-blue-500 bg-blue-50 text-blue-700' 
-                                                     : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
-                                             }`}
-                                         >
-                                             {time}
-                                         </button>
-                                     ))}
-                                 </div>
-                             </div>
-                             
-                             {/* Duration Selection */}
-                             <div className="mb-6">
-                                 <p className="text-base font-medium text-blue-700 mb-4">Session Duration:</p>
-                                 <div className="flex gap-3">
-                                     {[30, 60, 90, 120, 150, 180].map(duration => (
-                                         <button
-                                             key={duration}
-                                             onClick={() => setSelectedDuration(duration)}
-                                             className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
-                                                 selectedDuration === duration 
-                                                     ? 'border-blue-500 bg-blue-50 text-blue-700' 
-                                                     : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
-                                             }`}
-                                         >
-                                             {duration === 30 ? '30 mins' : 
-                                              duration === 60 ? '1 hr' : 
-                                              duration === 90 ? '1 hr 30 mins' :
-                                              duration === 120 ? '2 hrs' :
-                                              duration === 150 ? '2 hrs 30 mins' :
-                                              '3 hrs'}
-                                         </button>
-                                     ))}
-                                 </div>
-                             </div>
-                             
-                             {/* Error/Success Messages */}
-                             {bookingError && (
-                                 <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-                                     {bookingError}
-                                 </div>
-                             )}
-                             {bookingSuccess && (
-                                 <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
-                                     {bookingSuccess}
-                                 </div>
-                             )}
-                                     
-                           {/* Book Button */}
-                           <button 
-                               onClick={handleBookMentor}
-                               disabled={isBooking || !selectedDate || !selectedTime}
-                               className={`w-full mt-4 py-4 px-6 rounded-lg font-semibold text-lg transition-colors ${
-                                   isBooking || !selectedDate || !selectedTime
-                                       ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                                       : 'bg-orange-700 text-white hover:bg-green-800'
-                               }`}
-                           >
-                               {isBooking ? 'BOOKING...' : 'BOOK SESSION'}
-                           </button>
+                        <div className="bg-blue-50 rounded-xl p-6">
+                            <h3 className="text-xl font-semibold text-blue-800 mb-4">Book a Session</h3>
+                            <p className="text-blue-600 mb-6 text-lg">Choose your preferred date and time for a mentor session.</p>
+
+                            {/* Calendar */}
+                            <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                                <div className="text-center text-xl font-semibold text-gray-800 mb-4">August 2024</div>
+                                <div className="grid grid-cols-7 gap-2 text-center text-sm">
+                                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
+                                        <div key={`hdr-${i}`} className="py-3 text-gray-500 font-medium">{day}</div>
+                                    ))}
+                                    {[...Array(31)].map((_, i) => {
+                                        const day = i + 1;
+                                        const isSelected = selectedDate && selectedDate.getDate() === day;
+                                        return (
+                                            <button
+                                                key={i}
+                                                onClick={() => {
+                                                    const date = new Date(2024, 7, day); // August 2024
+                                                    setSelectedDate(date);
+                                                }}
+                                                className={`py-3 cursor-pointer hover:bg-blue-50 rounded-lg transition-colors ${isSelected ? 'bg-blue-600 text-white' : ''
+                                                    }`}
+                                            >
+                                                {day}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
+                            {/* Time Slots */}
+                            <div className="mb-6">
+                                <p className="text-base font-medium text-blue-700 mb-4">Available Time Slots:</p>
+                                <div className="grid grid-cols-4 gap-3">
+                                    {['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map(time => (
+                                        <button
+                                            key={time}
+                                            onClick={() => setSelectedTime(time)}
+                                            className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${selectedTime === time
+                                                    ? 'border-blue-500 bg-blue-50 text-blue-700'
+                                                    : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
+                                                }`}
+                                        >
+                                            {time}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Duration Selection */}
+                            <div className="mb-6">
+                                <p className="text-base font-medium text-blue-700 mb-4">Session Duration:</p>
+                                <div className="flex gap-3">
+                                    {[30, 60, 90, 120, 150, 180].map(duration => (
+                                        <button
+                                            key={duration}
+                                            onClick={() => setSelectedDuration(duration)}
+                                            className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${selectedDuration === duration
+                                                    ? 'border-blue-500 bg-blue-50 text-blue-700'
+                                                    : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
+                                                }`}
+                                        >
+                                            {duration === 30 ? '30 mins' :
+                                                duration === 60 ? '1 hr' :
+                                                    duration === 90 ? '1 hr 30 mins' :
+                                                        duration === 120 ? '2 hrs' :
+                                                            duration === 150 ? '2 hrs 30 mins' :
+                                                                '3 hrs'}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Error/Success Messages */}
+                            {bookingError && (
+                                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                                    {bookingError}
+                                </div>
+                            )}
+                            {bookingSuccess && (
+                                <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+                                    {bookingSuccess}
+                                </div>
+                            )}
+
+                            {/* Book Button */}
+                            <button
+                                onClick={handleBookMentor}
+                                disabled={isBooking || !selectedDate || !selectedTime}
+                                className={`w-full mt-4 py-4 px-6 rounded-lg font-semibold text-lg transition-colors ${isBooking || !selectedDate || !selectedTime
+                                        ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                                        : 'bg-orange-700 text-white hover:bg-green-800'
+                                    }`}
+                            >
+                                {isBooking ? 'BOOKING...' : 'BOOK SESSION'}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -811,7 +611,7 @@ export default function BuddySystem() {
                     </button>
                 </div>
             </div>
-            
+
             {/* Messages List */}
             <div className="p-4">
                 {messages.map(message => (
@@ -843,8 +643,8 @@ export default function BuddySystem() {
                     <div className="text-center py-20">
                         <h2 className="text-2xl font-bold text-gray-800 mb-4">Authentication Required</h2>
                         <p className="text-gray-600 mb-6">Please log in to access the Buddy System.</p>
-                        <a 
-                            href="/login" 
+                        <a
+                            href="/login"
                             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
                         >
                             Go to Login
@@ -872,17 +672,16 @@ export default function BuddySystem() {
                                         <button
                                             key={tab.id}
                                             onClick={() => setActiveTab(tab.id)}
-                                            className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
-                                                activeTab === tab.id
+                                            className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === tab.id
                                                     ? 'border-slate-500 text-slate-600'
                                                     : 'border-transparent text-gray-500 hover:text-gray-700'
-                                            }`}
+                                                }`}
                                         >
                                             {tab.label}
                                         </button>
                                     ))}
                                 </div>
-                                
+
                                 <div className="p-6">
                                     {activeTab === 'mentors' && renderMentorsTab()}
                                     {activeTab === 'saved' && renderSavedMentorsTab()}
@@ -938,7 +737,7 @@ export default function BuddySystem() {
                     </>
                 )}
             </div>
-            <Footer/>
+            <Footer />
         </Background>
     );
 }

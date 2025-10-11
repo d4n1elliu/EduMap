@@ -23,7 +23,7 @@ export default function Login() {
             const response = await login(email, password);
          
             // Save token to localStorage
-            localStorage.setItem('authToken', response.data.data.jwtToken);
+            localStorage.setItem('token', response.data.data.jwtToken);
 
             // Redirect to home page, updating to refresh Navbar state
             navigate('/');

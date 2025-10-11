@@ -49,7 +49,7 @@ export default function Register() {
             const response = await register(email, password, firstName, lastName, role);
             if (response.data && response.data.data?.jwtToken)
             // Save token to localStorage
-            localStorage.setItem('authToken', response.data.data.token);
+            localStorage.setItem('token', response.data.data.token);
 
             // Redirect to home page, updating to refresh Navbar state
             navigate('/');

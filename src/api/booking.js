@@ -1,52 +1,53 @@
-// src/api/js/booking.js
-import api from './api'; 
+import api from "./api";
 
-const BUDDY_BASE = '/BuddySystem'; // relative to /api
+const BUDDY_BASE = "/BuddySystem";
 
-// helper: minutes -> "HH:mm:ss" (TimeSpan)
+// minutes -> "HH:mm:ss"
 function toHHMMSS(minutes) {
-  const hh = String(Math.floor(minutes / 60)).padStart(2, "0");
-  const mm = String(minutes % 60).padStart(2, "0");
+  const m = Number(minutes) || 0;
+  const hh = String(Math.floor(m / 60)).padStart(2, "0");
+  const mm = String(m % 60).padStart(2, "0");
   return `${hh}:${mm}:00`;
 }
 
+// get a clean token string
+function getAuthToken(token) {
+  console.log(token);
+  return (token || localStorage.getItem("token") || "")
+    .replace(/^"(.+)"$/, "$1") // strip accidental surrounding quotes
+    .trim();
+}
+
+// keep this helper; return the Axios config object
 const auth = (token) => ({
   headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
+      Authorization: `Bearer ${getAuthToken(token)}`,
   }
 });
 
-/** GET /api/buddysystem/get-bookings */
+/** GET /api/BuddySystem/get-bookings */
 export async function getMyBookings(token) {
-  alert(token);
-  const { data } = await api.get(`${BUDDY_BASE}/get-bookings`, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-            "Content-Type": "application/json" 
-        }
-    });
-  return data?.responseData ?? data;
+  return await api.get(`${BUDDY_BASE}/get-bookings`, auth(token));
 }
 
-/** POST /api/buddysystem/create-booking
- * body: { startTime: ISO string, duration: "HH:mm:ss", mentorId: number }
- */
+/** GET /api/BuddySystem/get-mentors */
+export async function getMentors() {
+  return await api.get(`${BUDDY_BASE}/get-mentors`);
+}
+
+/** POST /api/BuddySystem/create-booking */
 export async function bookMentor({ startTime, durationMinutes, mentorId }, token) {
   const payload = {
     startTime,
-    duration: toHHMMSS(Number(durationMinutes)),
+    duration: toHHMMSS(durationMinutes),
     mentorId: Number(mentorId),
   };
   const { data } = await api.post(`${BUDDY_BASE}/create-booking`, payload, auth(token));
   return data;
 }
 
-/** GET /api/buddysystem/confirm-booking?bookingId={id} */
+/** POST /api/BuddySystem/confirm-booking  (body = int bookingId) */
 export async function confirmBooking(bookingId, token) {
-  const { data } = await api.post(
-    `${BUDDY_BASE}/confirm-booking`,
-    { ...auth(token), params: { bookingId } }
-  );
+  const { data } = await api.post(`${BUDDY_BASE}/confirm-booking`, bookingId, auth(token));
   return data;
 }
