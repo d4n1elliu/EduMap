@@ -178,14 +178,20 @@ export default function BuddySystem() {
     };
 
     // Filter mentors based on search and filters
-    const filteredMentors = mentors.filter(mentor => {
-        const matchesSearch = mentor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            mentor.studies.toLowerCase().includes(searchQuery.toLowerCase());
+    const filteredMentors = mentors.filter((mentor) => {
+        const courseField = mentor.studies || mentor.course || '';
+        const matchesSearch = 
+        (mentor.firstName || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+            courseField.toString().toLowerCase().includes(searchQuery.toLowerCase());
+
         const matchesGender = filters.gender === 'all' || mentor.gender === filters.gender;
+
         const matchesUniversity = filters.university === 'all' || mentor.university === filters.university;
-        const matchesCourses = filters.courses.length === 0 ||
-            filters.courses.some(course =>
-                mentor.studies.toLowerCase().includes(course.toLowerCase())
+
+        const matchesCourses = 
+            filters.courses.length === 0 ||
+            filters.courses.some((course) =>
+                courseField.toString().toLowerCase().includes(course.toLowerCase())
             );
 
         return matchesSearch && matchesGender && matchesUniversity && matchesCourses;
@@ -282,8 +288,10 @@ export default function BuddySystem() {
                             <div className="text-center mb-3">
                                 <div className="text-4xl mb-2">{mentor.image || "👩‍🏫"}</div>
                                 <h3 className="font-semibold text-gray-800">{mentor.firstName + " " + mentor.lastName}</h3>
-                                <p className="text-sm text-gray-600">{mentor.studies}</p>
-                                <p className="text-xs text-gray-500">{mentor.university}</p>
+                                
+                                <p className="text-sm text-gray-600">{mentor.studies || mentor.course || ''}</p>
+                                {/* Need to create backend for this */}
+                                <p className="text-xs text-gray-500">{mentor.university }</p>
                             </div>
 
                             {/* Ratings and Save Button */}
@@ -333,7 +341,7 @@ export default function BuddySystem() {
                 <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm flex flex-col h-full">
                     <div className="text-center mb-3">
                         <div className="text-4xl mb-2">{mentor.image}</div>
-                        <h3 className="font-semibold text-gray-800">{mentor.name}</h3>
+                        <h3 className="font-semibold text-gray-800">{mentor.firstName} {mentor.lastName}</h3>
                         <p className="text-sm text-gray-600">{mentor.studies}</p>
                         <p className="text-xs text-gray-500">{mentor.university}</p>
                     </div>
@@ -452,8 +460,8 @@ export default function BuddySystem() {
                 <div className="lg:col-span-1">
                     <div className="text-center">
                         <div className="text-7xl mb-6">{selectedMentor.image}</div>
-                        <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.name}</h2>
-                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies}</p>
+                        <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.firstName} {selectedMentor.lastName}</h2>
+                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies || selectedMentors.course || ''}</p>
                         <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
 
                         {/* Ratings */}
@@ -481,7 +489,7 @@ export default function BuddySystem() {
                 <div className="lg:col-span-2">
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-2xl font-semibold text-blue-800 mb-4">About {selectedMentor.name}</h3>
+                            <h3 className="text-2xl font-semibold text-blue-800 mb-4">About {selectedMentor.firstName} {selectedMentor.lastName}</h3>
                             <p className="text-blue-600 leading-relaxed text-lg">{selectedMentor.about}</p>
                         </div>
 
