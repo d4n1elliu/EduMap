@@ -10,14 +10,14 @@ import EduMapLogoWhite from "./assets/EduMapLogoWHITE300dpi.png";
 import EduMapLogoBlue from "./assets/EduMapLogoBLUE300dpi.png";
 
 function Navbar() {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     const navigate = useNavigate();
 
     /* Controls the hamburger menu panel (mobile/compact view) */
     const [menuOpen, setMenuOpen] = useState(false);
 
     const handleLogout = () => {
-        localStorage.removeItem('authToken');
+        localStorage.removeItem('token');
         navigate('/');
         window.location.reload();
     };

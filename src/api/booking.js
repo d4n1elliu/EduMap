@@ -42,6 +42,7 @@ export async function bookMentor({ startTime, durationMinutes, mentorId }, token
     duration: toHHMMSS(durationMinutes),
     mentorId: Number(mentorId),
   };
+  console.log(payload);
   const { data } = await api.post(`${BUDDY_BASE}/create-booking`, payload, auth(token));
   return data;
 }
@@ -50,4 +51,9 @@ export async function bookMentor({ startTime, durationMinutes, mentorId }, token
 export async function confirmBooking(bookingId, token) {
   const { data } = await api.post(`${BUDDY_BASE}/confirm-booking`, bookingId, auth(token));
   return data;
+}
+
+/* get /api/buddySystem/mentor-availability? mentorId */
+export async function getMentorAvailability(mentorId, token) {
+  return await api.get(`${BUDDY_BASE}/mentor-availability`, mentorId, auth(token));
 }

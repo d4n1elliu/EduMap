@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Footer from './Footer';
 import Background from './Background';
-import { getMyBookings, bookMentor, confirmBooking, getMentors } from '../api/booking';
+import { getMyBookings, bookMentor, confirmBooking, getMentors, getMentorAvailability } from '../api/booking';
 
 export default function BuddySystem() {
 
@@ -25,6 +25,10 @@ export default function BuddySystem() {
     const [bookingError, setBookingError] = useState('');
     const [bookingSuccess, setBookingSuccess] = useState('');
     const [mentors, setMentors] = useState([]);
+
+    // Checking for chosen mentor availabilities 
+    const [availability, setAvailability] = useState({});
+    const [isLoadingAvailability, setIsLoadingAvailability] = useState(false);
 
     // Real bookings from API
     const [bookedSessions, setBookedSessions] = useState([]);
@@ -68,6 +72,33 @@ export default function BuddySystem() {
             console.error('Failed to load mentors:', error);
         } finally {
             setIsLoadingMentors(false);
+        }
+    };
+
+    // Choosing a mentor, open their profile and check their availabilities 
+    const selectMentor = async (mentor) => {
+        setSelectedMentor(mentor);
+        setShowBooking(true);
+        setBookingError('');
+        setBookingSuccess('');
+
+        setIsLoadingAvailability(true);
+        try {
+            const res = await getMentorAvailability(mentor.id, token);
+            const data = (res && res.data && res.data.data) || {};
+            setAvailability(data);
+
+            // Pre-select first available date if present
+            const firstKey = Object.keys(data)[0];
+            if (firstKey) {
+                setSelectedDate(new Date(firstKey));
+                setSelectedTime(null);
+            }
+        } catch (e) {
+            console.error('Failed to load availability:', e);
+            setAvailability({});
+        } finally {
+            setIsLoadingAvailability(false);
         }
     };
 
@@ -148,9 +179,12 @@ export default function BuddySystem() {
 
     // Load bookings on component mount
     useEffect(() => {
-        loadBookings();
         loadMentors();
     }, [token]);
+
+    useEffect(() => {
+        loadBookings();
+    }, [activeTab]);
 
     // Handle filter changes
     const handleFilterChange = (filterType, value) => {
@@ -180,15 +214,15 @@ export default function BuddySystem() {
     // Filter mentors based on search and filters
     const filteredMentors = mentors.filter((mentor) => {
         const courseField = mentor.studies || mentor.course || '';
-        const matchesSearch = 
-        (mentor.firstName || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        const matchesSearch =
+            (mentor.firstName || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
             courseField.toString().toLowerCase().includes(searchQuery.toLowerCase());
 
         const matchesGender = filters.gender === 'all' || mentor.gender === filters.gender;
 
         const matchesUniversity = filters.university === 'all' || mentor.university === filters.university;
 
-        const matchesCourses = 
+        const matchesCourses =
             filters.courses.length === 0 ||
             filters.courses.some((course) =>
                 courseField.toString().toLowerCase().includes(course.toLowerCase())
@@ -288,10 +322,10 @@ export default function BuddySystem() {
                             <div className="text-center mb-3">
                                 <div className="text-4xl mb-2">{mentor.image || "👩‍🏫"}</div>
                                 <h3 className="font-semibold text-gray-800">{mentor.firstName + " " + mentor.lastName}</h3>
-                                
+
                                 <p className="text-sm text-gray-600">{mentor.studies || mentor.course || ''}</p>
                                 {/* Need to create backend for this */}
-                                <p className="text-xs text-gray-500">{mentor.university }</p>
+                                <p className="text-xs text-gray-500">{mentor.university}</p>
                             </div>
 
                             {/* Ratings and Save Button */}
@@ -320,6 +354,7 @@ export default function BuddySystem() {
                                 <button
                                     onClick={() => {
                                         setSelectedMentor(mentor);
+                                        //selectMentor(mentor);
                                         setShowBooking(true);
                                     }}
                                     className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
@@ -461,7 +496,7 @@ export default function BuddySystem() {
                     <div className="text-center">
                         <div className="text-7xl mb-6">{selectedMentor.image}</div>
                         <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.firstName} {selectedMentor.lastName}</h2>
-                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies || selectedMentors.course || ''}</p>
+                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies || selectedMentor.course || ''}</p>
                         <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
 
                         {/* Ratings */}
@@ -476,11 +511,15 @@ export default function BuddySystem() {
 
                         {/* Skills Tags */}
                         <div className="flex flex-wrap gap-2 justify-center mb-6">
-                            {selectedMentor.skills.map(skill => (
-                                <span key={skill} className="px-4 py-2 bg-slate-100 text-slate-800 text-sm rounded-full font-medium">
-                                    {skill}
-                                </span>
-                            ))}
+                            {(selectedMentor?.skills ?? []).length > 0 ? (
+                                (selectedMentor.skills ?? []).map((skill) => (
+                                    <span key={skill} className="px-4 py-2 bg-slate-100 text-slate-800 text-sm rounded-full font-medium">
+                                        {skill}
+                                    </span>
+                                ))
+                            ) : (
+                                <span className="text-sm text-gray-500">No skills listed</span>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -534,8 +573,8 @@ export default function BuddySystem() {
                                             key={time}
                                             onClick={() => setSelectedTime(time)}
                                             className={`px-4 py-3 rounded-lg border text-sm font-medium transition-colors ${selectedTime === time
-                                                    ? 'border-blue-500 bg-blue-50 text-blue-700'
-                                                    : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
+                                                ? 'border-blue-500 bg-blue-50 text-blue-700'
+                                                : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
                                                 }`}
                                         >
                                             {time}
@@ -553,8 +592,8 @@ export default function BuddySystem() {
                                             key={duration}
                                             onClick={() => setSelectedDuration(duration)}
                                             className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${selectedDuration === duration
-                                                    ? 'border-blue-500 bg-blue-50 text-blue-700'
-                                                    : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
+                                                ? 'border-blue-500 bg-blue-50 text-blue-700'
+                                                : 'border-blue-300 hover:border-slate-300 hover:bg-slate-50'
                                                 }`}
                                         >
                                             {duration === 30 ? '30 mins' :
@@ -585,8 +624,8 @@ export default function BuddySystem() {
                                 onClick={handleBookMentor}
                                 disabled={isBooking || !selectedDate || !selectedTime}
                                 className={`w-full mt-4 py-4 px-6 rounded-lg font-semibold text-lg transition-colors ${isBooking || !selectedDate || !selectedTime
-                                        ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                                        : 'bg-orange-700 text-white hover:bg-green-800'
+                                    ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                                    : 'bg-orange-700 text-white hover:bg-green-800'
                                     }`}
                             >
                                 {isBooking ? 'BOOKING...' : 'BOOK SESSION'}
@@ -681,8 +720,8 @@ export default function BuddySystem() {
                                             key={tab.id}
                                             onClick={() => setActiveTab(tab.id)}
                                             className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === tab.id
-                                                    ? 'border-slate-500 text-slate-600'
-                                                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                                                ? 'border-slate-500 text-slate-600'
+                                                : 'border-transparent text-gray-500 hover:text-gray-700'
                                                 }`}
                                         >
                                             {tab.label}
