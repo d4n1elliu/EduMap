@@ -243,7 +243,7 @@ export default function BuddySystem() {
                     </svg>
                 </div>
 
-                {/*Filters Form*/}
+                {/* Filters Form */}
                 <div className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
@@ -262,7 +262,7 @@ export default function BuddySystem() {
                         ))}
                     </div>
 
-                    {/*University Filter*/}
+                    {/* University Filter */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">University</label>
                         {['all', 'University of New South Wales', 'University of Sydney', 'University of Technology Sydney', 'Macquarie University', 'Western University'].map(uni => (
@@ -280,7 +280,7 @@ export default function BuddySystem() {
                         ))}
                     </div>
 
-                    {/*Courses Filter*/}
+                    {/* Courses Filter */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Courses</label>
                         {['Information Technology', 'Computer Science', 'Business', 'Law', 'Science', 'Engineering', 'Communications', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
@@ -349,7 +349,7 @@ export default function BuddySystem() {
                             </div>
 
 
-                            {/*About Section*/}
+                            {/* About Section */}
                             <div className="mt-auto">
                                 <button
                                     onClick={() => {
@@ -400,7 +400,7 @@ export default function BuddySystem() {
                         </button>
                     </div>
 
-                    {/*Skills tag*/}
+                    {/* Skills tag */}
                     <div className="mt-auto">
                         <button
                             onClick={() => {
