@@ -11,7 +11,7 @@ import UOM from "../assets/UOM logo.png";
 import UQ from "../assets/UQ logo.png";
 import UWA from "../assets/UWA logo.png";
 import Background from "./Background";
-import Handshake from "../assets/officeHandshake.jpg"; 
+import Handshake from "../assets/officeHandShake.jpg"; 
 
 function Home() {
   return (
