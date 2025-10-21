@@ -1,23 +1,16 @@
 import {useState} from "react";
 import {register} from "../api/auth";
+import { bookMentor } from "../api/booking";
 import {useNavigate, Link} from "react-router-dom";
 import Footer from './Footer';
 import Background from "./Background";
-
-export const Role = Object.freeze({
-    STUDENT: 0,
-    MENTOR: 1, 
-})
 
 export default function Register() {
 
     // Account fields 
     const [email, setEmail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [role, setRole] = useState(Role.STUDENT); // Default to Student
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
@@ -26,17 +19,7 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // Validate form fields
-        if (!firstName.trim() || !lastName.trim()) {
-            setError("Please enter your first and last name");
-            return;
-        }
-        
-        if (password.length < 6) {
-            setError("Password must be at least 6 characters long");
-            return;
-        }
-        
+        // Validate passwords match
         if (password !== confirmPassword) {
             setError("Passwords do not match!");
             return;
@@ -46,10 +29,10 @@ export default function Register() {
         setError("");
         
         try {
-            const response = await register(email, password, firstName, lastName, role);
+            const response = await register(email, password);
             if (response.data && response.data.data?.jwtToken)
             // Save token to localStorage
-            localStorage.setItem('token', response.data.data.token);
+            localStorage.setItem('authToken', response.data.data.token);
 
             // Redirect to home page, updating to refresh Navbar state
             navigate('/');
@@ -64,7 +47,7 @@ export default function Register() {
     // JSX for the registration form
     return (
         <Background>
-            <div className="pt-5 pb-5 flex-1 flex items-center justify-center px-4">
+            <div className="pt-5 pb -flex-1 flex items-center justify-center px-4">
                 <form
                     onSubmit={handleSubmit}
                     className="bg-white p-8 sm:p-12 rounded-lg shadow-md w-full max-w-md"
@@ -83,55 +66,22 @@ export default function Register() {
                         </p>
                     )}
                     
-                    {/* First Name Input */}
-                    <input
-                        type="text"
-                        placeholder="First Name"
-                        className="w-full p-2 mb-4 border rounded"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        autoComplete="given-name"
-                        required
-                    />
-
-                    {/* Last Name Input */}
-                    <input
-                        type="text"
-                        placeholder="Last Name"
-                        className="w-full p-2 mb-4 border rounded"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        autoComplete="family-name"
-                        required
-                    />
-
                     {/* Email Input */}
                     <input
                         type="email"
                         placeholder="example@gmail.com"
-                        className="w-full p-2 mb-4 border rounded"
+                        className="w-full p-2 mb-6 border rounded"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         autoComplete="email"
                         required
                     />
 
-                    {/* Role Selection */}
-                    <select
-                        className="w-full p-2 mb-4 border rounded"
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                        required
-                    >
-                        <option value={Role.STUDENT}>Student</option>
-                        <option value={Role.MENTOR}>Mentor</option>
-                    </select>
-
                     {/* Password Input */}
                     <input
                         type="password"
                         placeholder="Password"
-                        className="w-full p-2 mb-4 border rounded"
+                        className="w-full p-2 mb-6 border rounded"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         autoComplete="new-password"
