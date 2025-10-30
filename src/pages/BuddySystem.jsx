@@ -9,6 +9,7 @@ export default function BuddySystem() {
     const [activeTab, setActiveTab] = useState('mentors');
     const [selectedMentor, setSelectedMentor] = useState(null);
     const [showBooking, setShowBooking] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [filters, setFilters] = useState({
@@ -139,16 +140,21 @@ export default function BuddySystem() {
 
             console.log('Booking response:', result);
 
-            if (result.success) {
-                setBookingSuccess('Booking created successfully!');
+            const successfulBooking = result?.success === true || result?.message === "Success" || result?.data?.message === "Success";
+            
+            if (successfulBooking) {
+                setBookingSuccess('');
                 setShowBooking(false);
                 setSelectedMentor(null);
                 setSelectedDate(null);
                 setSelectedTime(null);
+
+                // Show booking success message
+                setShowPopup(true);
                 // Reload bookings
                 await loadBookings();
             } else {
-                setBookingError(result.message || 'Failed to create booking');
+                setBookingError(result?.data?.message || result?.message || 'Failed to create booking');
             }
         } catch (error) {
             console.error('Booking error details:', error);
@@ -769,7 +775,7 @@ export default function BuddySystem() {
                                 </div>
                             )}
 
-                            {/* Proceed to Events when a booking exists */}
+                            {/* 
                             <div className="pt-2 pb-8 flex justify-center">
                                 <a
                                     href="/EventsAndNetworkingMap"
@@ -780,10 +786,34 @@ export default function BuddySystem() {
                                     Proceed to Events & Networking Map
                                 </a>
                             </div>
+                            */}
                         </main>
                     </>
                 )}
             </div>
+
+            {/* Pop Up Goes in here*/}
+            {showPopup && (
+                <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded-xl shadow-2xl text-center max-w-md">
+                    <h2 className="text-2xl font-bold text-green-600 mb-2">
+                        🎉 Booking Confirmed!
+                    </h2>
+
+                    <p className="text-gray-700">
+                        Your mentor session has been successfully booked.
+                    </p>
+
+                    <a
+                        href="/EventsAndNetworkingMap"
+                        className="mt-6 px-4 py-2 rounded bg-purple-600 text-white inline-block"
+                        onClick={() => setShowPopup(false)}
+                    >
+                        Proceed to Events Map
+                    </a>
+                    </div>
+                </div>
+            )}
             <Footer />
         </Background>
     );
