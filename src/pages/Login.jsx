@@ -15,8 +15,6 @@ export default function Login() {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email);
-        console.log(password);
 
         // Call the login API
         try {
