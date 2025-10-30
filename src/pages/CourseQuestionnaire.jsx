@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Background from './Background';
+import ProfileSetup from './ProfileSetup';
 import Footer from './Footer';
 
 export default function CourseQuestionnaire() {
@@ -622,7 +623,7 @@ export default function CourseQuestionnaire() {
 
     return (
         <Background>
-            <div className="w-full max-w-6xl px-6 pt-28 mx-auto flex-1">
+            <div className="w-full max-w-6xl px-6 pb-6 pt-28 mx-auto flex-1">
                 <main className="flex-1 space-y-10">
                     <section className="text-center mb-10">
                         <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 drop-shadow-[2px_2px_0_black] mb-3">
@@ -1055,10 +1056,10 @@ export default function CourseQuestionnaire() {
                                     {showRecommendations ? 'Hide Recommendations' : 'Get UTS Recommendations'}
                                 </button>
                                 <button
-                                onClick={() => navigate('/profile')}
+                                onClick={() => navigate('/profile-setup')}
                                 className="py-2 px-4 rounded-lg bg-blue-500 text-white font-semibold hover:bg-blue-600"
                                 >
-                                Sign Up
+                                Go to Profile 
                                 </button>
                             </div>
                         </section>
