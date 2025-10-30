@@ -326,7 +326,7 @@ export default function BuddySystem() {
                     {filteredMentors.map(mentor => (
                         <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                             <div className="text-center mb-3">
-                                <div className="text-4xl mb-2">{mentor.image || "👩‍🏫"}</div>
+                                <div className="text-4xl mb-2">{mentor.profileEmoji || "👩‍🏫"}</div>
                                 <h3 className="font-semibold text-gray-800">{mentor.firstName + " " + mentor.lastName}</h3>
 
                                 <p className="text-sm text-gray-600">{mentor.studies || mentor.course || ''}</p>
@@ -381,7 +381,7 @@ export default function BuddySystem() {
             {mentors.filter(mentor => savedMentors.includes(mentor.id)).map(mentor => (
                 <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm flex flex-col h-full">
                     <div className="text-center mb-3">
-                        <div className="text-4xl mb-2">{mentor.image}</div>
+                        <div className="text-4xl mb-2">{mentor.profileEmoji || "👩‍🏫"}</div>
                         <h3 className="font-semibold text-gray-800">{mentor.firstName} {mentor.lastName}</h3>
                         <p className="text-sm text-gray-600">{mentor.studies}</p>
                         <p className="text-xs text-gray-500">{mentor.university}</p>
@@ -442,7 +442,7 @@ export default function BuddySystem() {
                         <div key={booking.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-4">
-                                    <div className="text-3xl">{mentor?.image || '👤'}</div>
+                                    <div className="text-3xl">{mentor.profileEmoji !== null && mentor.profileEmoji !== "" ? mentor.profileEmoji : '👤'}</div>
                                     <div>
                                         <h3 className="font-semibold text-gray-800">{booking.firstName} {booking.lastName}</h3>
                                         <p className="text-sm text-gray-600">{booking.course?.name || 'Course not specified'}</p>
@@ -500,9 +500,9 @@ export default function BuddySystem() {
                 {/* Left Column - Mentor Info */}
                 <div className="lg:col-span-1">
                     <div className="text-center">
-                        <div className="text-7xl mb-6">{selectedMentor.image}</div>
+                        <div className="text-7xl mb-6">{selectedMentor.profileEmoji || "👩‍🏫"}</div>
                         <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.firstName} {selectedMentor.lastName}</h2>
-                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies || selectedMentor.course || ''}</p>
+                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.course || ''}</p>
                         <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
 
                         {/* Ratings */}
