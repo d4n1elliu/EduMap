@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Background from './ProfileBackground.jsx';
 import Footer from './Footer';
 
@@ -568,10 +569,12 @@ export default function Profile() {
 
                 {/* Find More Mentors */}
                 <div className="mt-4 pt-4 border-t border-gray-300">
-                  <button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2">
-                    <span>🔍</span>
+                  <Link 
+                    to="/buddy-system"
+                    className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2">
+                    <span role="img" aria-label="search">🔍</span>
                     Find More Mentors
-                  </button>
+                  </Link>
                 </div>
               </div>
 

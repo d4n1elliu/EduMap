@@ -14,7 +14,7 @@ export default function BuddySystem() {
     const [searchQuery, setSearchQuery] = useState('');
     const [filters, setFilters] = useState({
         gender: 'all',
-        university: 'all',
+        //university: 'all',
         courses: []
     });
 
@@ -226,7 +226,7 @@ export default function BuddySystem() {
 
         const matchesGender = filters.gender === 'all' || mentor.gender === filters.gender;
 
-        const matchesUniversity = filters.university === 'all' || mentor.university === filters.university;
+        //const matchesUniversity = filters.university === 'all' || mentor.university === filters.university;
 
         const matchesCourses =
             filters.courses.length === 0 ||
@@ -234,7 +234,7 @@ export default function BuddySystem() {
                 courseField.toString().toLowerCase().includes(course.toLowerCase())
             );
 
-        return matchesSearch && matchesGender && matchesUniversity && matchesCourses;
+        return matchesSearch && matchesGender && matchesCourses;
     });
 
     // Render Mentors Tab
@@ -268,7 +268,7 @@ export default function BuddySystem() {
                         ))}
                     </div>
 
-                    {/* University Filter */}
+                    {/*
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">University</label>
                         {['all', 'University of New South Wales', 'University of Sydney', 'University of Technology Sydney', 'Macquarie University', 'Western University'].map(uni => (
@@ -284,12 +284,12 @@ export default function BuddySystem() {
                                 <span className="text-sm">{uni === 'all' ? 'All' : uni}</span>
                             </label>
                         ))}
-                    </div>
+                    </div> */}
 
                     {/* Courses Filter */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Courses</label>
-                        {['Information Technology', 'Computer Science', 'Business', 'Law', 'Science', 'Engineering', 'Communications', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
+                        {['InformationTechnology', 'ComputerScience', 'Business', 'Law', 'Science', 'Engineering', 'Communications', 'Architecture', 'Health', 'Mathematics', 'InternationalStudies', 'Education'].map(course => (
                             <label key={course} className="flex items-center mb-2">
                                 <input
                                     type="checkbox"
