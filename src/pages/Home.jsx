@@ -26,7 +26,7 @@ function Home() {
           />
 
           <div className="absolute inset-0 flex flex-col justify-center items-start px-10">
-            <h1 className="text-white text-4xl font-semibold mb-4">
+            <h1 className="text-white text-4xl font-bold mb-4">
               Welcome to EduMap
             </h1>
             <p className="text-white max-w-lg text-sm">
@@ -53,7 +53,7 @@ function Home() {
 
           {/* Right Content */}
           <div className="flex flex-col justify-center px-10 py-12 bg-white h-[480px] md:h-[520px]">
-            <h2 className="text-3xl font-semibold mb-4">Find out what suits you</h2>
+            <h2 className="text-3xl font-bold mb-4">Find out what suits you</h2>
             <p className="text-gray-700 mb-6 max-w-md">
               Discover and realise your interests and skills to share them with others.
             </p>
@@ -69,7 +69,7 @@ function Home() {
         <section className="w-full grid grid-cols-1 md:grid-cols-2">
           {/* Left Content */}
           <div className="flex flex-col justify-center px-10 py-12 bg-[#1c2955] text-white h-[480px] md:h-[520px]">
-            <h2 className="text-3xl font-semibold mb-4">
+            <h2 className="text-3xl font-bold mb-4">
               Connect with those on your path
             </h2>
             <p className="mb-6 max-w-md text-gray-200">
