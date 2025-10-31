@@ -95,7 +95,7 @@ function Home() {
         </section>
 
         {/* ========= DISCOVER EVENTS ========= */}
-        <section className="w-full bg-gradient-to-r from-blue-200 to-orange-200 py-16 px-6">
+        <section className="w-full bg-gradient-to-r from-blue-500 via-[#EED6C4] to-orange-500 py-16 px-6">
 
           {/* Title BAR */}
           <div className="w-full flex justify-center mb-10">
@@ -114,7 +114,7 @@ function Home() {
               <img src={Raspberry} className="w-full h-40 object-cover" />
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="font-semibold text-sm mb-1">Raspberry Pi Workshop</h3>
-                <p className="text-xs text-blue-600">Hosted by Tech Soc</p>
+                <p className="font-semibold text-sm text-blue-600">Hosted by Tech Soc</p>
 
                 <div className="mt-auto flex justify-end">
                   <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
@@ -129,7 +129,7 @@ function Home() {
               <img src={CV} className="w-full h-40 object-cover" />
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="font-semibold text-sm mb-1">Writing a CV Resume</h3>
-                <p className="text-xs text-blue-600">Hosted by Tech Soc</p>
+                <p className="font-semibold text-sm text-blue-600">Hosted by Tech Soc</p>
 
                 <div className="mt-auto flex justify-end">
                   <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
@@ -144,7 +144,7 @@ function Home() {
               <img src={Networking} className="w-full h-40 object-cover" />
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="font-semibold text-sm mb-1">Industry Networking</h3>
-                <p className="text-xs text-blue-600">Hosted by UTS UXID</p>
+                <p className="font-semibold text-sm text-blue-600">Hosted by UTS UXID</p>
 
                 <div className="mt-auto flex justify-end">
                   <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
