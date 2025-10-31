@@ -139,26 +139,6 @@ export default function EventsAndNetworkingMap() {
                         </Popup>
                     </Marker>
 
-                    {/* UNSW marker */}
-                    <Marker position={[-33.9173, 151.2313]} icon={locationIcon}>
-                        <Popup>
-                            <div className="space-y-2">
-                                <div className="font-semibold">UNSW Sydney, Kensington NSW 2033</div>
-                                <div className="text-sm text-slate-600">Campus location</div>
-                            </div>
-                        </Popup>
-                    </Marker>
-
-                    {/* USYD marker */}
-                    <Marker position={[-33.8886, 151.1873]} icon={locationIcon}>
-                        <Popup>
-                            <div className="space-y-2">
-                                <div className="font-semibold">University of Sydney, Camperdown NSW 2050</div>
-                                <div className="text-sm text-slate-600">Campus location</div>
-                            </div>
-                        </Popup>
-                    </Marker>
-
                     {/* Dynamic mentor/event markers */}
                     {markers.map(m => (
                         <Marker key={m.id} position={[m.latitude, m.longitude]} icon={mentorIcon}>
