@@ -7,14 +7,14 @@ import HeroImg from "../assets/EduMapWelcome.png";
 import FindWhatSuitsImg from "../assets/findWhatSuitsYou.png";
 import ConnectImg from "../assets/ConnectWithThose.png";
 
-import Raspberry from "../assets/uts.png";
-import CV from "../assets/usyd.png";
-import Networking from "../assets/UWA logo.png";
+import Raspberry from "../assets/raspberryPi.png";
+import CV from "../assets/CV.png";
+import Networking from "../assets/networking.png";
 
 function Home() {
   return (
     <Background>
-      {/* MAIN WRAPPER */}
+      {/* Main Wrapper Box */}
       <div className="w-full flex flex-col items-center">
 
         {/* ========= HERO SECTION ========= */}
@@ -42,7 +42,7 @@ function Home() {
         
         {/* ========= FIND WHAT SUITS YOU ========= */}
         <section className="w-full grid grid-cols-1 md:grid-cols-2">
-          {/* LEFT IMAGE */}
+          {/* Left Image */}
           <div className="w-full h-[480px] md:h-[520px]">
             <img
               src={FindWhatSuitsImg}
@@ -51,7 +51,7 @@ function Home() {
             />
           </div>
 
-          {/* RIGHT CONTENT */}
+          {/* Right Content */}
           <div className="flex flex-col justify-center px-10 py-12 bg-white h-[480px] md:h-[520px]">
             <h2 className="text-3xl font-semibold mb-4">Find out what suits you</h2>
             <p className="text-gray-700 mb-6 max-w-md">
@@ -67,7 +67,7 @@ function Home() {
 
         {/* ========= CONNECT WITH THOSE ========= */}
         <section className="w-full grid grid-cols-1 md:grid-cols-2">
-          {/* LEFT CONTENT */}
+          {/* Left Content */}
           <div className="flex flex-col justify-center px-10 py-12 bg-[#1c2955] text-white h-[480px] md:h-[520px]">
             <h2 className="text-3xl font-semibold mb-4">
               Connect with those on your path
@@ -84,7 +84,7 @@ function Home() {
             </Link>
           </div>
 
-          {/* RIGHT IMAGE */}
+          {/* Right image */}
           <div className="w-full h-[480px] md:h-[520px]">
             <img
               src={ConnectImg}
@@ -97,7 +97,7 @@ function Home() {
         {/* ========= DISCOVER EVENTS ========= */}
         <section className="w-full bg-gradient-to-r from-blue-200 to-orange-200 py-16 px-6">
 
-          {/* TITLE BAR*/}
+          {/* Title BAR */}
           <div className="w-full flex justify-center mb-10">
             <div className="px-105 py-3 bg-white/20 backdrop-blur-md rounded-2xl shadow-sm">
               <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-900">
@@ -106,7 +106,7 @@ function Home() {
             </div>
           </div>
 
-          {/* CARD ROW */}
+          {/* Cards */}
           <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
 
             {/* CARD 1 */}
