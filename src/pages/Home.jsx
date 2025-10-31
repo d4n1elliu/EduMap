@@ -1,7 +1,7 @@
 
 import Background from "./Background";
 import Footer from "./Footer";
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import HeroImg from "../assets/EduMapWelcome.png";
 import FindWhatSuitsImg from "../assets/findWhatSuitsYou.png";
@@ -34,9 +34,9 @@ function Home() {
               you along your education journey.
             </p>
 
-            <button className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-8 py-2 rounded-lg text-base font-medium">
+            <Link to="/course-questionnaire" className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-8 py-2 rounded-lg text-base font-medium">
               Join Now!
-            </button>
+            </Link>
           </div>
         </section>
         
@@ -57,12 +57,11 @@ function Home() {
             <p className="text-gray-700 mb-6 max-w-md">
               Discover and realise your interests and skills to share them with others.
             </p>
-            <a
-              href="/course-questionnaire"
+            <Link to="/course-questionnaire"
               className="block w-full max-w-[300px] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg font-semibold transition-colors"
             >
               Take the Questionnaire
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -77,12 +76,12 @@ function Home() {
               Find others who are in similar situations and connect with a peer mentor
               who can help you learn what it’s like to be in different fields.
             </p>
-            <a
-              href="/buddy-system"
+            <Link
+              to="/buddy-system"
               className="block w-full max-w-[300px] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg font-semibold transition-colors"
             >
               Start Connecting
-            </a>
+            </Link>
           </div>
 
           {/* RIGHT IMAGE */}
@@ -96,54 +95,67 @@ function Home() {
         </section>
 
         {/* ========= DISCOVER EVENTS ========= */}
-        <section className="w-full bg-gradient-to-r from-blue-200 to-orange-200 py-10">
-          <h2 className="text-center text-xl font-semibold text-gray-900 mb-6">
-            Discover Events
-          </h2>
+        <section className="w-full bg-gradient-to-r from-blue-200 to-orange-200 py-16 px-6">
 
-          <div className="flex justify-center gap-6 flex-wrap px-6">
+          {/* TITLE BAR*/}
+          <div className="w-full flex justify-center mb-10">
+            <div className="px-105 py-3 bg-white/20 backdrop-blur-md rounded-2xl shadow-sm">
+              <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-900">
+                Discover Events
+              </h2>
+            </div>
+          </div>
+
+          {/* CARD ROW */}
+          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
 
             {/* CARD 1 */}
-            <div className="bg-white shadow rounded-lg overflow-hidden w-60">
-              <img src={Raspberry} className="w-full h-32 object-cover" />
-              <div className="p-3">
-                <h3 className="font-semibold text-sm">Raspberry Pi Workshop</h3>
-                <p className="text-xs text-blue-600 mt-1">Hosted by Tech Soc</p>
-                <button className="mt-3 bg-orange-500 text-white text-xs px-3 py-1 rounded">
-                  See details...
-                </button>
+            <div className="bg-white shadow-md rounded-xl overflow-hidden w-72 flex flex-col">
+              <img src={Raspberry} className="w-full h-40 object-cover" />
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="font-semibold text-sm mb-1">Raspberry Pi Workshop</h3>
+                <p className="text-xs text-blue-600">Hosted by Tech Soc</p>
+
+                <div className="mt-auto flex justify-end">
+                  <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
+                    See details…
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* CARD 2 */}
-            <div className="bg-white shadow rounded-lg overflow-hidden w-60">
-              <img src={CV} className="w-full h-32 object-cover" />
-              <div className="p-3">
-                <h3 className="font-semibold text-sm">Writing a CV Resume</h3>
-                <p className="text-xs text-blue-600 mt-1">Hosted by Tech Soc</p>
-                <button className="mt-3 bg-orange-500 text-white text-xs px-3 py-1 rounded">
-                  See details...
-                </button>
+            <div className="bg-white shadow-md rounded-xl overflow-hidden w-72 flex flex-col">
+              <img src={CV} className="w-full h-40 object-cover" />
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="font-semibold text-sm mb-1">Writing a CV Resume</h3>
+                <p className="text-xs text-blue-600">Hosted by Tech Soc</p>
+
+                <div className="mt-auto flex justify-end">
+                  <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
+                    See details…
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* CARD 3 */}
-            <div className="bg-white shadow rounded-lg overflow-hidden w-60">
-              <img src={Networking} className="w-full h-32 object-cover" />
-              <div className="p-3">
-                <h3 className="font-semibold text-sm">Industry Networking</h3>
-                <p className="text-xs text-blue-600 mt-1">Hosted by UTS UXID</p>
-                <button className="mt-3 bg-orange-500 text-white text-xs px-3 py-1 rounded">
-                  See details...
-                </button>
+            <div className="bg-white shadow-md rounded-xl overflow-hidden w-72 flex flex-col">
+              <img src={Networking} className="w-full h-40 object-cover" />
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="font-semibold text-sm mb-1">Industry Networking</h3>
+                <p className="text-xs text-blue-600">Hosted by UTS UXID</p>
+
+                <div className="mt-auto flex justify-end">
+                  <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
+                    See details…
+                  </button>
+                </div>
               </div>
             </div>
-
-          </div>
-        </section>
-
-      </div>
-
+            </div>
+          </section>
+        </div>
       <Footer />
     </Background>
   );
