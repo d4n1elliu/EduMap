@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Background from './ProfileBackground.jsx';
 import Footer from './Footer';
+import studentImg from "../assets/student.png";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -74,9 +75,9 @@ export default function Profile() {
       <div className="flex items-center gap-4 relative">
         <div className="relative">
           <img
-            src="src/assets/studentbob.png"
+            src={studentImg}
             alt="Student avatar"
-            className="w-20 h-20 rounded-full border-2 border-blue-400"
+            className="w-25 h-30 rounded-full border-2 border-blue-400"
           />
           <button className="absolute bottom-0 right-0 bg-blue-500 text-white p-1 rounded-full w-6 h-6 flex items-center justify-center hover:bg-blue-600 transition-colors">
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

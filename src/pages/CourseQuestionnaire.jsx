@@ -625,14 +625,14 @@ export default function CourseQuestionnaire() {
         <Background>
             <div className="w-full max-w-6xl px-6 pb-6 pt-28 mx-auto flex-1">
                 <main className="flex-1 space-y-10">
-                    <section className="text-center mb-10">
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 drop-shadow-[2px_2px_0_black] mb-3">
+                    <div className="w-full max-w-6xl bg-white/50 backdrop-blur-md rounded-2xl shadow-xln px-10 py-8 text-center">
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-orange-500 mb-3">
                             Course Questionnaire
                         </h1>
-                        <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+                        <p className="text-lg md:text-xl text-grey-700 max-w-2xl mx-auto">
                             Answer a few questions and get tailored UTS course recommendations.
                         </p>
-                    </section>
+                    </div>
 
                     {/* Step 1 */}
                     {step === 1 && (
