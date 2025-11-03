@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useEffect, useMemo, useRef, useState } from 'react';
 //import { searchMentors, getSavedEvents, saveEvent, removeSavedEvent, getBuddySavedMentors } from '../api/events';
-import { getMapMarkers, getSavedEvents, saveEvent, removeSavedEvent } from '../api/events';
+import { getMapMarkers, getSavedEvents, saveEvent } from '../api/events';
 import L from 'leaflet';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
@@ -49,10 +49,6 @@ export default function EventsAndNetworkingMap() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const mapRef = useRef(null);
 
-    useEffect(() => {
-        getSavedEvents().then(setSaved);
-    }, []);
-
     /* Load mentors from Buddy Program (saved)
     const [buddyMentors, setBuddyMentors] = useState([]);
     useEffect(() => {
@@ -78,7 +74,8 @@ export default function EventsAndNetworkingMap() {
         (async () => {
             const data = await getMapMarkers(token); // [{ id, name, role, lat, lng, ... }]
             setMarkers(data);
-            setSaved(await getSavedEvents());
+            const s = await getSavedEvents("aaaaaaaa")
+            setSaved(s);
         })();
     }, [token]);
 
@@ -142,35 +139,15 @@ export default function EventsAndNetworkingMap() {
                         </Popup>
                     </Marker>
 
-                    {/* UNSW marker */}
-                    <Marker position={[-33.9173, 151.2313]} icon={locationIcon}>
-                        <Popup>
-                            <div className="space-y-2">
-                                <div className="font-semibold">UNSW Sydney, Kensington NSW 2033</div>
-                                <div className="text-sm text-slate-600">Campus location</div>
-                            </div>
-                        </Popup>
-                    </Marker>
-
-                    {/* USYD marker */}
-                    <Marker position={[-33.8886, 151.1873]} icon={locationIcon}>
-                        <Popup>
-                            <div className="space-y-2">
-                                <div className="font-semibold">University of Sydney, Camperdown NSW 2050</div>
-                                <div className="text-sm text-slate-600">Campus location</div>
-                            </div>
-                        </Popup>
-                    </Marker>
-
                     {/* Dynamic mentor/event markers */}
-                    {results.map(m => (
-                        <Marker key={m.id} position={[m.lat, m.lng]} icon={mentorIcon}>
+                    {markers.map(m => (
+                        <Marker key={m.id} position={[m.latitude, m.longitude]} icon={mentorIcon}>
                             <Popup>
                                 <div className="space-y-1">
-                                    <div className="font-semibold">{m.name}</div>
-                                    <div className="text-sm text-slate-600">{m.role}</div>
+                                    <div className="font-semibold">{m.firstName + " " + m.lastName}</div>
+                                    <div className="text-sm text-slate-600">{m.course}</div>
                                     <button
-                                        onClick={async () => setSaved(await saveEvent({ id: m.id, title: m.name, lat: m.lat, lng: m.lng }))}
+                                        onClick={async () => setSaved(await saveEvent({ mentorId: m.mentorId, fullName: m.firstName + " " + m.lastName, latitude: m.latitude, longitude: m.longitude }))}
                                         className="mt-1 rounded bg-orange-500 text-white px-3 py-1 text-sm hover:bg-orange-400"
                                     >
                                         Save
@@ -194,13 +171,18 @@ export default function EventsAndNetworkingMap() {
                             <ul className="space-y-3">
                                 {saved.map(e => (
                                     <li key={e.id} className="flex items-center justify-between rounded-lg border border-slate-200 p-3">
-                                        <div>
-                                            <div className="font-medium text-slate-800">{e.title}</div>
-                                            <div className="text-xs text-slate-500">{e.lat.toFixed(4)}, {e.lng.toFixed(4)}</div>
+                                        <div className="flex flex-row justify-between items-center gap-2">
+                                            <div>
+                                                <div className="font-medium text-slate-800">{e.title}</div>
+                                                <div className="text-xs text-slate-500">{e.lat.toFixed(4)}, {e.lng.toFixed(4)}</div>
+                                            </div>
+                                            <div>
+                                                {e.profileEmoji || "👩‍🏫"}
+                                            </div>
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <button onClick={() => { mapRef.current?.setView([e.lat, e.lng], 18); setDrawerOpen(false); }} className="rounded bg-blue-600 text-white px-2 py-1 text-xs hover:bg-blue-500">View</button>
-                                            <button onClick={async () => setSaved(await removeSavedEvent(e.id))} className="rounded bg-slate-200 text-slate-700 px-2 py-1 text-xs hover:bg-slate-300">Remove</button>
+                                            {/*<button onClick={async () => setSaved(await removeSavedEvent(e.id))} className="rounded bg-slate-200 text-slate-700 px-2 py-1 text-xs hover:bg-slate-300">Remove</button> */}
                                         </div>
                                     </li>
                                 ))}

@@ -1,106 +1,161 @@
-import Footer from "./Footer";
-import UNSW from "../assets/unsw.png";
-import UTS from "../assets/uts.png";
-import USYD from "../assets/usyd.png";
-import Macquarie from "../assets/macquarie.png";
-import Western from "../assets/western_university.png";
-import ANU from "../assets/ANU logo.png";
-import Monash from "../assets/Monash logo.png";
-import UOA from "../assets/UOA logo.png";
-import UOM from "../assets/UOM logo.png";
-import UQ from "../assets/UQ logo.png";
-import UWA from "../assets/UWA logo.png";
+
 import Background from "./Background";
-import Handshake from "../assets/officeHandShake.jpg"; 
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
+
+import HeroImg from "../assets/EduMapWelcome.png";
+import FindWhatSuitsImg from "../assets/findWhatSuitsYou.png";
+import ConnectImg from "../assets/ConnectWithThose.png";
+
+import Raspberry from "../assets/raspberryPi.png";
+import CV from "../assets/CV.png";
+import Networking from "../assets/networking.png";
 
 function Home() {
   return (
-    /* EduMap Welcome Message */
     <Background>
-      <div className="w-full px-6 pt-28 flex-1">
-        <main className="flex-1 max-w-6xl mx-auto">
-          <section className="text-center mb-12">
-            <div className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl px-8 md:px-10 py-10 md:py-12 shadow text-center">
-              <h1 className="text-5xl md:text-6xl font-bold text-orange-500 mb-4">
-                Welcome to EduMap
-              </h1>
-              <p className="text-lg md:text-xl font-semibold text-black">
-                Discover your career with confidence.
-              </p>
-              <p className="text-lg md:text-xl font-semibold text-black">
-                Find 🫵 courses, meet mentors <img 
-                  src={Handshake} 
-                  alt="Handshake" 
-                  className="inline-block w-8 h-6 mx-1 align-middle"
-                /> and take your next step forward 💼
-              </p>
-              <div className="mt-8">
-                <a href="/course-questionnaire" className="inline-block px-12 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors">
-                  Get Started
-                </a>
+      {/* Main Wrapper Box */}
+      <div className="w-full flex flex-col items-center">
+
+        {/* ========= HERO SECTION ========= */}
+        <section className="w-full relative">
+          <img
+            src={HeroImg}
+            alt="Students learning together"
+            className="w-full h-[600px] object-cover object-[50%_30%]"
+          />
+
+          <div className="absolute inset-0 flex flex-col justify-center items-start px-10">
+            <h1 className="text-white text-4xl font-bold mb-4">
+              Welcome to EduMap
+            </h1>
+            <p className="text-white max-w-lg text-sm">
+              A place that provides prospective university students support and assists
+              you along your education journey.
+            </p>
+
+            <Link to="/course-questionnaire" className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-8 py-2 rounded-lg text-base font-medium">
+              Join Now!
+            </Link>
+          </div>
+        </section>
+        
+        {/* ========= FIND WHAT SUITS YOU ========= */}
+        <section className="w-full grid grid-cols-1 md:grid-cols-2">
+          {/* Left Image */}
+          <div className="w-full h-[480px] md:h-[520px]">
+            <img
+              src={FindWhatSuitsImg}
+              alt="Find what suits you"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Right Content */}
+          <div className="flex flex-col justify-center px-10 py-12 bg-white h-[480px] md:h-[520px]">
+            <h2 className="text-3xl font-bold mb-4">Find out what suits you</h2>
+            <p className="text-gray-700 mb-6 max-w-md">
+              Discover and realise your interests and skills to share them with others.
+            </p>
+            <Link to="/course-questionnaire"
+              className="block w-full max-w-[300px] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg font-semibold transition-colors"
+            >
+              Take the Questionnaire
+            </Link>
+          </div>
+        </section>
+
+        {/* ========= CONNECT WITH THOSE ========= */}
+        <section className="w-full grid grid-cols-1 md:grid-cols-2">
+          {/* Left Content */}
+          <div className="flex flex-col justify-center px-10 py-12 bg-[#1c2955] text-white h-[480px] md:h-[520px]">
+            <h2 className="text-3xl font-bold mb-4">
+              Connect with those on your path
+            </h2>
+            <p className="mb-6 max-w-md text-gray-200">
+              Find others who are in similar situations and connect with a peer mentor
+              who can help you learn what it’s like to be in different fields.
+            </p>
+            <Link
+              to="/buddy-system"
+              className="block w-full max-w-[300px] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg font-semibold transition-colors"
+            >
+              Start Connecting
+            </Link>
+          </div>
+
+          {/* Right image */}
+          <div className="w-full h-[480px] md:h-[520px]">
+            <img
+              src={ConnectImg}
+              alt="connecting"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </section>
+
+        {/* ========= DISCOVER EVENTS ========= */}
+        <section className="w-full bg-gradient-to-r from-blue-500 via-[#EED6C4] to-orange-500 py-16 px-6">
+
+          {/* Title BAR */}
+          <div className="w-full flex justify-center mb-10">
+            <div className="px-105 py-3 bg-white/20 backdrop-blur-md rounded-2xl shadow-sm">
+              <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-900">
+                Discover Events
+              </h2>
+            </div>
+          </div>
+
+          {/* Cards */}
+          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+
+            {/* CARD 1 */}
+            <div className="bg-white shadow-md rounded-xl overflow-hidden w-72 flex flex-col">
+              <img src={Raspberry} className="w-full h-40 object-cover" />
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="font-semibold text-sm mb-1">Raspberry Pi Workshop</h3>
+                <p className="font-semibold text-sm text-blue-600">Hosted by Tech Soc</p>
+
+                <div className="mt-auto flex justify-end">
+                  <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
+                    See details…
+                  </button>
+                </div>
               </div>
             </div>
+
+            {/* CARD 2 */}
+            <div className="bg-white shadow-md rounded-xl overflow-hidden w-72 flex flex-col">
+              <img src={CV} className="w-full h-40 object-cover" />
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="font-semibold text-sm mb-1">Writing a CV Resume</h3>
+                <p className="font-semibold text-sm text-blue-600">Hosted by Tech Soc</p>
+
+                <div className="mt-auto flex justify-end">
+                  <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
+                    See details…
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* CARD 3 */}
+            <div className="bg-white shadow-md rounded-xl overflow-hidden w-72 flex flex-col">
+              <img src={Networking} className="w-full h-40 object-cover" />
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="font-semibold text-sm mb-1">Industry Networking</h3>
+                <p className="font-semibold text-sm text-blue-600">Hosted by UTS UXID</p>
+
+                <div className="mt-auto flex justify-end">
+                  <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded">
+                    See details…
+                  </button>
+                </div>
+              </div>
+            </div>
+            </div>
           </section>
-          {/* All Universities logos display in the middle of the website */}
-          <section className="pt-10 pb-30 mt-12 flex justify-center items-center gap-10">
-            <img
-              src={UNSW}
-              alt="UNSW"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={USYD}
-              alt="USYD"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={UTS}
-              alt="UTS"
-              className="h-20 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={Macquarie}
-              alt="Macquarie University"
-              className="h-20 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={Western}
-              alt="Western Sydney University"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={ANU}
-              alt="ANU"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={Monash}
-              alt="Monash"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={UOA}
-              alt="UOA"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={UOM}
-              alt="UOM"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={UQ}
-              alt="UQ"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-            <img
-              src={UWA}
-              alt="UWA"
-              className="h-25 w-auto object-contain drop-shadow flex-shrink-0"
-            />
-          </section>
-        </main>
-      </div>
+        </div>
       <Footer />
     </Background>
   );

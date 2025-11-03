@@ -12,7 +12,6 @@ function toHHMMSS(minutes) {
 
 // get a clean token string
 function getAuthToken(token) {
-  console.log(token);
   return (token || localStorage.getItem("token") || "")
     .replace(/^"(.+)"$/, "$1") // strip accidental surrounding quotes
     .trim();

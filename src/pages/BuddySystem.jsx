@@ -9,11 +9,12 @@ export default function BuddySystem() {
     const [activeTab, setActiveTab] = useState('mentors');
     const [selectedMentor, setSelectedMentor] = useState(null);
     const [showBooking, setShowBooking] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [filters, setFilters] = useState({
         gender: 'all',
-        university: 'all',
+        //university: 'all',
         courses: []
     });
 
@@ -43,8 +44,8 @@ export default function BuddySystem() {
 
     // Messages data
     const [messages] = useState([
-        { mentorId: 1, mentorName: "Emma Janice", lastMessage: "Hi! Looking forward to our session tomorrow." },
-        { mentorId: 3, mentorName: "Sarah Williams", lastMessage: "Thanks for the great study tips!" }
+        { mentorId: 2, mentorName: "Emma Janice", lastMessage: "Hi! Looking forward to our session tomorrow." },
+        { mentorId: 4, mentorName: "Sarah Williams", lastMessage: "Thanks for the great study tips!" }
     ]);
 
     // Load bookings from API
@@ -139,16 +140,21 @@ export default function BuddySystem() {
 
             console.log('Booking response:', result);
 
-            if (result.success) {
-                setBookingSuccess('Booking created successfully!');
+            const successfulBooking = result?.success === true || result?.message === "Success" || result?.data?.message === "Success";
+            
+            if (successfulBooking) {
+                setBookingSuccess('');
                 setShowBooking(false);
                 setSelectedMentor(null);
                 setSelectedDate(null);
                 setSelectedTime(null);
+
+                // Show booking success message
+                setShowPopup(true);
                 // Reload bookings
                 await loadBookings();
             } else {
-                setBookingError(result.message || 'Failed to create booking');
+                setBookingError(result?.data?.message || result?.message || 'Failed to create booking');
             }
         } catch (error) {
             console.error('Booking error details:', error);
@@ -220,7 +226,7 @@ export default function BuddySystem() {
 
         const matchesGender = filters.gender === 'all' || mentor.gender === filters.gender;
 
-        const matchesUniversity = filters.university === 'all' || mentor.university === filters.university;
+        //const matchesUniversity = filters.university === 'all' || mentor.university === filters.university;
 
         const matchesCourses =
             filters.courses.length === 0 ||
@@ -228,7 +234,7 @@ export default function BuddySystem() {
                 courseField.toString().toLowerCase().includes(course.toLowerCase())
             );
 
-        return matchesSearch && matchesGender && matchesUniversity && matchesCourses;
+        return matchesSearch && matchesGender && matchesCourses;
     });
 
     // Render Mentors Tab
@@ -239,7 +245,7 @@ export default function BuddySystem() {
                 <div className="flex items-center gap-2 mb-4">
                     <span className="text-lg font-semibold">Filter</span>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                     </svg>
                 </div>
 
@@ -262,7 +268,7 @@ export default function BuddySystem() {
                         ))}
                     </div>
 
-                    {/* University Filter */}
+                    {/*
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">University</label>
                         {['all', 'University of New South Wales', 'University of Sydney', 'University of Technology Sydney', 'Macquarie University', 'Western University'].map(uni => (
@@ -278,12 +284,12 @@ export default function BuddySystem() {
                                 <span className="text-sm">{uni === 'all' ? 'All' : uni}</span>
                             </label>
                         ))}
-                    </div>
+                    </div> */}
 
                     {/* Courses Filter */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Courses</label>
-                        {['Information Technology', 'Computer Science', 'Business', 'Law', 'Science', 'Engineering', 'Communications', 'Architecture', 'Health', 'Mathematics', 'International Studies', 'Education'].map(course => (
+                        {['InformationTechnology', 'ComputerScience', 'Business', 'Law', 'Science', 'Engineering', 'Communications', 'Architecture', 'Health', 'Mathematics', 'InternationalStudies', 'Education'].map(course => (
                             <label key={course} className="flex items-center mb-2">
                                 <input
                                     type="checkbox"
@@ -320,7 +326,7 @@ export default function BuddySystem() {
                     {filteredMentors.map(mentor => (
                         <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                             <div className="text-center mb-3">
-                                <div className="text-4xl mb-2">{mentor.image || "👩‍🏫"}</div>
+                                <div className="text-4xl mb-2">{mentor.profileEmoji || "👩‍🏫"}</div>
                                 <h3 className="font-semibold text-gray-800">{mentor.firstName + " " + mentor.lastName}</h3>
 
                                 <p className="text-sm text-gray-600">{mentor.studies || mentor.course || ''}</p>
@@ -375,7 +381,7 @@ export default function BuddySystem() {
             {mentors.filter(mentor => savedMentors.includes(mentor.id)).map(mentor => (
                 <div key={mentor.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm flex flex-col h-full">
                     <div className="text-center mb-3">
-                        <div className="text-4xl mb-2">{mentor.image}</div>
+                        <div className="text-4xl mb-2">{mentor.profileEmoji || "👩‍🏫"}</div>
                         <h3 className="font-semibold text-gray-800">{mentor.firstName} {mentor.lastName}</h3>
                         <p className="text-sm text-gray-600">{mentor.studies}</p>
                         <p className="text-xs text-gray-500">{mentor.university}</p>
@@ -436,7 +442,7 @@ export default function BuddySystem() {
                         <div key={booking.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-4">
-                                    <div className="text-3xl">{mentor?.image || '👤'}</div>
+                                    <div className="text-3xl">{mentor.profileEmoji !== null && mentor.profileEmoji !== "" ? mentor.profileEmoji : '👤'}</div>
                                     <div>
                                         <h3 className="font-semibold text-gray-800">{booking.firstName} {booking.lastName}</h3>
                                         <p className="text-sm text-gray-600">{booking.course?.name || 'Course not specified'}</p>
@@ -494,9 +500,9 @@ export default function BuddySystem() {
                 {/* Left Column - Mentor Info */}
                 <div className="lg:col-span-1">
                     <div className="text-center">
-                        <div className="text-7xl mb-6">{selectedMentor.image}</div>
+                        <div className="text-7xl mb-6">{selectedMentor.profileEmoji || "👩‍🏫"}</div>
                         <h2 className="text-3xl font-bold text-gray-800 mb-2">{selectedMentor.firstName} {selectedMentor.lastName}</h2>
-                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.studies || selectedMentor.course || ''}</p>
+                        <p className="text-lg text-gray-600 mb-2">{selectedMentor.course || ''}</p>
                         <p className="text-base text-gray-500 mb-6">{selectedMentor.university}</p>
 
                         {/* Ratings */}
@@ -639,44 +645,50 @@ export default function BuddySystem() {
 
     // Render Messages Panel
     const renderMessages = () => (
-        <div className="bg-white rounded-lg border border-blue-200 shadow-sm">
-            <div className="bg-green-600 text-white p-4 rounded-t-lg">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                        </svg>
-                        <span className="font-semibold">Messages</span>
-                    </div>
-                    <button
-                        onClick={() => setShowMessages(false)}
-                        className="text-white hover:text-gray-200"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                        </svg>
-                    </button>
+        <div className="fixed bottom-5 right-6 z-50 w-96 bg-white rounded-lg border border-blue-200 shadow-2xl">
+            
+            {/* HEADER */}
+            <div className="bg-green-600 text-white p-4 rounded-t-lg flex items-center justify-between">
+                <div className="flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <span className="font-semibold">Messages</span>
                 </div>
+                <button onClick={() => setShowMessages(false)}>✕</button>
             </div>
 
-            {/* Messages List */}
-            <div className="p-4">
-                {messages.map(message => (
-                    <div key={message.mentorId} className="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
-                        <div className="w-10 h-10 bg-blue-300 rounded-full flex items-center justify-center">
-                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+            {/* BODY */}
+            <div className="max-h-80 overflow-y-auto p-4 space-y-3">
+
+                {messages.map(message => {
+                    // ✅ Find mentor
+                    const mentor = mentors.find(m => m.id === message.mentorId);
+                    const emoji = mentor?.profileEmoji || "👤";
+
+                    return (
+                        <div
+                            key={message.mentorId}
+                            onClick={() => {
+                                if (mentor) {
+                                    setSelectedMentor(mentor);
+                                    setShowBooking(true);
+                                    setShowMessages(false);
+                                }
+                            }}
+                            className="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer border"
+                        >
+                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-xl">
+                                {emoji}
+                            </div>
+
+                            <div className="flex-1">
+                                <h4 className="font-medium text-blue-800">{message.mentorName}</h4>
+                                <p className="text-sm text-blue-600 truncate">{message.lastMessage}</p>
+                            </div>
                         </div>
-                        <div className="flex-1">
-                            <h4 className="font-medium text-blue-800">{message.mentorName}</h4>
-                            <p className="text-sm text-blue-600 truncate">{message.lastMessage}</p>
-                        </div>
-                        <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );
@@ -700,8 +712,8 @@ export default function BuddySystem() {
                 ) : (
                     <>
                         {/* Header */}
-                        <header className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl px-5 md:px-8 py-8 md:py-10 shadow text-center mb-12">
-                            <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-4 leading-light whitespace-nowrap">Buddy Program</h1>
+                        <header className="w-full max-w-6xl bg-white/50 rounded-2xl shadow-xl px-10 py-10 text-center mb-12">
+                            <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-3">Buddy Program</h1>
                             <p className="text-lg md:text-xl font-bold text-black max-w-3xl mx-auto">
                                 Connect with peers, mentors and study partners who share your goals.
                             </p>
@@ -768,22 +780,34 @@ export default function BuddySystem() {
                                     </div>
                                 </div>
                             )}
-
-                            {/* Proceed to Events when a booking exists */}
-                            <div className="pt-2 pb-8 flex justify-center">
-                                <a
-                                    href="/EventsAndNetworkingMap"
-                                    className={`px-6 py-3 rounded-lg font-semibold transition-colors ${bookedSessions.length > 0 ? 'bg-purple-700 text-white hover:bg-orange-600' : 'bg-gray-200 text-gray-500 cursor-not-allowed'}`}
-                                    aria-disabled={bookedSessions.length === 0}
-                                    onClick={(e) => { if (bookedSessions.length === 0) e.preventDefault(); }}
-                                >
-                                    Proceed to Events & Networking Map
-                                </a>
-                            </div>
                         </main>
                     </>
                 )}
             </div>
+
+            {/* Pop Up Goes in here*/}
+            {showPopup && (
+                <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded-xl shadow-2xl text-center max-w-md">
+                    <h2 className="text-2xl font-bold text-green-600 mb-2">
+                        🎉 Booking Confirmed!
+                    </h2>
+
+                    <p className="text-gray-700">
+                        Your mentor session has been successfully booked.
+                    </p>
+
+                    <a
+                        href="/EventsAndNetworkingMap"
+                        className="mt-6 px-4 py-2 rounded bg-purple-600 text-white inline-block"
+                        onClick={() => setShowPopup(false)}
+                    >
+                        Proceed to Events Map
+                    </a>
+                    </div>
+                </div>
+                
+            )}
             <Footer />
         </Background>
     );
