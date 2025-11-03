@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Backend API endpoint
-const endpointUrl = "http://localhost:5046/api";
+const endpointUrl = "https://edumap-gxf4bpfyg3ghbpgy.australiacentral-01.azurewebsites.net:5046/api";
 
 // Create axios instance
 const api = axios.create({
