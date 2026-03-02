@@ -9,5 +9,6 @@ Three MVP features
 
 By combining these features into a cohesive digital experience, EduMap empowers students to confidently navigate their academic and social journey, reducing feelings of uncertainty and isolation while improving first-year retention and engagement.
 
-Pitch Video
+Pitch Video: 
+
 https://www.youtube.com/watch?v=X8FN5wrJ-vI
