@@ -52,6 +52,7 @@ export default function Profile() {
     { day: 'Friday', time: '4:00 PM', title: 'Project Meeting', type: 'event', color: 'bg-purple-200' }
   ];
 
+  // Time slot selected function
   const handleSlotClick = (day, time) => {
     const slotId = `${day}-${time}`;
     setSelectedSlots(prev =>
@@ -61,14 +62,17 @@ export default function Profile() {
     );
   };
 
+  // Event slot selected
   const getEventForSlot = (day, time) => {
     return sampleEvents.find(event => event.day === day && event.time === time);
   };
 
+  // Checking if slot has been selected or not
   const isSlotSelected = (day, time) => {
     return selectedSlots.includes(`${day}-${time}`);
   };
 
+  // Rendering profile 
   const renderProfileContent = () => (
     <div className="flex flex-col gap-6">
       {/* Header with Edit Icon */}

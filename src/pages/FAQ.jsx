@@ -12,6 +12,7 @@ export default function FAQ() {
         }));
     };
 
+    // FAQ Section
     const faqData = [
         {
             question: "How do I get started with EduMap?",
@@ -114,7 +115,6 @@ export default function FAQ() {
                     </div>
 
                     {/* Contact Section - Call to Action for Additional Support */}
-                    {/* This section provides alternative ways for users to get help if FAQ doesn't answer their questions */}
                     <div className="mt-12 bg-white/100 backdrop-blur-sm p-8 rounded-lg">
                         {/* Centered content container */}
                         <div className="text-center">

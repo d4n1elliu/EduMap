@@ -1,4 +1,3 @@
-
 import Background from "./Background";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
