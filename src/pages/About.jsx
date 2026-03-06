@@ -84,7 +84,7 @@ export default function About() {
                         </div>
                         </div>
 
-                    {/* How EduMap Works Section */}
+                    {/* EduMap Website Explanation Section */}
                     <div className="mb-16">
                         <h2 className="text-5xl md:text-5xl font-bold text-center text-blue-700 mb-6">How EduMap Works</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -129,7 +129,7 @@ export default function About() {
                         </div>
                     </div>
 
-                    {/* Team Section */}
+                    {/* Project Team Section */}
                     <div className="bg-white/100 backdrop-blur-sm p-8 rounded-lg shadow-lg">
                         <h2 className="text-4xl font-bold text-orange-500 text-center mb-8">Meet Our Team</h2>
                         <p className="text-lg text-gray-800 text-center mb-8 max-w-2xl mx-auto">

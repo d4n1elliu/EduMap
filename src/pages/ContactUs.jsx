@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Footer from './Footer';
 import Background from './Background';
 
+// Contact Us section
 export default function ContactUs() {
     const [formData, setFormData] = useState({
         name: '',
