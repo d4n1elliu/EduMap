@@ -14,6 +14,7 @@ import ProfileSetup from './pages/ProfileSetup';
 import FAQ from './pages/FAQ';
 import TermsOfService from './pages/TermsOfService';
 
+// Routes for navigating the website 
 function App() {
   return (
     <>
