@@ -6,7 +6,7 @@ export default function About() {
         <Background>
             <div className="flex-1 flex items-center justify-center px-4 py-12">
                 <div className="w-full max-w-6xl">
-                    {/* Header Section */}
+                    {/* Header */}
                     <div className="text-center mb-16">
                         <h1 className="text-5xl md:text-6xl font-bold text-blue-700 mb-6">About EduMap</h1>
                     </div>
@@ -14,7 +14,7 @@ export default function About() {
                     {/* Main Content Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
                         
-                        {/* Overview Section */}
+                        {/* Project Overview */}
                         <div className="bg-white/100 backdrop-blur-sm p-8 rounded-lg shadow-lg">
                             <h2 className="text-3xl font-bold text-orange-500 mb-6">Our Mission</h2>
                             <p className="text-lg text-gray-800 leading-relaxed mb-4">
@@ -27,7 +27,7 @@ export default function About() {
                             </p>
                         </div>
 
-                        {/* Vision Section */}
+                        {/* Vision Description */}
                         <div className="bg-white/100 backdrop-blur-sm p-8 rounded-lg shadow-lg">
                             <h2 className="text-3xl font-bold text-orange-500 mb-6">Our Vision</h2>
                             <p className="text-lg text-gray-800 leading-relaxed">
@@ -84,7 +84,7 @@ export default function About() {
                         </div>
                         </div>
 
-                    {/* EduMap Website Explanation Section */}
+                    {/* EduMap Website Explanation */}
                     <div className="mb-16">
                         <h2 className="text-5xl md:text-5xl font-bold text-center text-blue-700 mb-6">How EduMap Works</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -129,7 +129,7 @@ export default function About() {
                         </div>
                     </div>
 
-                    {/* Project Team Section */}
+                    {/* Project Team */}
                     <div className="bg-white/100 backdrop-blur-sm p-8 rounded-lg shadow-lg">
                         <h2 className="text-4xl font-bold text-orange-500 text-center mb-8">Meet Our Team</h2>
                         <p className="text-lg text-gray-800 text-center mb-8 max-w-2xl mx-auto">
