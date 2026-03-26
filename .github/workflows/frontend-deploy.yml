@@ -24,6 +24,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'Your-Azure-Frontend-Name' # Replace with your actual frontend app name
-          publish-profile: ${{ secrets.AZURE_FRONTEND_PUBLISH_PROFILE }}
+          app-name: 'EduMap' # Replace with your actual frontend app name
+          publish-profile: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_RIVER_0DEFC0500 }}
           package: ./dist
+          clean: false
