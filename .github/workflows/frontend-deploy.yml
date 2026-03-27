@@ -1,11 +1,11 @@
-name: Frontend CI/CD
+name: Frontend Build
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build-and-deploy:
+  build-frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,10 +21,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
+      # Instead of deploying, we save the build folder for the backend
+      - name: Upload Frontend Artifacts
+        uses: actions/upload-artifact@v4
         with:
-          app-name: 'EduMap' # Replace with your actual frontend app name
-          publish-profile: ${{ secrets.AZURE_FRONTEND_PUBLISH_PROFILE }}
-          package: ./dist
-          clean: false
+          name: frontend-dist
+          path: ./dist
