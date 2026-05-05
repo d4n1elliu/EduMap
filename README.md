@@ -1,4 +1,4 @@
-<h1 align="center">EduMap</h1>
+# EduMap
 
 EduMap is an interactive website designed to support incoming university students, particularly high school graduates in making informed decisions about their degree and university life.
 
