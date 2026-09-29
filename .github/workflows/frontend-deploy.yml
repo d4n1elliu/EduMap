@@ -20,6 +20,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_API_URL: /api
 
       # Instead of deploying, we save the build folder for the backend
       - name: Upload Frontend Artifacts
