@@ -1,27 +1,28 @@
-// Mentors may carry their course under `studies` or `course`
+import { courseLabel } from '../../lib/courses';
+
+// Readable course label
 export function mentorCourse(mentor) {
-    return (mentor.studies || mentor.course || '').toString();
+    return courseLabel(mentor.studies || mentor.course);
 }
 
 export function mentorFullName(mentor) {
     return `${mentor.firstName} ${mentor.lastName}`;
 }
 
-// Apply the search box and sidebar filters
-export function filterMentors(mentors, searchQuery, filters) {
-    const query = searchQuery.toLowerCase();
+// Lower-case text for comparisons; safe for enum values sent as numbers
+const toText = (value) => String(value ?? '').toLowerCase();
+
+// All filters must match
+export function filterMentors(mentors, { gender = 'all', courses = [], search = '' }) {
+    const query = search.trim().toLowerCase();
 
     return mentors.filter((mentor) => {
-        const course = mentorCourse(mentor).toLowerCase();
+        const matchesGender = gender === 'all' || toText(mentor.gender) === gender.toLowerCase();
+        const matchesCourses = courses.length === 0 || courses.includes(mentor.course);
+        const matchesSearch = !query || [mentorFullName(mentor), mentor.course, courseLabel(mentor.course)]
+            .some((text) => toText(text).includes(query));
 
-        const matchesSearch =
-            (mentor.firstName || '').toLowerCase().includes(query) || course.includes(query);
-        const matchesGender = filters.gender === 'all' || mentor.gender === filters.gender;
-        const matchesCourses =
-            filters.courses.length === 0 ||
-            filters.courses.some((c) => course.includes(c.toLowerCase()));
-
-        return matchesSearch && matchesGender && matchesCourses;
+        return matchesGender && matchesCourses && matchesSearch;
     });
 }
 
