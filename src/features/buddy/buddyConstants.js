@@ -4,7 +4,12 @@ export const BUDDY_TABS = [
     { id: 'bookings', label: 'My Bookings' },
 ];
 
-export const GENDER_OPTIONS = ['all', 'female', 'male'];
+// Filter values are compared case-insensitively with the API's gender names
+export const GENDER_FILTERS = [
+    { value: 'all', label: 'All' },
+    { value: 'female', label: 'Female' },
+    { value: 'male', label: 'Male' },
+];
 
 // Must match the backend Course enum: same names, same order (sign-up sends the index)
 export const COURSE_OPTIONS = [
