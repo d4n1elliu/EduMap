@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FOOTER_LINKS } from '../../config/routes';
-import { COPYRIGHT, SITE_TAGLINE } from '../../config/site';
+import { COPYRIGHT, PORTFOLIO_LINK, PROJECT_CREDIT, SITE_TAGLINE } from '../../config/site';
 import { LinkedInIcon, TwitterIcon } from '../ui/Icons';
 
 const SOCIAL_LINKS = [
@@ -43,6 +43,17 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="mt-10 pt-6 border-t border-slate-700 text-center">
                     <p className="text-slate-300">{COPYRIGHT}</p>
+                    <p className="text-slate-400 text-sm mt-2">
+                        {PROJECT_CREDIT} ·{' '}
+                        <a
+                            href={PORTFOLIO_LINK.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-300 hover:text-white transition-colors"
+                        >
+                            {PORTFOLIO_LINK.label}
+                        </a>
+                    </p>
                 </div>
             </div>
         </footer>

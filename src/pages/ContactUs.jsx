@@ -5,6 +5,8 @@ import Card from '../components/ui/Card';
 import FormField from '../components/ui/FormField';
 import { LocationIcon, MailIcon, PhoneIcon } from '../components/ui/Icons';
 import { CONTACT_INFO } from '../config/site';
+import usePageMeta from '../hooks/usePageMeta';
+import { PATHS } from '../config/routes';
 
 const EMPTY_FORM = { name: '', email: '', subject: '', message: '' };
 
@@ -58,6 +60,7 @@ function ContactMethod({ icon: Icon, title, value, note }) {
 }
 
 export default function ContactUs() {
+    usePageMeta('Contact Us', PATHS.CONTACT);
     const [formData, setFormData] = useState(EMPTY_FORM);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);

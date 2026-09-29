@@ -20,8 +20,11 @@ import MentorProfileModal from '../features/buddy/MentorProfileModal';
 import MessagesWidget from '../features/buddy/MessagesWidget';
 import { filterMentors } from '../features/buddy/mentorUtils';
 import { useBookings, useMentors } from '../features/buddy/useBuddyData';
+import usePageMeta from '../hooks/usePageMeta';
+import { PATHS } from '../config/routes';
 
 export default function BuddySystem() {
+    usePageMeta('Buddy Program', PATHS.BUDDY);
     const token = getToken();
     const { mentors } = useMentors();
     const { bookings, isLoading: isLoadingBookings, reload: reloadBookings, book, confirm } = useBookings(token);

@@ -5,8 +5,10 @@ import { PATHS } from '../config/routes';
 import EventCard from '../features/home/EventCard';
 import FeatureSection from '../features/home/FeatureSection';
 import { FEATURED_EVENTS, FEATURE_SECTIONS } from '../features/home/homeContent';
+import usePageMeta from '../hooks/usePageMeta';
 
 function Home() {
+    usePageMeta(null, PATHS.HOME);
     return (
         <PageLayout>
             <div className="w-full flex flex-col items-center">
