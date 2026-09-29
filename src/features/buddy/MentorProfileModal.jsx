@@ -2,14 +2,13 @@ import { ChevronLeftIcon } from '../../components/ui/Icons';
 import Modal from '../../components/ui/Modal';
 import StarRating from '../../components/ui/StarRating';
 import BookingForm from './BookingForm';
-import { DEFAULT_MENTOR_EMOJI } from './buddyConstants';
-import { mentorCourse, mentorFullName } from './mentorUtils';
+import { mentorCourse, mentorEmoji, mentorFullName } from './mentorUtils';
 
 function MentorInfo({ mentor }) {
     const skills = mentor.skills ?? [];
     return (
         <div className="text-center">
-            <div className="text-7xl mb-6">{mentor.profileEmoji || DEFAULT_MENTOR_EMOJI}</div>
+            <div className="text-7xl mb-6">{mentorEmoji(mentor)}</div>
             <h2 className="text-3xl font-bold text-gray-800 mb-2">{mentorFullName(mentor)}</h2>
             <p className="text-lg text-gray-600 mb-2">{mentorCourse(mentor)}</p>
             <p className="text-base text-gray-500 mb-6">{mentor.university}</p>

@@ -1,4 +1,5 @@
 import { SearchIcon } from '../../components/ui/Icons';
+import { mentorEmoji } from '../buddy/mentorUtils';
 
 // Floating search box with a dropdown of matching markers
 export default function MapSearch({ query, onQueryChange, results, onSelect }) {
@@ -17,7 +18,7 @@ export default function MapSearch({ query, onQueryChange, results, onSelect }) {
                 <div className="mt-2 max-h-56 overflow-auto rounded-xl bg-white shadow ring-1 ring-slate-200">
                     {results.map((m) => (
                         <button key={m.id} onClick={() => onSelect(m)} className="w-full text-left px-3 py-2 hover:bg-slate-50">
-                            <div className="font-medium text-slate-800">{m.name}</div>
+                            <div className="font-medium text-slate-800">{mentorEmoji(m)} {m.name}</div>
                             <div className="text-sm text-slate-500">{m.course}</div>
                         </button>
                     ))}

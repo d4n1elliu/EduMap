@@ -19,9 +19,9 @@ By combining these features into a cohesive digital experience, EduMap empowers 
 
 ## Tech Stack
 
-- **Frontend:** React + Vite, React Router, Tailwind CSS, React-Leaflet
-- **Backend:** ASP.NET Core 9, Entity Framework Core
-- **Database:** Neon PostgreSQL
+- **Frontend:** React, Vite, Tailwind CSS, React Router, React-Leaflet
+- **Backend:** ASP.NET Core 9 API with Entity Framework Core
+- **Database:** Neon Postgres
 - **Hosting:** Azure App Service behind Cloudflare Workers
 - **CI/CD:** GitHub Actions
 
@@ -44,7 +44,12 @@ Azure App Service
 
 - The React app is a single-page app. The App Service serves the built files from `wwwroot` and the API from the same origin.
 - The Cloudflare Worker sits in front of the App Service and serves the site on the custom domain.
-- GitHub Actions builds the frontend on every push to `main` and publishes the `dist` folder as an artifact for the backend deployment.
+
+## How deploys work
+
+1. Merge a pull request into `main`. The **Frontend Build** workflow in this repo builds the site with `VITE_API_URL=/api` and uploads the `dist` folder as an artifact named `frontend-dist`. This step does not deploy anything by itself.
+2. In the EduMap-Backend repo, go to **Actions → .NET Backend CI/CD → Run workflow**. It downloads the latest `frontend-dist` artifact and deploys it with the API to Azure App Service.
+3. Check https://edumap.daniel-liu.dev in a private window. If old files still show, purge the Cloudflare cache.
 
 ## My contributions
 
@@ -56,12 +61,22 @@ Azure App Service
 
 ## Running locally
 
-```bash
-npm ci
-npm run dev
-```
+You need Node 20 and the EduMap backend running locally on port 5046.
 
-The API base URL can be set with `VITE_API_URL` in a `.env` file.
+1. Install dependencies:
+   ```bash
+   npm ci
+   ```
+2. Create `.env.development` in the project root so the app talks to your local API:
+   ```
+   VITE_API_URL=http://localhost:5046/api
+   ```
+3. Start the dev server and open the URL it prints (usually http://localhost:5173):
+   ```bash
+   npm run dev
+   ```
+
+Restart `npm run dev` after changing any `.env` file.
 
 ## Project Structure
 

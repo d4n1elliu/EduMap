@@ -30,3 +30,12 @@ export function filterMentors(mentors, { gender = 'all', courses = [], search = 
 export function isBookingSuccess(result) {
     return result?.success === true || result?.message === 'Success' || result?.data?.message === 'Success';
 }
+
+// Icon by gender unless the mentor picked their own
+export function mentorEmoji(mentor) {
+    if (mentor?.profileEmoji) return mentor.profileEmoji;
+    const gender = String(mentor?.gender ?? '').toLowerCase();
+    if (gender === 'female') return '👩‍🏫';
+    if (gender === 'male') return '👨‍🏫';
+    return '🧑‍🏫';
+}

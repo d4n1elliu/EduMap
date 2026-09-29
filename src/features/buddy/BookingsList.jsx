@@ -1,16 +1,24 @@
 import Spinner from '../../components/ui/Spinner';
+import { courseLabel } from '../../lib/courses';
+import { mentorEmoji } from './mentorUtils';
 
 const ACTION_BUTTON = 'text-white px-4 py-2 rounded-lg transition-colors text-sm';
+
+// Bookings may carry the course as an object, an enum name or not at all
+function bookingCourse(booking, mentor) {
+    const course = typeof booking.course === 'object' ? booking.course?.name : booking.course;
+    return courseLabel(course ?? mentor?.course) || 'Course not specified';
+}
 
 function BookingItem({ booking, mentor, onConfirm }) {
     return (
         <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
             <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                    <div className="text-3xl">{mentor?.profileEmoji || '👤'}</div>
+                    <div className="text-3xl">{mentorEmoji(mentor)}</div>
                     <div>
                         <h3 className="font-semibold text-gray-800">{booking.firstName} {booking.lastName}</h3>
-                        <p className="text-sm text-gray-600">{booking.course?.name || 'Course not specified'}</p>
+                        <p className="text-sm text-gray-600">{bookingCourse(booking, mentor)}</p>
                         <p className="text-sm text-gray-500">
                             Session Time: {new Date(booking.startTime).toLocaleString()}
                         </p>

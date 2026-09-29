@@ -1,6 +1,6 @@
 import { FilterIcon } from '../../components/ui/Icons';
 import { courseLabel } from '../../lib/courses';
-import { COURSE_OPTIONS, GENDER_OPTIONS } from './buddyConstants';
+import { COURSE_OPTIONS, GENDER_FILTERS } from './buddyConstants';
 
 // Sidebar with gender (single) and course (multi) filters
 export default function MentorFilters({ filters, onGenderChange, onToggleCourse }) {
@@ -14,17 +14,17 @@ export default function MentorFilters({ filters, onGenderChange, onToggleCourse 
             <div className="space-y-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
-                    {GENDER_OPTIONS.map((gender) => (
-                        <label key={gender} className="flex items-center mb-2">
+                    {GENDER_FILTERS.map(({ value, label }) => (
+                        <label key={value} className="flex items-center mb-2">
                             <input
                                 type="radio"
                                 name="gender"
-                                value={gender}
-                                checked={filters.gender === gender}
+                                value={value}
+                                checked={filters.gender === value}
                                 onChange={(e) => onGenderChange(e.target.value)}
                                 className="mr-2"
                             />
-                            <span className="capitalize">{gender}</span>
+                            <span>{label}</span>
                         </label>
                     ))}
                 </div>

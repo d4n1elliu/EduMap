@@ -4,7 +4,12 @@ export const BUDDY_TABS = [
     { id: 'bookings', label: 'My Bookings' },
 ];
 
-export const GENDER_OPTIONS = ['all', 'female', 'male'];
+// Filter values are compared case-insensitively with the API's gender names
+export const GENDER_FILTERS = [
+    { value: 'all', label: 'All' },
+    { value: 'female', label: 'Female' },
+    { value: 'male', label: 'Male' },
+];
 
 // Must match the backend Course enum: same names, same order (sign-up sends the index)
 export const COURSE_OPTIONS = [
@@ -19,11 +24,8 @@ export const TIME_SLOTS = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 
 export const DURATIONS = [30, 60, 90, 120, 150, 180]; // minutes
 export const DEFAULT_DURATION = 60;
 
-export const DEFAULT_MENTOR_EMOJI = '👩‍🏫';
-
-// Saved mentor ids are mirrored here for the Events map to read
+// localStorage key for the ids of mentors the user has saved
 export const SAVED_MENTORS_STORAGE_KEY = 'buddySavedMentors';
-export const DEFAULT_SAVED_MENTOR_IDS = [1, 3];
 
 // Placeholder conversations until messaging is backed by the API
 export const MOCK_MESSAGES = [

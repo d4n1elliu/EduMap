@@ -9,7 +9,6 @@ import BookingsList from '../features/buddy/BookingsList';
 import BookingSuccessModal from '../features/buddy/BookingSuccessModal';
 import {
     BUDDY_TABS,
-    DEFAULT_SAVED_MENTOR_IDS,
     INITIAL_FILTERS,
     MOCK_MESSAGES,
     SAVED_MENTORS_STORAGE_KEY,
@@ -23,6 +22,16 @@ import { useBookings, useMentors } from '../features/buddy/useBuddyData';
 import usePageMeta from '../hooks/usePageMeta';
 import { PATHS } from '../config/routes';
 
+// Saved mentors persist between visits; ignore anything unreadable
+function loadSavedMentorIds() {
+    try {
+        const ids = JSON.parse(localStorage.getItem(SAVED_MENTORS_STORAGE_KEY));
+        return Array.isArray(ids) ? ids : [];
+    } catch {
+        return [];
+    }
+}
+
 export default function BuddySystem() {
     usePageMeta('Buddy Program', PATHS.BUDDY);
     const token = getToken();
@@ -35,7 +44,7 @@ export default function BuddySystem() {
     const [showMessages, setShowMessages] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [filters, setFilters] = useState(INITIAL_FILTERS);
-    const [savedMentorIds, setSavedMentorIds] = useState(DEFAULT_SAVED_MENTOR_IDS);
+    const [savedMentorIds, setSavedMentorIds] = useState(loadSavedMentorIds);
 
     // Refresh bookings whenever the user switches tabs
     useEffect(() => {
