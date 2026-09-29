@@ -57,6 +57,11 @@ export default function BuddySystem() {
         return error;
     };
 
+    const clearFilters = () => {
+        setFilters(INITIAL_FILTERS);
+        setSearchQuery('');
+    };
+
     const openMentorFromMessages = (mentor) => {
         setSelectedMentor(mentor);
         setShowMessages(false);
@@ -83,7 +88,8 @@ export default function BuddySystem() {
                         onConfirm={confirm}
                     />
                 );
-            default:
+            default: {
+                const visibleMentors = filterMentors(mentors, { ...filters, search: searchQuery });
                 return (
                     <div className="flex gap-6">
                         <MentorFilters
@@ -95,10 +101,23 @@ export default function BuddySystem() {
                             <div className="mb-4">
                                 <SearchInput value={searchQuery} onChange={setSearchQuery} />
                             </div>
-                            <MentorGrid mentors={filterMentors(mentors, searchQuery, filters)} {...gridProps} />
+                            {mentors.length > 0 && visibleMentors.length === 0 ? (
+                                <div className="text-center py-12">
+                                    <p className="text-gray-600 mb-4">No mentors match these filters</p>
+                                    <button
+                                        onClick={clearFilters}
+                                        className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                                    >
+                                        Clear filters
+                                    </button>
+                                </div>
+                            ) : (
+                                <MentorGrid mentors={visibleMentors} {...gridProps} />
+                            )}
                         </div>
                     </div>
                 );
+            }
         }
     };
 

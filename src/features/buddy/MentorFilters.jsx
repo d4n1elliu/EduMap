@@ -1,4 +1,5 @@
 import { FilterIcon } from '../../components/ui/Icons';
+import { courseLabel } from '../../lib/courses';
 import { COURSE_OPTIONS, GENDER_OPTIONS } from './buddyConstants';
 
 // Sidebar with gender (single) and course (multi) filters
@@ -38,7 +39,7 @@ export default function MentorFilters({ filters, onGenderChange, onToggleCourse 
                                 onChange={() => onToggleCourse(course)}
                                 className="mr-2"
                             />
-                            <span className="text-sm">{course}</span>
+                            <span className="text-sm">{courseLabel(course)}</span>
                         </label>
                     ))}
                 </div>

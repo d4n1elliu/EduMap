@@ -1,5 +1,6 @@
 import api from './client';
 import { authConfig } from '../lib/auth';
+import { courseLabel } from '../lib/courses';
 import { BUDDY_BASE, getMentors, getMyBookings } from './booking';
 
 // Turn a booking into a map marker using its mentor's coordinates
@@ -11,7 +12,7 @@ function toBookingMarker(booking, mentor) {
         name: `${mentor.firstName} ${mentor.lastName}`,
         firstName: mentor.firstName,
         lastName: mentor.lastName,
-        course: mentor.course,
+        course: courseLabel(mentor.course),
         latitude: mentor.latitude,
         longitude: mentor.longitude,
         startTime: booking.startTime,
