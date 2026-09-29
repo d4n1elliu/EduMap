@@ -1,4 +1,5 @@
-// Must match the backend enum
+// Must match the backend Gender enum: same order (0 Female, 1 Male, 2 NonBinary,
+// 3 PreferNotToSay). Sign-up sends the value as a number.
 export const GENDER_OPTIONS = [
     { value: 0, label: 'Female' },
     { value: 1, label: 'Male' },
