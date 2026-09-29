@@ -18,7 +18,7 @@ export default function MapSearch({ query, onQueryChange, results, onSelect }) {
                     {results.map((m) => (
                         <button key={m.id} onClick={() => onSelect(m)} className="w-full text-left px-3 py-2 hover:bg-slate-50">
                             <div className="font-medium text-slate-800">{m.name}</div>
-                            <div className="text-sm text-slate-500">{m.role}</div>
+                            <div className="text-sm text-slate-500">{m.course}</div>
                         </button>
                     ))}
                 </div>

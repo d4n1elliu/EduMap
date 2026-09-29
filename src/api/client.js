@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { clearToken } from '../lib/auth';
 
 // Backend API endpoint; override with VITE_API_URL in a .env file
 const API_BASE_URL =
@@ -17,7 +18,7 @@ api.interceptors.response.use(
         const status = error?.response?.status;
         if (status === 401) {
             // clear any bad/expired token
-            localStorage.removeItem('authToken');
+            clearToken();
         }
         return Promise.reject(error);
     }

@@ -1,5 +1,7 @@
 import { DEFAULT_MENTOR_EMOJI } from '../buddy/buddyConstants';
 
+const hasCoords = (e) => Number.isFinite(e.latitude) && Number.isFinite(e.longitude);
+
 // Right-hand panel listing saved events
 export default function SavedEventsDrawer({ events, onClose, onView }) {
     return (
@@ -18,12 +20,18 @@ export default function SavedEventsDrawer({ events, onClose, onView }) {
                             <div className="flex flex-row justify-between items-center gap-2">
                                 <div>
                                     <div className="font-medium text-slate-800">{e.title}</div>
-                                    <div className="text-xs text-slate-500">{e.lat.toFixed(4)}, {e.lng.toFixed(4)}</div>
+                                    {hasCoords(e) && (
+                                        <div className="text-xs text-slate-500">{e.latitude.toFixed(4)}, {e.longitude.toFixed(4)}</div>
+                                    )}
                                 </div>
                                 <div>{e.profileEmoji || DEFAULT_MENTOR_EMOJI}</div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <button onClick={() => onView(e)} className="rounded bg-blue-600 text-white px-2 py-1 text-xs hover:bg-blue-500">
+                                <button
+                                    onClick={() => onView(e)}
+                                    disabled={!hasCoords(e)}
+                                    className="rounded bg-blue-600 text-white px-2 py-1 text-xs hover:bg-blue-500 disabled:opacity-50"
+                                >
                                     View
                                 </button>
                             </div>

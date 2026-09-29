@@ -29,7 +29,11 @@ export default function Register() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const completeLogin = useCompleteLogin();
 
-    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        // <select> values are strings; the backend expects the numeric Role enum
+        setForm({ ...form, [name]: name === 'role' ? Number(value) : value });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();

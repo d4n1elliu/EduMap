@@ -1,7 +1,8 @@
-// Book-style tabs hanging off the left edge of the profile card
+// Book-style tabs hanging off the left edge of the profile card.
+// The card has ml-12, so left-12 + -translate-x-full puts the tabs flush against it.
 export default function ProfileTabNav({ tabs, activeTab, onChange }) {
     return (
-        <div className="absolute right-359 top-20 h-full flex flex-col items-end space-y-2 z-10">
+        <div className="absolute left-12 -translate-x-full top-20 flex flex-col items-end space-y-2 z-10">
             {tabs.map((tab) => (
                 <button
                     key={tab.id}

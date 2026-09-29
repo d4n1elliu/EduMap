@@ -33,5 +33,8 @@ export async function confirmBooking(bookingId, token) {
 
 /** GET /api/BuddySystem/mentor-availability?mentorId */
 export async function getMentorAvailability(mentorId, token) {
-    return await api.get(`${BUDDY_BASE}/mentor-availability`, mentorId, authConfig(token));
+    return await api.get(`${BUDDY_BASE}/mentor-availability`, {
+        ...authConfig(token),
+        params: { mentorId },
+    });
 }
