@@ -22,7 +22,7 @@ export default function ProfileSetup() {
     return (
         <PageLayout backgroundClassName="w-screen">
             <div className="flex justify-center p-6">
-                <div className="relative w-3/4 max-w-7x1 flex">
+                <div className="relative w-3/4 max-w-7xl flex">
                     <ProfileTabNav tabs={PROFILE_TABS} activeTab={activeTab} onChange={setActiveTab} />
 
                     <div className="bg-white shadow-lg rounded-2xl w-full flex p-6 gap-8 ml-12">

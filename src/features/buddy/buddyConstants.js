@@ -19,9 +19,6 @@ export const TIME_SLOTS = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 
 export const DURATIONS = [30, 60, 90, 120, 150, 180]; // minutes
 export const DEFAULT_DURATION = 60;
 
-// Month shown in the booking calendar (month is 0-based: 7 = August)
-export const BOOKING_CALENDAR = { year: 2024, month: 7 };
-
 export const DEFAULT_MENTOR_EMOJI = '👩‍🏫';
 
 // Saved mentor ids are mirrored here for the Events map to read

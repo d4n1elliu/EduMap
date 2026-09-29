@@ -36,10 +36,22 @@ export async function getMapMarkers(token) {
         .filter(Boolean);
 }
 
+// Normalise a saved event to the same field names saveEvent sends
+function toSavedEvent(event) {
+    return {
+        id: event.id ?? event.mentorId,
+        mentorId: event.mentorId,
+        title: event.title ?? event.fullName,
+        latitude: event.latitude ?? event.lat,
+        longitude: event.longitude ?? event.lng,
+        profileEmoji: event.profileEmoji,
+    };
+}
+
 /** GET /api/BuddySystem/get-events */
 export async function getSavedEvents(token) {
     const { data } = await api.get(`${BUDDY_BASE}/get-events`, authConfig(token));
-    return data.data;
+    return (data.data || []).map(toSavedEvent);
 }
 
 /** POST /api/BuddySystem/save-event */

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { getMapMarkers, getSavedEvents, saveEvent } from '../api/events';
 import { getToken } from '../lib/auth';
@@ -14,25 +14,41 @@ export default function EventsAndNetworkingMap() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const mapRef = useRef(null);
 
+    const loadSaved = useCallback(async () => {
+        try {
+            setSaved(await getSavedEvents(token));
+        } catch (error) {
+            console.error('Failed to load saved events:', error);
+        }
+    }, [token]);
+
     useEffect(() => {
         (async () => {
-            setMarkers(await getMapMarkers(token));
-            setSaved(await getSavedEvents(token));
+            try {
+                setMarkers(await getMapMarkers(token));
+            } catch (error) {
+                console.error('Failed to load map markers:', error);
+            }
         })();
-    }, [token]);
+        loadSaved();
+    }, [token, loadSaved]);
 
     const results = useMemo(() => {
         const q = query.toLowerCase();
         return markers.filter(
-            (m) => (m.name || '').toLowerCase().includes(q) || (m.role || '').toLowerCase().includes(q)
+            (m) => (m.name || '').toLowerCase().includes(q) || String(m.course ?? '').toLowerCase().includes(q)
         );
     }, [markers, query]);
 
-    const focusOn = (lat, lng) => mapRef.current?.setView([lat, lng], FOCUS_ZOOM);
+    const focusOn = ({ latitude, longitude }) => mapRef.current?.setView([latitude, longitude], FOCUS_ZOOM);
 
     const handleSave = async (m) => {
-        const fullName = `${m.firstName} ${m.lastName}`;
-        setSaved(await saveEvent({ mentorId: m.mentorId, fullName, latitude: m.latitude, longitude: m.longitude }, token));
+        try {
+            await saveEvent({ mentorId: m.mentorId, fullName: m.name, latitude: m.latitude, longitude: m.longitude }, token);
+            await loadSaved();
+        } catch (error) {
+            console.error('Failed to save event:', error);
+        }
     };
 
     return (
@@ -43,7 +59,7 @@ export default function EventsAndNetworkingMap() {
                     query={query}
                     onQueryChange={setQuery}
                     results={results}
-                    onSelect={(m) => focusOn(m.lat, m.lng)}
+                    onSelect={focusOn}
                 />
 
                 <button
@@ -54,7 +70,7 @@ export default function EventsAndNetworkingMap() {
                 </button>
 
                 <MapContainer
-                    whenCreated={(map) => { mapRef.current = map; }}
+                    ref={mapRef}
                     center={CAMPUS.position}
                     zoom={DEFAULT_ZOOM}
                     style={{ height: '100%', width: '100%' }}
@@ -74,7 +90,7 @@ export default function EventsAndNetworkingMap() {
                         <Marker key={m.id} position={[m.latitude, m.longitude]} icon={mentorIcon}>
                             <Popup>
                                 <div className="space-y-1">
-                                    <div className="font-semibold">{m.firstName} {m.lastName}</div>
+                                    <div className="font-semibold">{m.name}</div>
                                     <div className="text-sm text-slate-600">{m.course}</div>
                                     <button
                                         onClick={() => handleSave(m)}
@@ -92,7 +108,7 @@ export default function EventsAndNetworkingMap() {
                     <SavedEventsDrawer
                         events={saved}
                         onClose={() => setDrawerOpen(false)}
-                        onView={(e) => { focusOn(e.lat, e.lng); setDrawerOpen(false); }}
+                        onView={(e) => { focusOn(e); setDrawerOpen(false); }}
                     />
                 )}
             </div>
