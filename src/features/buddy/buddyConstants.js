@@ -6,7 +6,7 @@ export const BUDDY_TABS = [
 
 export const GENDER_OPTIONS = ['all', 'female', 'male'];
 
-// Must match the backend's course enum names
+// Must match the backend Course enum: same names, same order (sign-up sends the index)
 export const COURSE_OPTIONS = [
     'InformationTechnology', 'ComputerScience', 'Business', 'Law', 'Science', 'Engineering',
     'Communications', 'Architecture', 'Health', 'Mathematics', 'InternationalStudies', 'Education',
