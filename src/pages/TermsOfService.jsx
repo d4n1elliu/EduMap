@@ -2,8 +2,11 @@ import ContentPage from '../components/layout/ContentPage';
 import Card from '../components/ui/Card';
 import LegalSection from '../features/legal/LegalSection';
 import { TERMS_LAST_UPDATED, TERMS_SECTIONS } from '../features/legal/termsContent';
+import usePageMeta from '../hooks/usePageMeta';
+import { PATHS } from '../config/routes';
 
 export default function TermsOfService() {
+    usePageMeta('Terms of Service', PATHS.TERMS);
     return (
         <ContentPage title="Terms of Service" subtitle={`Last updated: ${TERMS_LAST_UPDATED}`}>
             <Card className="space-y-8">

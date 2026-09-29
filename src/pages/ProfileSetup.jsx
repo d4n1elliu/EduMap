@@ -7,6 +7,8 @@ import ProfileTab from '../features/profile/ProfileTab';
 import ProfileTabNav from '../features/profile/ProfileTabNav';
 import ProjectsTab from '../features/profile/ProjectsTab';
 import SettingsTab from '../features/profile/SettingsTab';
+import usePageMeta from '../hooks/usePageMeta';
+import { PATHS } from '../config/routes';
 
 const TAB_CONTENT = {
     profile: ProfileTab,
@@ -16,6 +18,7 @@ const TAB_CONTENT = {
 };
 
 export default function ProfileSetup() {
+    usePageMeta('Profile', PATHS.PROFILE);
     const [activeTab, setActiveTab] = useState('profile');
     const ActiveTab = TAB_CONTENT[activeTab];
 

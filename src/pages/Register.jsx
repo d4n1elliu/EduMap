@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { register } from '../api/auth';
 import { PATHS } from '../config/routes';
+import { DEMO_NOTICE } from '../config/site';
 import { AuthForm, AuthInput, AuthSubmitButton } from '../features/auth/AuthForm';
 import { Role, ROLE_OPTIONS } from '../features/auth/roles';
 import useCompleteLogin from '../features/auth/useCompleteLogin';
+import usePageMeta from '../hooks/usePageMeta';
 
 const INITIAL_FORM = {
     firstName: '',
@@ -24,6 +26,7 @@ function validate(form) {
 }
 
 export default function Register() {
+    usePageMeta('Sign up', PATHS.SIGNUP);
     const [form, setForm] = useState(INITIAL_FORM);
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,6 +70,10 @@ export default function Register() {
             wrapperClassName="pt-5 pb-5"
             className="p-8 sm:p-12 w-full max-w-md"
         >
+            <p className="mb-6 rounded border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-center text-slate-600">
+                {DEMO_NOTICE}
+            </p>
+
             <AuthInput name="firstName" type="text" placeholder="First Name" value={form.firstName} onChange={handleChange} autoComplete="given-name" required />
             <AuthInput name="lastName" type="text" placeholder="Last Name" value={form.lastName} onChange={handleChange} autoComplete="family-name" required />
             <AuthInput name="email" type="email" placeholder="example@gmail.com" value={form.email} onChange={handleChange} autoComplete="email" required />

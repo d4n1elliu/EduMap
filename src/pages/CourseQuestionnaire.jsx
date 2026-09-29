@@ -15,8 +15,10 @@ import {
     SUBJECTS,
 } from '../features/questionnaire/questionnaireData';
 import { getRecommendedPrograms } from '../features/questionnaire/programMatching';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function CourseQuestionnaire() {
+    usePageMeta('Course Questionnaire', PATHS.QUESTIONNAIRE);
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
 

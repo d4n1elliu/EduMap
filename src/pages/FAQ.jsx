@@ -5,10 +5,12 @@ import Card from '../components/ui/Card';
 import { PATHS } from '../config/routes';
 import { CONTACT_INFO } from '../config/site';
 import { FAQ_ITEMS } from '../features/legal/faqContent';
+import usePageMeta from '../hooks/usePageMeta';
 
 const ACCORDION_ITEMS = FAQ_ITEMS.map(({ question, answer }) => ({ title: question, content: answer }));
 
 export default function FAQ() {
+    usePageMeta('FAQ', PATHS.FAQ);
     return (
         <ContentPage title="Frequently Asked Questions">
             <Accordion items={ACCORDION_ITEMS} />

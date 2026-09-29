@@ -5,8 +5,11 @@ import { getToken } from '../lib/auth';
 import { CAMPUS, DEFAULT_ZOOM, FOCUS_ZOOM, TILE_LAYERS, campusIcon, mentorIcon } from '../features/map/mapConfig';
 import MapSearch from '../features/map/MapSearch';
 import SavedEventsDrawer from '../features/map/SavedEventsDrawer';
+import usePageMeta from '../hooks/usePageMeta';
+import { PATHS } from '../config/routes';
 
 export default function EventsAndNetworkingMap() {
+    usePageMeta('Events Map', PATHS.EVENTS_MAP);
     const token = getToken();
     const [query, setQuery] = useState('');
     const [markers, setMarkers] = useState([]);

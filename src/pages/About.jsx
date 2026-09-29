@@ -2,8 +2,11 @@ import ContentPage from '../components/layout/ContentPage';
 import Card from '../components/ui/Card';
 import { FeatureCard, TeamMember, ValueItem } from '../features/about/AboutCards';
 import { CORE_VALUES, FEATURES, MISSION, TEAM, TEAM_INTRO, VISION } from '../features/about/aboutContent';
+import usePageMeta from '../hooks/usePageMeta';
+import { PATHS } from '../config/routes';
 
 export default function About() {
+    usePageMeta('About', PATHS.ABOUT);
     return (
         <ContentPage title="About EduMap" maxWidth="max-w-6xl" headerClassName="mb-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">

@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { login } from '../api/auth';
 import { AuthForm, AuthInput, AuthSubmitButton } from '../features/auth/AuthForm';
 import useCompleteLogin from '../features/auth/useCompleteLogin';
+import usePageMeta from '../hooks/usePageMeta';
+import { PATHS } from '../config/routes';
 
 export default function Login() {
+    usePageMeta('Log in', PATHS.LOGIN);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
