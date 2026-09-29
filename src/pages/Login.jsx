@@ -1,80 +1,48 @@
-import {useState} from "react";
-import {login} from "../api/auth";
-import {useNavigate} from "react-router-dom";
-import Footer from './Footer';
-import Background from "./Background";
+import { useState } from 'react';
+import { login } from '../api/auth';
+import { AuthForm, AuthInput, AuthSubmitButton } from '../features/auth/AuthForm';
+import useCompleteLogin from '../features/auth/useCompleteLogin';
 
 export default function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const completeLogin = useCompleteLogin();
 
-    // State variables for form inputs and submission status
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
-
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Call the login API
         try {
             const response = await login(email, password);
-         
-            // Save token to localStorage
-            localStorage.setItem('token', response.data.data.jwtToken);
-
-            // Redirect to home page, updating to refresh Navbar state
-            navigate('/');
-            window.location.reload();
-        } catch (err) {
-            setError("Invalid Login Credentials!");
+            completeLogin(response.data.data.jwtToken);
+        } catch {
+            setError('Invalid Login Credentials!');
         }
-    }
+    };
 
-    // JSX for the login form
     return (
-        <Background>
-            <div className="flex-1 flex items-center justify-center px-4">
-                <form
-                    onSubmit={handleSubmit}
-                    className="bg-white p-20 rounded-lg shadow-md max-w-md sm:max-w-lg lg:max-w-xl"
-                >   
-                    {/* Login Header */}
-                    <h2 className="text-2xl font-bold mb-6 text-center text-orange-500">
-                        Login to EduMap
-                    </h2>
-                    {error && <p className="text-red-500 mb-4">{error}</p>}
-                    
-                    {/* Email Input */}
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        className="w-full p-2 mb-6 border rounded"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-
-                    {/* Password Input */}
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        className="w-full p-2 mb-6 border rounded"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    
-                    {/* Submit Button */}
-                    <button
-                        type="submit"
-                        className="w-full py-3 bg-blue-500 text-white font-semibold rounded hover:bg-orange-600 transition-colors"
-                    >
-                        Login
-                    </button>
-                </form>
-            </div>
-            <Footer/>
-        </Background>
+        <AuthForm
+            title="Login to EduMap"
+            error={error}
+            onSubmit={handleSubmit}
+            className="p-20 max-w-md sm:max-w-lg lg:max-w-xl"
+        >
+            <AuthInput
+                type="email"
+                placeholder="Email"
+                className="mb-6"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
+            <AuthInput
+                type="password"
+                placeholder="Password"
+                className="mb-6"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            />
+            <AuthSubmitButton>Login</AuthSubmitButton>
+        </AuthForm>
     );
 }
