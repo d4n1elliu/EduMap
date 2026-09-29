@@ -21,45 +21,42 @@ By combining these features into a cohesive digital experience, EduMap empowers 
 
 ```
 EduMap/
-├── .github/
-│   └── workflows/          # CI/CD deployment workflows
+├── .github/workflows/        # CI build workflow
 ├── public/
-│   └── vite.svg
 ├── src/
-│   ├── api/
-│   │   ├── api.js
-│   │   ├── auth.js
-│   │   ├── booking.js
-│   │   └── events.js
-│   ├── assets/
-│   ├── pages/
-│   │   ├── About.jsx
-│   │   ├── Background.jsx
-│   │   ├── BuddySystem.jsx
-│   │   ├── ContactUs.jsx
-│   │   ├── CourseQuestionnaire.jsx
-│   │   ├── EventsAndNetworkingMap.jsx
-│   │   ├── FAQ.jsx
-│   │   ├── Footer.jsx
-│   │   ├── Home.jsx
-│   │   ├── Login.jsx
-│   │   ├── ProfileBackground.jsx
-│   │   ├── ProfileSetup.jsx
-│   │   ├── Register.jsx
-│   │   └── TermsOfService.jsx
-│   ├── App.css
-│   ├── App.jsx
-│   ├── Navbar.jsx
+│   ├── api/                  # Backend calls (axios)
+│   │   ├── client.js         #   shared axios instance + base URL (VITE_API_URL)
+│   │   ├── auth.js           #   login / register
+│   │   ├── booking.js        #   mentors & bookings
+│   │   └── events.js         #   map markers & saved events
+│   ├── assets/               # Images and logos
+│   ├── components/           # Reusable, feature-agnostic UI
+│   │   ├── layout/           #   Navbar, Footer, Background, PageLayout, ContentPage
+│   │   └── ui/               #   Card, Alert, Modal, Tabs, Icons, StarRating, FormField, ...
+│   ├── config/
+│   │   ├── routes.js         # PATHS + nav/footer link lists (single source of truth for URLs)
+│   │   └── site.js           # Contact details, tagline, copyright
+│   ├── features/             # Feature-specific components, hooks and data
+│   │   ├── about/  auth/  buddy/  home/  legal/  map/  profile/  questionnaire/
+│   ├── hooks/                # Generic hooks (useToggleList)
+│   ├── lib/                  # Pure helpers: auth token storage, time formatting, cx, arrays
+│   ├── pages/                # One thin component per route, composed from features/
+│   ├── App.jsx               # Route table
 │   ├── index.css
 │   └── main.jsx
-├── .gitignore
-├── README.md
 ├── eslint.config.js
 ├── index.html
-├── package-lock.json
 ├── package.json
 └── vite.config.js
 ```
+
+### Conventions
+
+- **Pages stay thin** – they own page-level state and compose components from `features/` and `components/`.
+- **Content lives in data files** (`*Content.js`, `*Data.js`, `*Constants.js`), not inline in JSX.
+- **URLs come from `config/routes.js`**; never hard-code a path string.
+- **Auth token access goes through `lib/auth.js`** (`getToken`, `setToken`, `clearToken`, `authConfig`).
+- **Tailwind classes must be complete literal strings** (e.g. a lookup map of `'bg-red-500'`), never built by string concatenation.
 
 ## Pitch
 

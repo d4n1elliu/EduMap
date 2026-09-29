@@ -1,41 +1,46 @@
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Navbar from './Navbar';
-//import './App.css'
-import CourseQuestionnaire from './pages/CourseQuestionnaire';
-import BuddySystem from './pages/BuddySystem';
-import JobProspects from './pages/EventsAndNetworkingMap';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import { PATHS } from './config/routes';
 import About from './pages/About';
+import BuddySystem from './pages/BuddySystem';
+import ContactUs from './pages/ContactUs';
+import CourseQuestionnaire from './pages/CourseQuestionnaire';
+import EventsAndNetworkingMap from './pages/EventsAndNetworkingMap';
+import FAQ from './pages/FAQ';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Register from "./pages/Register";
-import ContactUs from './pages/ContactUs';
 import ProfileSetup from './pages/ProfileSetup';
-import FAQ from './pages/FAQ';
+import Register from './pages/Register';
 import TermsOfService from './pages/TermsOfService';
 
-// Routes for navigating the website 
+const ROUTES = [
+    { path: PATHS.HOME, element: <Home /> },
+    { path: PATHS.ABOUT, element: <About /> },
+    { path: PATHS.LOGIN, element: <Login /> },
+    { path: PATHS.SIGNUP, element: <Register /> },
+    { path: PATHS.QUESTIONNAIRE, element: <CourseQuestionnaire /> },
+    { path: PATHS.PROFILE, element: <ProfileSetup /> },
+    { path: PATHS.BUDDY, element: <BuddySystem /> },
+    { path: PATHS.EVENTS_MAP, element: <EventsAndNetworkingMap /> },
+    { path: PATHS.CONTACT, element: <ContactUs /> },
+    { path: PATHS.FAQ, element: <FAQ /> },
+    { path: PATHS.TERMS, element: <TermsOfService /> },
+];
+
+// Fixed navbar on top, routed page content below it
 function App() {
-  return (
-    <>
-      <Navbar/>
-      <div className="pt-24">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
-          <Route path="/course-questionnaire" element={<CourseQuestionnaire />} />
-          <Route path="/profile-setup" element={<ProfileSetup />} />
-          <Route path="/buddy-system" element={<BuddySystem />} />
-          <Route path="/EventsAndNetworkingMap" element={<JobProspects />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/terms" element={<TermsOfService />} />
-        </Routes>
-      </div>
-    </>
-  )
+    return (
+        <>
+            <Navbar />
+            <div className="pt-24">
+                <Routes>
+                    {ROUTES.map(({ path, element }) => (
+                        <Route key={path} path={path} element={element} />
+                    ))}
+                </Routes>
+            </div>
+        </>
+    );
 }
 
-export default App
+export default App;

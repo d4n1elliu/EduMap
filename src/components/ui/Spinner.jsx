@@ -1,0 +1,9 @@
+// Centered loading spinner with an optional caption
+export default function Spinner({ label }) {
+    return (
+        <div className="text-center py-8">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            {label && <p className="mt-2 text-gray-600">{label}</p>}
+        </div>
+    );
+}

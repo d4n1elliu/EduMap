@@ -1,19 +1,17 @@
-import api from "./api";
+import api from './client';
 
-const controller = 'auth';
+const AUTH_BASE = 'auth';
 
-// Temporary student number for login
-export const login = async (username, password) => {
-    return await api.post(`${controller}/login`, { username, password });
-};
+export async function login(username, password) {
+    return await api.post(`${AUTH_BASE}/login`, { username, password });
+}
 
-// Registration with all required fields
-export const register = async (email, password, firstName, lastName, role) => {
-    return await api.post(`${controller}/register`, { 
-        email, 
-        password, 
-        firstName, 
-        lastName, 
-        role, 
+export async function register({ email, password, firstName, lastName, role }) {
+    return await api.post(`${AUTH_BASE}/register`, {
+        email,
+        password,
+        firstName,
+        lastName,
+        role,
     });
-};
+}
