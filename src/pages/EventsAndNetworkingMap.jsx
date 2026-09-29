@@ -5,6 +5,7 @@ import { getToken } from '../lib/auth';
 import { CAMPUS, DEFAULT_ZOOM, FOCUS_ZOOM, TILE_LAYERS, campusIcon, mentorIcon } from '../features/map/mapConfig';
 import MapSearch from '../features/map/MapSearch';
 import SavedEventsDrawer from '../features/map/SavedEventsDrawer';
+import { mentorEmoji } from '../features/buddy/mentorUtils';
 import usePageMeta from '../hooks/usePageMeta';
 import { PATHS } from '../config/routes';
 
@@ -42,6 +43,12 @@ export default function EventsAndNetworkingMap() {
             (m) => (m.name || '').toLowerCase().includes(q) || String(m.course ?? '').toLowerCase().includes(q)
         );
     }, [markers, query]);
+
+    // Saved events may not carry gender, so borrow it from the matching mentor marker
+    const savedWithGender = useMemo(() => {
+        const genderByMentor = new Map(markers.map((m) => [m.mentorId, m.gender]));
+        return saved.map((e) => ({ ...e, gender: e.gender ?? genderByMentor.get(e.mentorId) }));
+    }, [saved, markers]);
 
     const focusOn = ({ latitude, longitude }) => mapRef.current?.setView([latitude, longitude], FOCUS_ZOOM);
 
@@ -93,7 +100,7 @@ export default function EventsAndNetworkingMap() {
                         <Marker key={m.id} position={[m.latitude, m.longitude]} icon={mentorIcon}>
                             <Popup>
                                 <div className="space-y-1">
-                                    <div className="font-semibold">{m.name}</div>
+                                    <div className="font-semibold">{mentorEmoji(m)} {m.name}</div>
                                     <div className="text-sm text-slate-600">{m.course}</div>
                                     <button
                                         onClick={() => handleSave(m)}
@@ -109,7 +116,7 @@ export default function EventsAndNetworkingMap() {
 
                 {drawerOpen && (
                     <SavedEventsDrawer
-                        events={saved}
+                        events={savedWithGender}
                         onClose={() => setDrawerOpen(false)}
                         onView={(e) => { focusOn(e); setDrawerOpen(false); }}
                     />

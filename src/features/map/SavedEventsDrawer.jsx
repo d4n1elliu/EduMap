@@ -1,4 +1,4 @@
-import { DEFAULT_MENTOR_EMOJI } from '../buddy/buddyConstants';
+import { mentorEmoji } from '../buddy/mentorUtils';
 
 const hasCoords = (e) => Number.isFinite(e.latitude) && Number.isFinite(e.longitude);
 
@@ -24,7 +24,7 @@ export default function SavedEventsDrawer({ events, onClose, onView }) {
                                         <div className="text-xs text-slate-500">{e.latitude.toFixed(4)}, {e.longitude.toFixed(4)}</div>
                                     )}
                                 </div>
-                                <div>{e.profileEmoji || DEFAULT_MENTOR_EMOJI}</div>
+                                <div>{mentorEmoji(e)}</div>
                             </div>
                             <div className="flex items-center gap-2">
                                 <button

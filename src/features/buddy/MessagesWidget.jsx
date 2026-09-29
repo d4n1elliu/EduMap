@@ -1,4 +1,5 @@
 import { ChatIcon } from '../../components/ui/Icons';
+import { mentorEmoji } from './mentorUtils';
 
 // Floating chat button that toggles a list of recent conversations
 export default function MessagesWidget({ isOpen, onToggle, messages, mentors, onOpenMentor }) {
@@ -24,7 +25,7 @@ export default function MessagesWidget({ isOpen, onToggle, messages, mentors, on
                                     className="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer border"
                                 >
                                     <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-xl">
-                                        {mentor?.profileEmoji || '👤'}
+                                        {mentorEmoji(mentor)}
                                     </div>
                                     <div className="flex-1">
                                         <h4 className="font-medium text-blue-800">{message.mentorName}</h4>

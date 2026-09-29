@@ -13,6 +13,8 @@ function toBookingMarker(booking, mentor) {
         firstName: mentor.firstName,
         lastName: mentor.lastName,
         course: courseLabel(mentor.course),
+        gender: mentor.gender,
+        profileEmoji: mentor.profileEmoji,
         latitude: mentor.latitude,
         longitude: mentor.longitude,
         startTime: booking.startTime,
@@ -45,6 +47,7 @@ function toSavedEvent(event) {
         title: event.title ?? event.fullName,
         latitude: event.latitude ?? event.lat,
         longitude: event.longitude ?? event.lng,
+        gender: event.gender,
         profileEmoji: event.profileEmoji,
     };
 }

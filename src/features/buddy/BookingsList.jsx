@@ -1,4 +1,5 @@
 import Spinner from '../../components/ui/Spinner';
+import { mentorEmoji } from './mentorUtils';
 
 const ACTION_BUTTON = 'text-white px-4 py-2 rounded-lg transition-colors text-sm';
 
@@ -7,7 +8,7 @@ function BookingItem({ booking, mentor, onConfirm }) {
         <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
             <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                    <div className="text-3xl">{mentor?.profileEmoji || '👤'}</div>
+                    <div className="text-3xl">{mentorEmoji(mentor)}</div>
                     <div>
                         <h3 className="font-semibold text-gray-800">{booking.firstName} {booking.lastName}</h3>
                         <p className="text-sm text-gray-600">{booking.course?.name || 'Course not specified'}</p>

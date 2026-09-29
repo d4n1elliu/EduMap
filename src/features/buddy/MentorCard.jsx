@@ -1,14 +1,13 @@
 import { SaveStarIcon } from '../../components/ui/Icons';
 import StarRating from '../../components/ui/StarRating';
-import { DEFAULT_MENTOR_EMOJI } from './buddyConstants';
-import { mentorCourse, mentorFullName } from './mentorUtils';
+import { mentorCourse, mentorEmoji, mentorFullName } from './mentorUtils';
 
 // Summary card for one mentor with a save toggle and a primary action
 export default function MentorCard({ mentor, isSaved, onToggleSave, onSelect, actionLabel = 'View Profile' }) {
     return (
         <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
             <div className="text-center mb-3">
-                <div className="text-4xl mb-2">{mentor.profileEmoji || DEFAULT_MENTOR_EMOJI}</div>
+                <div className="text-4xl mb-2">{mentorEmoji(mentor)}</div>
                 <h3 className="font-semibold text-gray-800">{mentorFullName(mentor)}</h3>
                 <p className="text-sm text-gray-600">{mentorCourse(mentor)}</p>
                 <p className="text-xs text-gray-500">{mentor.university}</p>
