@@ -19,7 +19,7 @@ export const SITE_TAGLINE =
     'Empowering students to connect, learn, and grow together through our comprehensive ' +
     'educational platform and mentorship programs.';
 
-export const COPYRIGHT = '© 2025 EduMap. All rights reserved.';
+export const COPYRIGHT = '© 2025 Daniel Liu. All rights reserved.';
 
 export const PROJECT_CREDIT = 'Built by a team of 6 as a UTS capstone project';
 export const PORTFOLIO_LINK = { href: 'https://daniel-liu.dev', label: 'daniel-liu.dev' };
