@@ -28,14 +28,15 @@ export const CAMPUS = {
     description: 'Campus location',
 };
 
+// OpenStreetMap tiles go up to zoom 19, so keep these at or below that
 export const DEFAULT_ZOOM = 16;
 export const FOCUS_ZOOM = 18;
 
-const CARTO_ATTRIBUTION = '&copy; OpenStreetMap contributors &copy; CARTO';
-const CARTO_SUBDOMAINS = ['a', 'b', 'c', 'd'];
-
-// Base map without POI icons, then a labels-only overlay
+// OpenStreetMap's standard tiles need no API key but require this attribution
 export const TILE_LAYERS = [
-    { url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', attribution: CARTO_ATTRIBUTION, subdomains: CARTO_SUBDOMAINS },
-    { url: 'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', attribution: CARTO_ATTRIBUTION, subdomains: CARTO_SUBDOMAINS },
+    {
+        url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+    },
 ];
