@@ -40,10 +40,10 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="mt-10 pt-6 border-t border-slate-700 text-center">
-                    <p className="text-slate-300">{COPYRIGHT}</p>
-                    <p className="text-slate-400 text-sm mt-2">
+                {/* Bottom Bar: copyright in the left corner, project credit in the right */}
+                <div className="mt-10 pt-6 border-t border-slate-700 flex flex-col md:flex-row md:justify-between gap-2 text-sm text-slate-400 text-center md:text-left">
+                    <p>{COPYRIGHT}</p>
+                    <p>
                         {PROJECT_CREDIT} ·{' '}
                         <a
                             href={PORTFOLIO_LINK.href}
