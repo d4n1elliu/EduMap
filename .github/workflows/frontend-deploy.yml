@@ -22,6 +22,7 @@ jobs:
         run: npm run build
         env:
           VITE_API_URL: /api
+          VITE_CARTO_KEY: ${{ vars.VITE_CARTO_KEY }}
 
       # Instead of deploying, we save the build folder for the backend
       - name: Upload Frontend Artifacts

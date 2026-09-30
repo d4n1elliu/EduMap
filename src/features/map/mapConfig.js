@@ -28,15 +28,31 @@ export const CAMPUS = {
     description: 'Campus location',
 };
 
-// OpenStreetMap tiles go up to zoom 19, so keep these at or below that
+// The OpenStreetMap fallback tiles stop at zoom 19, so keep these at or below that
 export const DEFAULT_ZOOM = 16;
 export const FOCUS_ZOOM = 18;
 
-// OpenStreetMap's standard tiles need no API key but require this attribution
-export const TILE_LAYERS = [
-    {
-        url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 19,
-    },
-];
+const OSM_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+// CARTO raster basemaps need a key (https://carto.com/basemaps/apikey/).
+// Styles: https://github.com/CartoDB/basemap-styles
+const CARTO_KEY = import.meta.env.VITE_CARTO_KEY;
+
+const cartoLayer = (style) => ({
+    url: `https://{s}.basemaps.cartocdn.com/${style}/{z}/{x}/{y}{r}.png?key=${encodeURIComponent(CARTO_KEY)}`,
+    attribution: `${OSM_ATTRIBUTION} &copy; CARTO`,
+    subdomains: ['a', 'b', 'c', 'd'],
+    maxZoom: 20,
+});
+
+// Plain OpenStreetMap tiles, used when no CARTO key is set (for example local dev)
+const OSM_LAYER = {
+    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attribution: OSM_ATTRIBUTION,
+    maxZoom: 19,
+};
+
+// Clean light base without labels, then a labels-only overlay
+export const TILE_LAYERS = CARTO_KEY
+    ? [cartoLayer('light_nolabels'), cartoLayer('light_only_labels')]
+    : [OSM_LAYER];
